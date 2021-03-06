@@ -37,7 +37,12 @@ struct ContentView: View {
 struct PhotoView: View {
     let metadata: Photo
     var body: some View {
-        Text("snoogle \(metadata.downloadUrl)")
+        VStack {
+            Text("\(metadata.author)")
+            Image("loading-placeholder")
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+        }
     }
 }
 
