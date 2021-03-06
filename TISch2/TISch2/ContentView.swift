@@ -35,9 +35,11 @@ struct ContentView: View {
     }
 }
 
+var cancellables = [AnyCancellable]()
+
 struct PhotoView: View {
     let metadata: Photo
-    @State var image: UIImage? = nil
+    @State private var image: UIImage = UIImage(named: "loading-placeholder")!
 
     init(metadata: Photo) {
         self.metadata = metadata
@@ -50,28 +52,23 @@ struct PhotoView: View {
 
     func loadImage() {
         print("\(metadata.downloadUrl)")
-        handle = URLSession.shared.dataTaskPublisher(for: metadata.downloadUrl)
+        URLSession.shared.dataTaskPublisher(for: metadata.downloadUrl)
           .map { $0.data }
-          .map { UIImage(data: $0) }
+          .map { UIImage(data: $0)! } // FIXME
           .sink(receiveCompletion: { status in
-                    print("status´ \(status)")
+                    print("status \(status)")
                 },
                 receiveValue: { image in
                     self.image = image
                 })
+        .store(in: &cancellables)
     }
 
     var body: some View {
         VStack {
             Text("\(metadata.author)")
-            if let image = image {
-                Image(uiImage: image).resizable()
-                  .aspectRatio(contentMode: .fit)
-            } else {
-                Image("loading-placeholder")
-                  .resizable()
-                  .aspectRatio(contentMode: .fit)
-            }
+            Image(uiImage: image).resizable()
+              .aspectRatio(contentMode: .fit)
         }
     }
 }
