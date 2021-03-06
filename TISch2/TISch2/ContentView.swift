@@ -10,6 +10,13 @@ struct ContentView: View {
     var body: some View {
         if let photos = remote.loadedData {
             Text("Blargle \(photos.count)")
+
+            List {
+                ForEach(photos) {
+                    Text("\($0.author) : \($0.width) x \($0.height)")
+                }
+            }
+
         } else {
             Text("Splunge")
               .padding()
