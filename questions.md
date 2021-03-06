@@ -214,7 +214,12 @@ The type is all views that could ever be onscreen during the app's lifecycle.
     - the slider doesn't care about where that Double comes from or where
       it's stored.  Just needs a way to read and write a Double
       - that's what Binding<Double> does
-
+- Working through chapter two exercise. So main thread (not surprised)
+```
+[SwiftUI] Publishing changes from background threads is not allowed;
+make sure to publish values from the main thread (via operators like
+receive(on:)) on model updates.
+```
 
 ==================================================
 # Hints
@@ -328,3 +333,6 @@ ContentView:
 So by keeping track of the use of the projeced value, SUI's diffotron knows
 that even though counter is refrenced (via $) and is a property of the
 view, the only thing that is substantivelly affected by it is the LabelView.
+
+* on branch tis_ch2_ex_s3 - the views updating when the array finishes loading.
+  That's freaking amazing magic.

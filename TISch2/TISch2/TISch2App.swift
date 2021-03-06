@@ -1,24 +1,22 @@
 import SwiftUI
 import Combine
 
+typealias PhotoRemote = Remote<WebPhoto, Photo>
+
 @main
 struct TISch2App: App {
+    var remote: PhotoRemote 
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(remote: remote)
         }
     }
 
     init() {
-        loadPhoto()
-    }
-
-    var remote: Remote<WebPhoto, Photo>?
-
-    mutating func loadPhoto() {
         let url = URL(string: "https://picsum.photos/v2/list")!
-        remote = Remote(url: url)
-        remote?.load() { webItem in
+        self.remote = Remote(url: url)
+        remote.load() { webItem in
             return Photo(webPhoto: webItem)
         }
     }
@@ -28,10 +26,14 @@ class Remote<WebType, RealType>: ObservableObject where WebType: Decodable {
     var flunge: AnyCancellable?
     
     let url: URL
-    var loadedData: [RealType]? = nil
+    @Published public private(set) var loadedData: [RealType]? = nil
 
     init(url: URL) {
         self.url = url
+    }
+
+    init() {
+        url = URL(string: "https://picsum.photos/v2/list")!
     }
 
     func load(converter: @escaping (WebType) -> RealType) {
@@ -39,6 +41,7 @@ class Remote<WebType, RealType>: ObservableObject where WebType: Decodable {
           .map { $0.data }
           .decode(type: [WebType].self, decoder: JSONDecoder())
           .map { $0.map { webItem in converter(webItem) } }
+          .receive(on: OperationQueue.main)
           .sink(receiveCompletion: { status in
                     print("status´ \(status)")
                 },
