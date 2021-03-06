@@ -39,7 +39,8 @@ var cancellables = [AnyCancellable]()
 
 struct PhotoView: View {
     let metadata: Photo
-    @State private var image: UIImage = UIImage(named: "loading-placeholder")!
+//    @State private var image: UIImage = UIImage(named: "loading-placeholder")!
+    @State private var image: Image = Image("loading-placeholder")
 
     init(metadata: Photo) {
         self.metadata = metadata
@@ -58,8 +59,8 @@ struct PhotoView: View {
           .sink(receiveCompletion: { status in
                     print("status \(status)")
                 },
-                receiveValue: { image in
-                    self.image = image
+                receiveValue: { imagex in
+                    image = Image(uiImage: imagex)
                 })
         .store(in: &cancellables)
     }
@@ -67,7 +68,7 @@ struct PhotoView: View {
     var body: some View {
         VStack {
             Text("\(metadata.author)")
-            Image(uiImage: image).resizable()
+            image.resizable()
               .aspectRatio(contentMode: .fit)
         }
     }
