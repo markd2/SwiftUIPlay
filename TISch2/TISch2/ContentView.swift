@@ -8,9 +8,12 @@ struct ContentView: View {
     }
 
     var body: some View {
-        Text("Splunge")
-            .padding()
-        Text("Blargle \(remote.loadedData?.count ?? -666)")
+        if let photos = remote.loadedData {
+            Text("Blargle \(photos.count)")
+        } else {
+            Text("Splunge")
+              .padding()
+        }
     }
 }
 
