@@ -18,9 +18,9 @@ struct ContentView: View {
                         Text("Linky")
                     }
                     List {
-                        ForEach(photos) { photo in
+                        ForEach(photos) { metadata in
                             NavigationLink(destination: Text("blorf")) {
-                                Text("\(photo.author) : \(photo.width) x \(photo.height)")
+                                PhotoView(metadata: metadata)
                             }
                         }
                     }
@@ -31,6 +31,13 @@ struct ContentView: View {
             }
             .navigationBarTitle("Florp")
         }
+    }
+}
+
+struct PhotoView: View {
+    let metadata: Photo
+    var body: some View {
+        Text("snoogle \(metadata.downloadUrl)")
     }
 }
 
