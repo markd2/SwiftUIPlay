@@ -4,6 +4,9 @@ Notes and experiment dumping ground learning SwiftUI.  Now that I have
 a shipping side project that I can drop iOS 12 support, I can actually
 learn this stuff for real.
 
+* See my [questions](questions.md) document for raw notes.  I take a lot
+  of notes when learning stuff.
+
 So far, it's notes and observations and exercises from the Objc.io
 [Thinking in SwiftUI](https://www.objc.io/books/thinking-in-swiftui/).
 It dives in to technical details. Don't expect "This is xcode. This
