@@ -2,24 +2,34 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var remote: PhotoRemote
-
+    
     init(remote: PhotoRemote) {
         self.remote = remote
     }
-
+    
     var body: some View {
-        if let photos = remote.loadedData {
-            Text("Blargle \(photos.count)")
-
-            List {
-                ForEach(photos) {
-                    Text("\($0.author) : \($0.width) x \($0.height)")
+        NavigationView {
+            VStack {
+                if let photos = remote.loadedData {
+                    Text("Blargle \(photos.count)")
+                    
+                    Text("Flongwaffle")
+                    NavigationLink(destination: Text("Snorgle")) {
+                        Text("Linky")
+                    }
+                    List {
+                        ForEach(photos) { photo in
+                            NavigationLink(destination: Text("blorf")) {
+                                Text("\(photo.author) : \(photo.width) x \(photo.height)")
+                            }
+                        }
+                    }
+                } else {
+                    Text("Splunge")
+                      .padding()
                 }
             }
-
-        } else {
-            Text("Splunge")
-              .padding()
+            .navigationBarTitle("Florp")
         }
     }
 }
