@@ -1,5 +1,8 @@
-## Emacs (courtesy of gitignore.io. Love ya Joe!)
+## Local Junk
 
+.DS_Store
+
+## Emacs (courtesy of gitignore.io. Love ya Joe!)
 
 # Created by https://www.toptal.com/developers/gitignore/api/emacs
 # Edit at https://www.toptal.com/developers/gitignore?templates=emacs
