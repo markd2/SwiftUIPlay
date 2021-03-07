@@ -26,6 +26,9 @@
     - in reality, the index must conform to Strideable or implement
       index(_:offsetBy:) and distance(from:to:) in O(1)
     - rabbithole continues down into BidirectionalCollection, Collection, etc
+* [ ] Why didn't having a UIImage as a @State in the PhotoView, and assigning
+      that image in a network callback work (triggering a refresh of the
+      world).
 
 ==================================================
 # Property Wrappers seen
@@ -239,6 +242,33 @@ The type is all views that could ever be onscreen during the app's lifecycle.
 make sure to publish values from the main thread (via operators like
 receive(on:)) on model updates.
 ```
+
+- fun bizarre error:
+```
+Cannot convert value of type '[Photo]' to expected argument type 'Range<Int>'
+    List {
+        ForEach(photos) {
+```
+Notice that there is no explicit argument.  Add a `spoonwaffle in` and
+the error goes away.
+
+* NavigationView - one of the steps in chapter 2's exercise.
+   - c.f. https://www.hackingwithswift.com/articles/216/complete-guide-to-navigationview-in-swiftui (video 40min)
+   - push and pop screens with ease
+
+* wow.  Xcode templates are openly hostile to supporting iOS 13. #ilyxc
+
+* Getting a syntax error like
+```
+Cannot convert value of type 'Binding<Subject>' to expected argument type '[Photo]'
+```
+Make sure there's not a simple error like "accessing a field that doesn't exist".  There's probably a follow-on error like
+
+```
+Value of type 'ObservedObject<PhotoRemote>.Wrapper' (aka 'ObservedObject<Remote<WebPhoto, Photo>>.Wrapper') has no dynamic member 'photos' using key path from root type 'PhotoRemote' (aka 'Remote<WebPhoto, Photo>')
+```
+
+"has no dynamic member" is the key bit, just buried way deep in a ton of noise :-(
 
 ==================================================
 # Hints

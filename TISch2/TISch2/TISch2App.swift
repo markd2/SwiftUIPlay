@@ -22,6 +22,39 @@ struct TISch2App: App {
     }
 }
 
+class Loader<T>: ObservableObject {
+    let url: URL
+    let converter: (Data) throws -> T
+    @Published var value: T?
+
+    init(url: URL, converter: @escaping (Data) throws -> T) {
+        self.url = url
+        self.converter = converter
+        try! load()
+    }
+
+    func load() throws {
+        URLSession.shared.dataTask(with: url) { data, _, _ in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    self.value = nil
+                }
+                return
+            }
+            let result = try? self.converter(data)
+            DispatchQueue.main.async {
+                self.value = result
+             }
+        }.resume()
+    }
+}
+
+extension Loader where T: Decodable {
+    convenience init(url: URL) {
+        self.init(url: url, converter: { data in try JSONDecoder().decode(T.self, from: data) }) 
+    }
+}
+
 class Remote<WebType, RealType>: ObservableObject where WebType: Decodable {
     var flunge: AnyCancellable?
     
