@@ -1,6 +1,20 @@
 import SwiftUI
 import Combine
 
+struct PhotosList: View {
+    var photos: [Photo]
+
+    var body: some View {
+        List {
+            ForEach(photos) { metadata in
+                NavigationLink(destination: Text("blorf")) {
+                    PhotoView(metadata: metadata)
+                }
+            }
+        }
+    }
+}
+
 struct ContentView: View {
     @ObservedObject var remote: PhotoRemote
     
@@ -18,13 +32,7 @@ struct ContentView: View {
                     NavigationLink(destination: Text("Snorgle")) {
                         Text("Linky")
                     }
-                    List {
-                        ForEach(photos) { metadata in
-                            NavigationLink(destination: Text("blorf")) {
-                                PhotoView(metadata: metadata)
-                            }
-                        }
-                    }
+                    PhotosList(photos: remote.loadedData ?? [])
                 } else {
                     Text("Splunge")
                       .padding()
@@ -37,39 +45,24 @@ struct ContentView: View {
 
 var cancellables = [AnyCancellable]()
 
-struct PhotoView: View {
+struct PhotoView: View  {
     let metadata: Photo
-//    @State private var image: UIImage = UIImage(named: "loading-placeholder")!
-    @State private var image: Image = Image("loading-placeholder")
+    @ObservedObject var imageLoader: Loader<UIImage>
 
     init(metadata: Photo) {
         self.metadata = metadata
-        // TODO - don't load it immediately like this, wait until it's
-        // visible. ++md 6-march-2021
-        loadImage()
-    }
-
-    @State var handle: AnyCancellable?
-
-    func loadImage() {
-        print("\(metadata.downloadUrl)")
-        URLSession.shared.dataTaskPublisher(for: metadata.downloadUrl)
-          .map { $0.data }
-          .map { UIImage(data: $0)! } // FIXME
-          .sink(receiveCompletion: { status in
-                    print("status \(status)")
-                },
-                receiveValue: { imagex in
-                    image = Image(uiImage: imagex)
-                })
-        .store(in: &cancellables)
+        imageLoader = Loader<UIImage>(url: metadata.downloadUrl) { data in
+            UIImage(data:  data)!
+        }
     }
 
     var body: some View {
         VStack {
             Text("\(metadata.author)")
-            image.resizable()
-              .aspectRatio(contentMode: .fit)
+            if let image = imageLoader.value {
+                Image(uiImage: image).resizable()
+                    .aspectRatio(contentMode: .fit)
+            }
         }
     }
 }
