@@ -21,26 +21,88 @@
 
 import SwiftUI
 
+class DatabaseConnection: ObservableObject {
+    var isConnected: Bool = true
+}
 
-struct ContentView: View {
-    @State var flunge = 0.33
+struct SomeView: View {
+    // the database is effectively injected
+    @EnvironmentObject var connection: DatabaseConnection
 
     var body: some View {
-        Knob(value: $flunge).frame(width: 100, height: 100)
-        Text("Blah \(flunge)")
-        Slider(value: $flunge, in: (0...1))
+        VStack {
+            if connection.isConnected {
+                Text("Connected")
+            } else {
+                Text("Not Connected")
+            }
+        }
     }
 }
 
+struct ContentView: View {
+    var body: some View {
+        NavigationView {
+            SomeView()
+        }.environmentObject(DatabaseConnection())
+    }
+}
 
-struct Knob: View {
+// ---------- custom environment stuffs
+
+struct ch3_customEnvironment_ContentView: View {
+    @State var volume = 0.33
+    @State var cutoff = 0.5
+
+    var body: some View {
+        HStack {
+            VStack {
+                ch3_customEnvironment_Knob(value: $volume)
+                  .frame(width: 100, height: 100)
+                Text("Volume")
+            }
+            VStack {
+                ch3_customEnvironment_Knob(value: $cutoff)
+                  .frame(width: 100, height: 100)
+                Text("Cutoff")
+            }
+        }
+          .knobPointerSize(0.1) // custom enviroment step 6/6
+    }
+}
+
+// custom environment step 1/6
+fileprivate struct PointerSizeKey: EnvironmentKey {
+    static let defaultValue: CGFloat = 0.1
+}
+
+// custom environment step 2/6
+extension EnvironmentValues {
+    var knobPointerSize: CGFloat {
+        get { self[PointerSizeKey.self] }  // since has the type, can get the defaultValue for the  default, I think...
+        set { self[PointerSizeKey.self] = newValue }
+    }
+}
+
+// custom environment step 3/6
+extension View {
+    func knobPointerSize(_ size: CGFloat) -> some View {
+        environment(\.knobPointerSize, size)
+        // environment is a method of self (View)
+    }
+}
+
+struct ch3_customEnvironment_Knob: View {
     @Binding var value: Double // 0 through 1
     @Environment(\.colorScheme) var colorScheme
 
-    var pointerSize: CGFloat = 0.1  // e.g. 32 bits :-D
+    var pointerSize: CGFloat? = nil
+    // custom environment step 4/6
+    @Environment(\.knobPointerSize) var envPointerSize
     
     var body: some View {
-        KnobShape(pointerSize: pointerSize * 2)
+        // custom environment step 5/6
+        KnobShape(pointerSize: pointerSize ?? envPointerSize)
           .fill(colorScheme == .dark ? Color.white : Color.black)
           .rotationEffect(Angle(degrees: value * 330))
           .onTapGesture {
