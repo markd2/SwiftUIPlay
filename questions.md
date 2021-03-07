@@ -1,6 +1,8 @@
 
 # random notes
 
+* resume at Chapter 3, Preferences
+
 * [ ] need to pick up chapter 2 video at 30:34. Managed to get through the
       base exercise and want to move on, but looks like more good stuff in
       there.
@@ -8,7 +10,6 @@
 ==================================================
 # accumulated questions
 
-* [ ] What is `@State`?
 * [ ] what is `some`?
     - "whatever the exact type of the body might be, it definitely conforms
        to the View protocol"
@@ -43,11 +44,14 @@
 * [ ] @StateObject
 * [ ] @EnvironmentObject
 * [ ] @GestureState
+* [ ] @Environment
 
 c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relationships
 
 ==================================================
 # UI Thingies seen
+
+### Views
 
 * [ ] Text
 * [ ] List
@@ -56,6 +60,27 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] Image
 * [ ] ForEach - an array of Identifiables for the simple syntax 
 * [ ] Group
+
+### modifier things
+
+* [ ] .transformEnvironment
+* [ ] .font
+* [ ] .navigationBarTitle
+* [ ] .border
+* [ ] .onTapGesture
+* [ ] .rotationEffect
+* [ ] .navigatioNBarTitle
+* [ ] .aspectRatio
+* [ ] .padding
+* [ ] .environment
+
+
+### Types
+
+* [ ] EnvironmentKey - requires `static defaultValue`
+      - need this to add custom things to the environment
+* [ ] EnvironmentValues - lets us use the key as a keypath
+
 
 ==================================================
 # Random things of interest
@@ -270,6 +295,61 @@ Value of type 'ObservedObject<PhotoRemote>.Wrapper' (aka 'ObservedObject<Remote<
 
 "has no dynamic member" is the key bit, just buried way deep in a ton of noise :-(
 
+* Environment
+  - mechanism SUI uses to propagate values down the view tree, from a parent
+    own to its contained subviews
+  - it's apssed down the view tree
+  - we can call methods (wrap views?) with random stuff - font, foregrondColor,
+    etc.  Font on VStack?  linespacing on Color?  how do magnets work?
+```
+ModifiedContent<VStack<Text>, _EnvironmentKeyWritingModifier<Optional<Font>>>
+```
+  - wrap with Modified Content - content and modifier
+    - so an optional value being written to the environment
+    - since being passed down the view tree,  the Text will be able to read
+      the font from the environment
+      - so for `.font`, an optional Font is written to the environment
+  - `.environment(\.font, Font.headline)` - same effect as .font(.headline)
+  - the same call `.font` is actually overloaded
+    - on Text, it sets the font
+    - on VStack, it sets in the environment
+    - "this pattern is used throughout SwiftUI"
+    - This can have an impact on API design. Consider these two.  Have to make
+       the knobPointerSize a function on View
+```
+   Knob(value: $value).knobPointerSize(0.2)
+and  
+   Knob(value: $value).frame(width/height).knobPointerSize(0.2)
+```
+  - environment modifiers only affect direct subview trees and never
+    parent or sibling views.
+  - `@Environment(\.colorScheme) var colorScheme` - given a keypath into
+    an environment, sets up a binding thingie so if the colorScheme changes
+    in the environment, this will change and trigger a re-do. Acts like 
+    @State
+  - Environment is not (just) a global dictionary of values
+    - one view's subtree can be different from another
+  - a form of dependency injection
+    - but usually used with value types
+    - @Environment is only invalidated when a new value is set, so if a 
+      property of the thing in the enviroment changes, nothing  hapens
+    - so use @EnvironmentObject, give it an ObservableObject
+       - cases the view to be invalidated when objectWillChange publisher
+         is triggered
+       - works without a key b/c the type of the object is automatically
+         used as the key.
+       - _does this mean we can't have say two UIColors?_ - yes
+    - recommend to use value type with a key. It can provide a default value,
+      and won't die if forget to inject the object
+      - wait, what?
+```
+Fatal error: No ObservableObject of type DatabaseConnection found. A
+View.environmentObject(_:) for DatabaseConnection may be missing as an
+ancestor of this view.: file SwiftUI, line 0
+```
+
+
+
 ==================================================
 # Hints
 
@@ -282,6 +362,10 @@ Value of type 'ObservedObject<PhotoRemote>.Wrapper' (aka 'ObservedObject<Remote<
       return VStack { ... }
    }
 ```
+* don't just Enviroment all the things.
+  - first expose customization options as simple view parameters
+  - then if notice a more decoupled API would be useful, it's easy
+    to change to use the environment.
 
 ==================================================
 # Neat!
@@ -385,3 +469,30 @@ view, the only thing that is substantivelly affected by it is the LabelView.
 
 * on branch tis_ch2_ex_s3 - the views updating when the array finishes loading.
   That's freaking amazing magic.
+
+* COOL.  See the contents of the environment.  
+    `.transformEnvironment(keypath) { dump($0) }`
+    Can use keypaths like \.font, but also things like \.self to see
+    :allTheThings:
+
+```
+    Text("Hello, world!")
+      .transformEnvironment(\.font) { dump($0) }
+yields
+▿ Optional(SwiftUI.Font(provider: SwiftUI
+                                  .(unknown context at $1b472f518)
+                                  .FontBox<SwiftUI.Font
+                                  .(unknown context at $1b474dfa0)
+                                  .TextStyleProvider>))
+  ▿ some: SwiftUI.Font
+    ▿ provider: SwiftUI
+                .(unknown context at $1b472f518)
+                 .FontBox<SwiftUI.Font
+                 .(unknown context at $1b474dfa0)
+                 .TextStyleProvider> #0
+      - super: SwiftUI.AnyFontBox
+      ▿ base: SwiftUI.Font.(unknown context at $1b474dfa0).TextStyleProvider
+        - style: SwiftUI.Font.TextStyle.headline
+        - design: SwiftUI.Font.Design.default
+        - weight: nil
+```
