@@ -1,3 +1,11 @@
+
+# random notes
+
+* [ ] need to pick up chapter 2 video at 30:34. Managed to get through the
+      base exercise and want to move on, but looks like more good stuff in
+      there.
+
+==================================================
 # accumulated questions
 
 * [ ] What is `@State`?
@@ -34,6 +42,17 @@
 * [ ] @GestureState
 
 c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relationships
+
+==================================================
+# UI Thingies seen
+
+* [ ] Text
+* [ ] List
+* [ ] Button
+* [ ] NavigationView
+* [ ] Image
+* [ ] ForEach - an array of Identifiables for the simple syntax 
+* [ ] Group
 
 ==================================================
 # Random things of interest
