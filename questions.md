@@ -81,7 +81,7 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] EnvironmentKey - requires `static defaultValue`
       - need this to add custom things to the environment
 * [ ] EnvironmentValues - lets us use the key as a keypath
-
+* [ ] PreferenceKey - requires default value and a reduce method
 
 ==================================================
 # Random things of interest
