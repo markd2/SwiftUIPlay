@@ -1,7 +1,7 @@
 
 # random notes
 
-* resume at Chapter 4, Layout - Frame
+* resume at Chapter 4, Layout - SnackViews
 
 * [ ] need to pick up chapter 2 video at 30:34. Managed to get through the
       base exercise and want to move on, but looks like more good stuff in
@@ -46,6 +46,7 @@
 * [ ] @EnvironmentObject
 * [ ] @GestureState
 * [ ] @Environment
+* [ ] @Namespace
 
 c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relationships
 
@@ -83,7 +84,12 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] .lineLimit
 * [ ] .minimumScaleFactor
 * [ ] .truncationMode
+* [ ] .offset
+* [ ] .matchedGeometryEffect
+* [ ] .clipped
+* [ ] .cornerRadius
 
+asdf
 
 ### Types
 
@@ -447,8 +453,66 @@ VStack<
       - .minimumScaleFactor - allows to be rendered at a smaller size if
         it doesn't fit
       - .truncationMode - beginning/middle/end
-
-        
+  - frames.  Two flavors
+    - fixed-sized frames
+      - .frame with width/height, and an alignment (by default w/h is nil and
+        alignment is .center)
+      - the frame's layout will propose this width to its children.
+      - also returns the fixed size as its size
+      - if one dimension if fixed, uses the returned value from the children
+        as the other dimension
+      - So Text("blah").frame(width: 100), text's layout will receive a 
+        proposed size 100 points wide no matter what the parent view's width
+        is.
+      - alignment to position child if the size is different than the frame
+    - flexible frames
+      - give a minimum, idea, and max width/height
+        - min/max clamp
+      - don't quite grok the description on page 68 "The ideal dimensions"
+    - to propose a nil dimension, use .fixedSize() modifier
+      - "it's a counter proposal"
+  - padding
+    - "one of the simplest around"
+    - full version takes EdgeInsets (padding per edge)
+    - without args, use default
+    - when layinig out, the padding modifier subsstracts the padding from
+      the proposed size and then proposes it to the child.
+      - then adds the padding to the returned size
+    - can have negative padding
+  - overlay / background
+    - content.overlay(other)
+    - proposed size is passed to content. Then reported size is psased to
+      other as proposed size. Overlay reports back its own size (ignoring
+      other)
+    - background is the same, and other is drawn behind content
+    - content.overlay(other) != other.overlay(content)
+      - first case, `content` size returned.  Latter case overlay's size is used
+  - drawing modifiers
+    - don't affect layout, just drawing.  They identity-matrix the sizes
+      flowing through them
+    - .offset causes to be drawn at a different position.  Useful during 
+      animations and interactions
+      "can use offset to move a dragged item to the drag position while
+       still maintaing its space in the list"
+  - matchedGeometryEffect
+    - give one or more views the same geometry properties as a single source
+      - target views can choose to be the same size
+      - or "align at the same position as the source"
+      - or get the same _frame_ - size and position matches the source
+      - "mostly useful for animations"
+    - also has _properties_ and _anchor_ parameters
+      - properties - can specify if the full frame or jsut the position or size
+      - with .position, anchor is used in to align the views
+    - make sure the destination view are able to be as large as the source
+      - if they need to shrink, it can "be aligned in unexpected ways"
+    - doesn't affect layout, just how it's rendered
+    - also useful in animations
+  - clipping and masking
+    - don't affect layout, but influence what's drawn
+    - .clipped - view is clipped to the bounding rectangle
+    - .clipShape - takes a shape
+    - "rounded corners with .cornerRadius are implemented by clipShape
+       with a roundedRect"
 
 asdf
 ==================================================
