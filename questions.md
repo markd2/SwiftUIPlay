@@ -13,6 +13,7 @@
 * [ ] what is `some`?
     - "whatever the exact type of the body might be, it definitely conforms
        to the View protocol"
+    - why not just "View" ?
 * [ ] deeper into function builders
     - cannot write loops and guards
     - can write switch and if statements to construct a view tree dependent
@@ -347,8 +348,54 @@ Fatal error: No ObservableObject of type DatabaseConnection found. A
 View.environmentObject(_:) for DatabaseConnection may be missing as an
 ancestor of this view.: file SwiftUI, line 0
 ```
+* Preferences - a way to implicitly pass values from the child views up
+  to a superview (!)
+  - e.g. NavigationView, describe navigationBarTitle, BarItems, etc through
+    modifiers.  Those need to bubble up to the NavigationView
+  - _ok I can see the need. Kind of a weird name_
+    - like .navigationBarTitle on a Text().  The text isn't interested in
+      it, but the/a parent view is
+  - like with env, a prefernce has
+    - key (type)
+    - associated type for the value
+    - defeault value
+  - also needs a way to combine values (like multiple view subtrees define
+    the same preference)
+  - this stuff kind of hurts my brain. Like this which adds `.blahNavigationTitle`
+    that someone can decorate another view.  It returns a prefernce, which
+    is a View. :mind-blown-but-in-a-way-that-hurts:
+```
+extension View {
+    func blahNavigationTitle(_ title: String) -> some View {
+        preference(key: BlahNavigationTitleKey.self, value: title)
+    }
+}
+```
+  - Kind of the money bit:
+```
+    VStack {
+        Text(title ?? "").font(Font.largeTitle)
+        // step 5 of custom preferences
+        content.onPreferenceChange(BlahNavigationTitleKey.self) { title in
+            self.title = title
+        }
+    }
 
-
+VStack<
+    TupleView<(Text, 
+               ModifiedContent<
+                   Text, 
+                   _PreferenceActionModifier<BlahNavigationTitleKey>
+```
+  - this means views are rendered twice.  Once with the nil value, then
+    subchildren are rendered, which set a preference, which changes stuff,
+    which causes things to be re-rendered again.
+    - but with the smart diffing, children that are unaffected shouldn't
+      actually get rebuilt
+    - wonder if it's possible to set up a loop?
+  - the "reduce", part of the `PreferenceKey` protocol.  The sample navView
+    just picked an arbitary (first seen) value. But you could collect stuff
+    in to a collection (so say tab views)
 
 ==================================================
 # Hints
