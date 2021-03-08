@@ -1,7 +1,7 @@
 
 # random notes
 
-* resume at Chapter 3, Preferences
+* resume at Chapter 4, Layout - Frame
 
 * [ ] need to pick up chapter 2 video at 30:34. Managed to get through the
       base exercise and want to move on, but looks like more good stuff in
@@ -61,19 +61,28 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] Image
 * [ ] ForEach - an array of Identifiables for the simple syntax 
 * [ ] Group
+* [ ] Path
+* [ ] Shape
+* [ ] RotatedShape
 
-### modifier things
+### view modifier things
 
 * [ ] .transformEnvironment
 * [ ] .font
 * [ ] .navigationBarTitle
 * [ ] .border
+* [ ] .frame
 * [ ] .onTapGesture
 * [ ] .rotationEffect
-* [ ] .navigatioNBarTitle
+* [ ] .navigationBarTitle
+* [ ] .resizeable
 * [ ] .aspectRatio
 * [ ] .padding
 * [ ] .environment
+* [ ] .fixedSize
+* [ ] .lineLimit
+* [ ] .minimumScaleFactor
+* [ ] .truncationMode
 
 
 ### Types
@@ -397,6 +406,51 @@ VStack<
     just picked an arbitary (first seen) value. But you could collect stuff
     in to a collection (so say tab views)
 
+* Layout
+  - task of assigning each view in the view tree a position and size
+  - the TL;DR
+    - for the root view, SUI proposes a size (available space)
+    - view lays itself out in that space and reports its actual size
+    - container then aligns the root view to available space
+  - but of course the reality is every view and modifier has different  
+    behavior
+    - two dimensions of proposed size
+    - nil value means the view can become the _ideal size_
+    - each view gets a rectangle, but the view doesn't always draw
+      within those bounds. (useful during animutation).  So like kee
+      a view's layout position (other views stay in place relative to it)
+      but draw with an offset or rotation
+  - specific view behavior
+    - Path - the layout ignores the bounding rectange of the path. Returns
+      the proposed size
+    - Shape - has a `path` function, makes it possible to draw a path
+      that's dependent on the proposed size. Custom shapes should mimic
+      built-in shapes (basically filling the space as appropriate)
+  - when doing a .rotation, it draws at its Loco size, but rotates and 
+    could stick out of its boundary
+    - likewise, doing an offset, doesn't change the layout, but draws the
+       shape in a different position (via `OffsetShape`)
+  - images have the size of their image.  The layout method ignores the size
+    proposed by the layout system and always returns the size
+    - to make it flexible, call .resizable
+    - .aspectRatio is also useful, includes fit or fill
+  - text (this is gonna be fun. Text is usually so simple %-) )
+    - always tries to fit its contents in the proposed size
+      - returns the bounding box of the rendered text
+      - if no newlines, tries to render as a single line. If not, it looks
+        to the available vertical space.  If enough, will wrap. if it still
+        won't fit (you must acquit), the text gets truncated.
+    - view modifiers
+      - .fixedSize, prevents wrapping. Text might draw outside the proposed
+        fixed size
+      - .lineLimit - max number of lines.  can truncate
+      - .minimumScaleFactor - allows to be rendered at a smaller size if
+        it doesn't fit
+      - .truncationMode - beginning/middle/end
+
+        
+
+asdf
 ==================================================
 # Hints
 
