@@ -21,11 +21,87 @@
 
 import SwiftUI
 
+// step 1 of custom preference
+struct BlahNavigationTitleKey: PreferenceKey {
+    static var defaultValue: String? = nil
+
+    // in case multiple subtrees define a nav title key.
+    // do a simple thing - pick the first one that floats by
+    static func reduce(value: inout String?, nextValue: () -> String?) {
+        value = value ?? nextValue()
+    }
+}
+
+// step 2 of custom preference. define navigation titles on any view
+
+extension View {
+    func blahNavigationTitle(_ title: String) -> some View {
+        preference(key: BlahNavigationTitleKey.self, value: title)
+    }
+}
+
+
+// step 3 of custom preferences  Using it
+struct BlahNavigationView<Content>: View where Content: View {
+    let content: Content
+
+    // step 4 of custom preferences. the thing that's being preferenced
+    @State private var title: String? = nil
+
+    var body: some View {
+        VStack {
+            Text(title ?? "default").font(Font.largeTitle)
+            // step 5 of custom preferences
+            content.onPreferenceChange(BlahNavigationTitleKey.self) { title in
+                self.title = title
+            }
+        }.debug()
+    }
+}
+
+
+// example of more sophistced reduce in the tab item key
+struct BlahTabItemKey: PreferenceKey {
+    static let defaultValue: [String] = []
+    static func reduce(value: inout [String], nextValue: () -> [String]) {
+        value.append(contentsOf: nextValue())
+    }
+}
+
+struct BlahTabView: View {
+    @State var titles: [String] = []
+
+    var body: some View {
+        VStack {
+            Text("Oogle")
+            HStack {
+                ForEach(Array(titles.enumerated()), id: \.offset) { item in
+                    Text(item.element)
+                }
+            }
+        }.onPreferenceChange(BlahTabItemKey.self) { self.titles = $0 }
+    }
+}
+
+
+struct ContentView: View {
+    var body: some View {
+        Text("Snarnge")
+        BlahNavigationView(content: 
+                             Text("Oogie")
+                             .blahNavigationTitle("Blorf")
+                             .background(Color.purple)
+        )
+    }
+}
+
+// ----------
+
 class DatabaseConnection: ObservableObject {
     var isConnected: Bool = true
 }
 
-struct SomeView: View {
+struct ch3_4_SomeView: View {
     // the database is effectively injected
     @EnvironmentObject var connection: DatabaseConnection
 
@@ -40,11 +116,17 @@ struct SomeView: View {
     }
 }
 
-struct ContentView: View {
+struct ch3_4_ContentView: View {
     var body: some View {
         NavigationView {
-            SomeView()
-        }.environmentObject(DatabaseConnection())
+            ch3_4_SomeView()
+        }.environmentObject(DatabaseConnection()) // env object
+
+        NavigationView {
+            Text("Snarnge")
+              .navigationBarTitle("Root")   // "preference"
+            .background(Color.gray)
+        }.debug()
     }
 }
 
