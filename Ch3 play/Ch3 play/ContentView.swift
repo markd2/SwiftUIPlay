@@ -1,25 +1,6 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import SwiftUI
+
+// -----------
 
 // step 1 of custom preference
 struct BlahNavigationTitleKey: PreferenceKey {
