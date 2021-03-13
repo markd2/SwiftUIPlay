@@ -1,7 +1,7 @@
 
 # random notes
 
-* resume at Chapter 3, Preferences
+* resume _Thinking in SwiftUI_ at Chapter 4, Layout - Grid Views
 
 * [ ] need to pick up chapter 2 video at 30:34. Managed to get through the
       base exercise and want to move on, but looks like more good stuff in
@@ -14,6 +14,9 @@
     - "whatever the exact type of the body might be, it definitely conforms
        to the View protocol"
     - why not just "View" ?
+    - From a chat with MikeyW - this is a manual optimization so that the
+      View protocol type won't generate an existential for each particular 
+      `body` and have to do boxing/unboxing of it, like Generics give us.
 * [ ] deeper into function builders
     - cannot write loops and guards
     - can write switch and if statements to construct a view tree dependent
@@ -31,6 +34,9 @@
 * [ ] Why didn't having a UIImage as a @State in the PhotoView, and assigning
       that image in a network callback work (triggering a refresh of the
       world).
+* [ ] overriding alignment guide via computeValue: only with custom layout guides?
+      (example in chapter 4 works great with a custom layout guide, didn't have an effect
+      when using VerticalAlignment.center)
 
 ==================================================
 # Property Wrappers seen
@@ -46,6 +52,7 @@
 * [ ] @EnvironmentObject
 * [ ] @GestureState
 * [ ] @Environment
+* [ ] @Namespace
 
 c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relationships
 
@@ -61,20 +68,37 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] Image
 * [ ] ForEach - an array of Identifiables for the simple syntax 
 * [ ] Group
+* [ ] Path
+* [ ] Shape
+* [ ] RotatedShape
+* [ ] H/V/ZStack
+* [ ] LazyH/V/ZStack
 
-### modifier things
+### view modifier things
 
 * [ ] .transformEnvironment
 * [ ] .font
 * [ ] .navigationBarTitle
 * [ ] .border
+* [ ] .frame
 * [ ] .onTapGesture
 * [ ] .rotationEffect
-* [ ] .navigatioNBarTitle
+* [ ] .navigationBarTitle
+* [ ] .resizeable
 * [ ] .aspectRatio
 * [ ] .padding
 * [ ] .environment
+* [ ] .fixedSize
+* [ ] .lineLimit
+* [ ] .minimumScaleFactor
+* [ ] .truncationMode
+* [ ] .offset
+* [ ] .matchedGeometryEffect
+* [ ] .clipped
+* [ ] .cornerRadius
+* [ ] .layoutPriority
 
+asdf
 
 ### Types
 
@@ -396,6 +420,156 @@ VStack<
   - the "reduce", part of the `PreferenceKey` protocol.  The sample navView
     just picked an arbitary (first seen) value. But you could collect stuff
     in to a collection (so say tab views)
+
+* Layout
+  - task of assigning each view in the view tree a position and size
+  - the TL;DR
+    - for the root view, SUI proposes a size (available space)
+    - view lays itself out in that space and reports its actual size
+    - container then aligns the root view to available space
+  - but of course the reality is every view and modifier has different  
+    behavior
+    - two dimensions of proposed size
+    - nil value means the view can become the _ideal size_
+    - each view gets a rectangle, but the view doesn't always draw
+      within those bounds. (useful during animutation).  So like kee
+      a view's layout position (other views stay in place relative to it)
+      but draw with an offset or rotation
+  - specific view behavior
+    - Path - the layout ignores the bounding rectange of the path. Returns
+      the proposed size
+    - Shape - has a `path` function, makes it possible to draw a path
+      that's dependent on the proposed size. Custom shapes should mimic
+      built-in shapes (basically filling the space as appropriate)
+  - when doing a .rotation, it draws at its Loco size, but rotates and 
+    could stick out of its boundary
+    - likewise, doing an offset, doesn't change the layout, but draws the
+       shape in a different position (via `OffsetShape`)
+  - images have the size of their image.  The layout method ignores the size
+    proposed by the layout system and always returns the size
+    - to make it flexible, call .resizable
+    - .aspectRatio is also useful, includes fit or fill
+  - text (this is gonna be fun. Text is usually so simple %-) )
+    - always tries to fit its contents in the proposed size
+      - returns the bounding box of the rendered text
+      - if no newlines, tries to render as a single line. If not, it looks
+        to the available vertical space.  If enough, will wrap. if it still
+        won't fit (you must acquit), the text gets truncated.
+    - view modifiers
+      - .fixedSize, prevents wrapping. Text might draw outside the proposed
+        fixed size
+      - .lineLimit - max number of lines.  can truncate
+      - .minimumScaleFactor - allows to be rendered at a smaller size if
+        it doesn't fit
+      - .truncationMode - beginning/middle/end
+  - frames.  Two flavors
+    - fixed-sized frames
+      - .frame with width/height, and an alignment (by default w/h is nil and
+        alignment is .center)
+      - the frame's layout will propose this width to its children.
+      - also returns the fixed size as its size
+      - if one dimension if fixed, uses the returned value from the children
+        as the other dimension
+      - So Text("blah").frame(width: 100), text's layout will receive a 
+        proposed size 100 points wide no matter what the parent view's width
+        is.
+      - alignment to position child if the size is different than the frame
+    - flexible frames
+      - give a minimum, idea, and max width/height
+        - min/max clamp
+      - don't quite grok the description on page 68 "The ideal dimensions"
+    - to propose a nil dimension, use .fixedSize() modifier
+      - "it's a counter proposal"
+  - padding
+    - "one of the simplest around"
+    - full version takes EdgeInsets (padding per edge)
+    - without args, use default
+    - when layinig out, the padding modifier subsstracts the padding from
+      the proposed size and then proposes it to the child.
+      - then adds the padding to the returned size
+    - can have negative padding
+  - overlay / background
+    - content.overlay(other)
+    - proposed size is passed to content. Then reported size is psased to
+      other as proposed size. Overlay reports back its own size (ignoring
+      other)
+    - background is the same, and other is drawn behind content
+    - content.overlay(other) != other.overlay(content)
+      - first case, `content` size returned.  Latter case overlay's size is used
+  - drawing modifiers
+    - don't affect layout, just drawing.  They identity-matrix the sizes
+      flowing through them
+    - .offset causes to be drawn at a different position.  Useful during 
+      animations and interactions
+      "can use offset to move a dragged item to the drag position while
+       still maintaing its space in the list"
+  - matchedGeometryEffect
+    - give one or more views the same geometry properties as a single source
+      - target views can choose to be the same size
+      - or "align at the same position as the source"
+      - or get the same _frame_ - size and position matches the source
+      - "mostly useful for animations"
+    - also has _properties_ and _anchor_ parameters
+      - properties - can specify if the full frame or jsut the position or size
+      - with .position, anchor is used in to align the views
+    - make sure the destination view are able to be as large as the source
+      - if they need to shrink, it can "be aligned in unexpected ways"
+    - doesn't affect layout, just how it's rendered
+    - also useful in animations
+  - clipping and masking
+    - don't affect layout, but influence what's drawn
+    - .clipped - view is clipped to the bounding rectangle
+    - .clipShape - takes a shape
+    - "rounded corners with .cornerRadius are implemented by clipShape
+       with a roundedRect"
+* SnackViews
+  - "essential mechanism for building up complex layouts from individual views"
+    - H/V/Z stack
+  - iOS14+ SUI has lazy versions - LazyHStack/LazyVStack
+  - layout (at least HStack)
+    - first pass - figure out the flexibility of each child
+      - determines the min and max width a view can become
+      - the largest number is the most flexible
+    - second pass - divide up the space starting with the least flexible
+      child (that would be me) and ending up with the most flexible
+      child (that would be my sister)
+      - subtracts all the necessary spacing between the views from the
+        proposed width.
+      - loop over children
+      - take the remaining width and divide amongst
+      - proposes to the least flexible remaining child.
+      - repeat
+    - width can nver go negative.  If run out of space, the chidlren will
+      get a proposed width of 0
+  - affecting layout
+    - if there's priorities, the child views not sorted by flexibility,
+      instead grouped by the priority, the nsorted
+  - off-axis alignment (like horizontal jiggering in a VStack)
+    - using _alignment guides_
+    - each stack view has a single alignment guide (two for ZStack - H and V)
+    - default is center, also exists baseline
+    - during layout, ask each child view its layout value (e.g. center)
+      - all the centers placed on a single line
+    - can create custom alignments - really easy
+    - also can override the alginment guide for a specific child view.
+      - Cool, can compute the value on the fly too
+      - only works with custom dimension?
+    - can also use .offset
+      - offset only changes drawing, not offset
+      - alignment guide _does_ change the layout
+* Grid Views
+  - 2D grid.  HGrid grows horizontally, VGrid vertically
+  - create content lazily
+  - three kinds of column (or row - only going to mention one axis from now on)
+    - fixed - fixed width
+    - flexible - can be any width between min/max values
+    - adaptive - flexible with multiple items
+      - SUI will fit as many items into an adaptive column
+  - looks like these are iOS 14 only. But all devices that support 13 also support 14
+* getting reading fatigue.  Want to actually start using stuff.
+
+
+asdf
 
 ==================================================
 # Hints
