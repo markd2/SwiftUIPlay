@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 class ViewController: UIViewController {
 
@@ -6,12 +7,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
 
-
     @IBAction func splunge() {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as UIViewController
+        let splungeView = SplungeView()
+        let vc = UIHostingController(rootView: splungeView)
         navigationController?.pushViewController(vc, animated: true)
     }
-
-
 }
 
