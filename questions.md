@@ -1,7 +1,7 @@
 
 # random notes
 
-* resume at Chapter 4, Layout - SnackViews
+* resume _Thinking in SwiftUI_ at Chapter 4, Layout - Grid Views
 
 * [ ] need to pick up chapter 2 video at 30:34. Managed to get through the
       base exercise and want to move on, but looks like more good stuff in
@@ -14,6 +14,9 @@
     - "whatever the exact type of the body might be, it definitely conforms
        to the View protocol"
     - why not just "View" ?
+    - From a chat with MikeyW - this is a manual optimization so that the
+      View protocol type won't generate an existential for each particular 
+      `body` and have to do boxing/unboxing of it, like Generics give us.
 * [ ] deeper into function builders
     - cannot write loops and guards
     - can write switch and if statements to construct a view tree dependent
@@ -31,6 +34,9 @@
 * [ ] Why didn't having a UIImage as a @State in the PhotoView, and assigning
       that image in a network callback work (triggering a refresh of the
       world).
+* [ ] overriding alignment guide via computeValue: only with custom layout guides?
+      (example in chapter 4 works great with a custom layout guide, didn't have an effect
+      when using VerticalAlignment.center)
 
 ==================================================
 # Property Wrappers seen
@@ -65,6 +71,8 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] Path
 * [ ] Shape
 * [ ] RotatedShape
+* [ ] H/V/ZStack
+* [ ] LazyH/V/ZStack
 
 ### view modifier things
 
@@ -88,6 +96,7 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] .matchedGeometryEffect
 * [ ] .clipped
 * [ ] .cornerRadius
+* [ ] .layoutPriority
 
 asdf
 
@@ -513,8 +522,55 @@ VStack<
     - .clipShape - takes a shape
     - "rounded corners with .cornerRadius are implemented by clipShape
        with a roundedRect"
+* SnackViews
+  - "essential mechanism for building up complex layouts from individual views"
+    - H/V/Z stack
+  - iOS14+ SUI has lazy versions - LazyHStack/LazyVStack
+  - layout (at least HStack)
+    - first pass - figure out the flexibility of each child
+      - determines the min and max width a view can become
+      - the largest number is the most flexible
+    - second pass - divide up the space starting with the least flexible
+      child (that would be me) and ending up with the most flexible
+      child (that would be my sister)
+      - subtracts all the necessary spacing between the views from the
+        proposed width.
+      - loop over children
+      - take the remaining width and divide amongst
+      - proposes to the least flexible remaining child.
+      - repeat
+    - width can nver go negative.  If run out of space, the chidlren will
+      get a proposed width of 0
+  - affecting layout
+    - if there's priorities, the child views not sorted by flexibility,
+      instead grouped by the priority, the nsorted
+  - off-axis alignment (like horizontal jiggering in a VStack)
+    - using _alignment guides_
+    - each stack view has a single alignment guide (two for ZStack - H and V)
+    - default is center, also exists baseline
+    - during layout, ask each child view its layout value (e.g. center)
+      - all the centers placed on a single line
+    - can create custom alignments - really easy
+    - also can override the alginment guide for a specific child view.
+      - Cool, can compute the value on the fly too
+      - only works with custom dimension?
+    - can also use .offset
+      - offset only changes drawing, not offset
+      - alignment guide _does_ change the layout
+* Grid Views
+  - 2D grid.  HGrid grows horizontally, VGrid vertically
+  - create content lazily
+  - three kinds of column (or row - only going to mention one axis from now on)
+    - fixed - fixed width
+    - flexible - can be any width between min/max values
+    - adaptive - flexible with multiple items
+      - SUI will fit as many items into an adaptive column
+  - looks like these are iOS 14 only. But all devices that support 13 also support 14
+* getting reading fatigue.  Want to actually start using stuff.
+
 
 asdf
+
 ==================================================
 # Hints
 

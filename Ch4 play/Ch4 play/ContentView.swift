@@ -11,6 +11,8 @@
 
 import SwiftUI
 
+
+
 struct ContentView: View {
     let image = Image(systemName: "tortoise")
     @State var knobValue: Double = 0.3
@@ -46,13 +48,82 @@ struct ContentView: View {
 //                              Circle().fill (Color.purple)
 //                          }
 //                          MatchedGeometrySample()
-                          Rectangle().rotation(.degrees(33)).fill(Color.red).border(Color.blue).clipped().frame(width:100, height: 100)
+//                          Rectangle().rotation(.degrees(33)).fill(Color.red).border(Color.blue).clipped().frame(width:100, height: 100)
 
-        )
-                          .padding()
+//                          HStack {
+//                              Text("Snorgle Blorgle")
+//                              Rectangle().fill(Color.purple).frame(minWidth: 200)
+//                          }
+
+//                          HStack(spacing: 0) {  // this is also very cool
+//                              Text("/a/very/long/long/path/blah/blah/")
+//                                .truncationMode(.middle).lineLimit(1)
+//                              Text("chappter1.md").layoutPriority(1)
+//                          }
+
+//                          HStack(spacing: 0) {
+//                              Rectangle().fill(Color.purple).frame(minWidth: 50)
+//                               Rectangle().fill(Color.orange).frame(maxWidth: 100)
+//                                .layoutPriority(1)
+//                          }.frame(width: 75)
+
+//                          HStack(alignment: .blahCenter) {
+//                              Rectangle().fill(Color.blue).frame(width: 50, height: 70)
+//                              Rectangle().fill(Color.yellow).frame(width: 30, height: 40)
+//                          }
+
+//                          HStack(alignment: .blahCenter) {
+//                              Rectangle().fill(Color.blue).frame(width: 50, height: 70)
+//                              Rectangle().fill(Color.purple).frame(width: 30, height: 40)
+//                              Rectangle().fill(Color.orange)
+//                                .frame(width: 20, height: 45)
+//                   // this doesn't work - tried HorizontaAlignment and VerticalAlignment
+////                                .alignmentGuide(HorizontalAlignment.center, computeValue: { viewDimensions in
+////                                    return viewDimensions[HorizontalAlignment.center] + 90
+////                                })
+//                   // but this does
+//                                .alignmentGuide(.blahCenter, computeValue: { viewDimensions in
+//                                    return viewDimensions[.blahCenter] + 90
+//                                })
+//                          }
+
+       // still doesn't work
+//                          HStack(alignment: .center) {
+//                              Rectangle().fill(Color.blue).frame(width: 50, height: 70)
+//                              Rectangle().fill(Color.purple).frame(width: 30, height: 40)
+//                              Rectangle().fill(Color.orange)
+//                                .frame(width: 20, height: 45)
+//                                .alignmentGuide(HorizontalAlignment.center, computeValue: { viewDimensions in
+//                                    return viewDimensions[HorizontalAlignment.center] + 90
+//                                })
+//                          }
+
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 50))]) {
+            ForEach(0 ..< 30) { index in
+                Text("\(index)").background(Color.orange).frame(height: 50).border(Color.black)
+            }
+        }
+        .frame(width: 400)
+        
+
+        ).padding()
 
         }
 }
+
+
+// Custom alignment guide part 1/2
+enum BlahCenterID: AlignmentID {
+    static func defaultValue(in context: ViewDimensions) -> CGFloat {
+        return context.height / 3
+    }
+}
+
+// Custom alignment guide part 2/2
+extension VerticalAlignment {
+    static let blahCenter: VerticalAlignment = VerticalAlignment(BlahCenterID.self)
+}
+
 
 struct MatchedGeometrySample: View {
     @Namespace var ns
