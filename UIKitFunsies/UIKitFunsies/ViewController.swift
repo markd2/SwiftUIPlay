@@ -8,7 +8,8 @@ class ViewController: UIViewController {
 
 
     @IBAction func splunge() {
-        print("SNORGLE")
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as UIViewController
+        navigationController?.pushViewController(vc, animated: true)
     }
 
 
