@@ -573,6 +573,15 @@ VStack<
 ==================================================
 # UIKit and SwiftUI, sitting in a Tree (hierarchy)
 
+* UIHostingController. 
+* pushing SwiftUI into UINavController - Well, that was easy
+```
+        let splungeView = SplungeView()
+        let vc = UIHostingController(rootView: splungeView)
+        navigationController?.pushViewController(vc, animated: true)
+```
+* then pushing UIKit from SwiftUI inside of a navcontroller
+
 
 
 ==================================================
