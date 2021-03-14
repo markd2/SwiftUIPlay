@@ -61,6 +61,7 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 
 ### Views
 
+* [ ] Context
 * [ ] Text
 * [ ] List
 * [ ] Button
@@ -569,7 +570,28 @@ VStack<
 * getting reading fatigue.  Want to actually start using stuff.
 
 
-asdf
+
+==================================================
+# UIKit and SwiftUI, sitting in a Tree (hierarchy)
+
+* UIHostingController. 
+* pushing SwiftUI into UINavController - Well, that was easy
+```
+        let splungeView = SplungeView()
+        let vc = UIHostingController(rootView: splungeView)
+        navigationController?.pushViewController(vc, animated: true)
+```
+* then pushing UIKit from SwiftUI inside of a navcontroller
+  - UIViewControllerRepresentable - has a `makeUIViewController`. 
+  - Then give that to `NavigationLink`
+```
+    var body: some View {
+        Text("Greeble").background(Color.blue)
+        NavigationLink(destination: ViewControllerView()) {
+            Text("Flongwaffle")
+        }.navigationBarTitle("Navigation")
+    }
+```
 
 ==================================================
 # Hints
