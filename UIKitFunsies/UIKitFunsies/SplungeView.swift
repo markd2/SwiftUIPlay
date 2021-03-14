@@ -16,11 +16,31 @@ struct ViewControllerView: UIViewControllerRepresentable {
 }
 
 struct SplungeView: View {
+    @State private var isSplunging = true
+
     var body: some View {
-        Text("Greeble").background(Color.blue)
-        NavigationLink(destination: ViewControllerView()) {
-            Text("Flongwaffle")
-        }.navigationBarTitle("Navigation")
+        VStack {
+            Text("Greeble").background(Color.blue)
+            NavigationLink(destination: ViewControllerView()) {
+                Text("Flongwaffle")
+            }.navigationBarTitle("Navigation")
+            Toggle("Snorkle", isOn: $isSplunging)
+            Button(action: {
+                isSplunging.toggle()
+            }) {
+                Image(systemName: "tortoise")
+            }
+            Button(action: {
+                       withAnimation(.easeInOut(duration: 1)) {
+                           isSplunging.toggle()
+                       }
+            }) {
+                Image(systemName: "pause.circle")
+            }
+            .padding()
+            Image(systemName: "tortoise").scaleEffect(isSplunging ? 0.5 : 2.5)
+        }
+        .background(isSplunging ? Color.gray : Color.orange)
     }
 }
 
