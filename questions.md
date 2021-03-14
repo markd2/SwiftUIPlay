@@ -739,3 +739,36 @@ yields
         - design: SwiftUI.Font.Design.default
         - weight: nil
 ```
+
+==================================================
+# State and Data Flow
+
+I think I have a handle on the visual stuff. The data stuff (@State blah, when to
+use what and where, and why do things never work when I expect them to?)
+
+Looking first at https://developer.apple.com/documentation/swiftui/state-and-data-flow
+
+- while composing hierarchy of views, also indicate data dependencies for the views
+- when the data changes (external event or action by the user, SUI automagically updates
+  the affected parts of te interface
+  - hence the framework does most of the work traditionally done by VCs
+```
+                                +------+
+                                | User |<-----------------+
+ +----------------+             +------+                  |
+ | External Event |                |                      |
+ +----------------+                | User interaction     |
+         |              SWIFTUI    |                      |
+         |              +----------|----------------------|-----------+
+     Publisher          |          V                      |           |
+         |              |      +--------+             +------+        |
+         +-------------------->| Action |             | View |        |
+                        |      +--------+             +------+        |
+                        |          |                      ^           |
+                        | mutation |                      | updates   |
+                        |          |       +-------+      |           |
+                        |          +------>| State |------+           |
+                        |                  +-------+                  |
+                        |                                             |
+                        +---------------------------------------------+
+```
