@@ -74,6 +74,7 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] RotatedShape
 * [ ] H/V/ZStack
 * [ ] LazyH/V/ZStack
+* [ ] Toggle
 
 ### view modifier things
 
@@ -98,6 +99,7 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] .clipped
 * [ ] .cornerRadius
 * [ ] .layoutPriority
+* [ ] .animation
 
 asdf
 
@@ -772,3 +774,116 @@ Looking first at https://developer.apple.com/documentation/swiftui/state-and-dat
                         |                                             |
                         +---------------------------------------------+
 ```
+  - framework privdes tools for connecting app's data to the UI
+    - e.g. state variables and bindings
+  - help maintain a Single Source of Truth(tm) for every piece of data in the app
+    - in part by reducing the amount of glue logic
+* tools
+  - Manage tansient UI state locally
+    - @State - wrapping _value types_
+  - Connect to external reference model data
+    - that conforms to ObservableObject by using @xObservedObject in the View
+  - Share a reference to a source of truth
+    - like state or an observable object
+    - using @Binding
+      - which is two-way
+  - distribute value data throughout
+    - storing in the Environment
+  - pass data up through the view hierarchy from child views with PreferenceKey
+  - manage persistent data in CoreData using FetchRequest,
+    - (i'm not a core data user, so ignoring that stuff)
+* Property wrappers
+  - the state and data flow property wrappers watch for changes in the data
+  - automatically update affected views as needed
+  - when refer directly to the property, are accessing the wrapped value
+  - can access the projected value with $
+  - state and data flow property wrappers alawys project a @Binding, which is two-way
+    - allows views to mutate a single source of truth
+
+https://developer.apple.com/documentation/swiftui/managing-user-interface-state
+
+Managing User Interface State
+
+* "Encapsulate view-specific data within your app's view hierarchy to make your
+  views reusable
+* store data as state in the _least common ancestor_ of the views that need the data
+* provide as read-only through a Swift property, or two-way with a binding
+  - SUI watches for changes in the data, and updates any affected views as needed
+```      
+               +--------+
+               |        |
+               |  VIEW  |
+               |        |
+               +--------+
+               | state  |
+               +--------+
+                  ^ \
+                 /   \
+       two-way  /     \   one-way
+               /       \
+              V         V
+      +-------+           +--------+
+  +---|binding|       +---|property|
+  |        |          |        |
+  |  VIEW  |          |  VIEW  |
+  |        |          |        |
+  +--------+          +--------+
+```
+* don't use state properties for persistent storagee
+  - life cycle of state variables mirrors the view lifecycle
+  - manage transient state that only affects the UI
+    - highlight state of a button, filter setttings, currently selected list item
+  - "you might also find this kind of storage convenient when prototyping, before
+     ready to make changes to your app's data model"
+* If a view needs to store data that it can modify
+  - declare @State
+  - e.g. a boolean to indicate if a podcast is running.
+    - `@State private var isPlaying: bool = false`
+  - marking as @State tells SUI to manage the underlying storage <<<
+  - view reads and writes the data, in the state's `wrappedValue` property
+  - when change value, SUI updates affected parts of the view
+  - limit the scope by declaring private.
+    - this ensure the variables remain encapsulated in the view hierearchy that declares them
+* if a property is immutable
+  - use a plain old `let` property
+  - like a podcast player with strings for episode title and show name
+  - doesn't need to be constant in its parent view  <<<
+    - because the child will be recreated if the parent changes substantively
+    -- like if a new podcast is played
+* Share access to state with bindings
+  - if a view needs to _share control_ of state with a child view, use @Binding
+  - represents a reference to existing storage
+    - preserving that single source of truth thing
+  - like if extract the podcast player's view's button into a child view,
+    can give it a binding to `isPlaying` property
+  - read and write the binding by referencing the property directly
+  - doesn't have its own storage <<<
+    - references a state property stored somewhere else
+  - pass down a binding by using the $projectedValue
+  - bindings have $projectedValues too, so can be passed down the line
+  - can also limit the scope by binding to a value within a state varible
+    - like an Episode struct, with `isFavorite` property
+    - if the episode is a @State, can use `$episode.isFavorite` and give it to a toggle
+* Animate state transition
+  - when view state changes, SUI updates affected views right away
+  - if want to smooth visual transitions, can tell SUI to animate them by wrapping
+    the state change in a call `withAnimation(_:_:_:_:_:_:_:_:_:_:_:_:_:_:)
+  - e.g.
+```
+            Button(action: {
+                       withAnimation(.easeInOut(duration: 1)) {
+                           isSplunging.toggle()
+                       }
+            }) {
+                Image(systemName: "pause.circle")
+            }
+```
+   - the animation applies to anything dependent on that state
+     - like if theres an image that bases its scaling on `isSplunging`.  That will
+       smoothly change.
+
+
+Next up
+
+https://developer.apple.com/documentation/swiftui/managing-model-data-in-your-app
+  "Managing model data in your app"
