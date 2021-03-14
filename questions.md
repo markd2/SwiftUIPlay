@@ -61,6 +61,7 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 
 ### Views
 
+* [ ] Context
 * [ ] Text
 * [ ] List
 * [ ] Button
@@ -581,8 +582,16 @@ VStack<
         navigationController?.pushViewController(vc, animated: true)
 ```
 * then pushing UIKit from SwiftUI inside of a navcontroller
-
-
+  - UIViewControllerRepresentable - has a `makeUIViewController`. 
+  - Then give that to `NavigationLink`
+```
+    var body: some View {
+        Text("Greeble").background(Color.blue)
+        NavigationLink(destination: ViewControllerView()) {
+            Text("Flongwaffle")
+        }.navigationBarTitle("Navigation")
+    }
+```
 
 ==================================================
 # Hints
