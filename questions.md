@@ -10,7 +10,7 @@
 ==================================================
 # accumulated questions
 
-* [ ] what is `some`?
+* [x] what is `some`?
     - "whatever the exact type of the body might be, it definitely conforms
        to the View protocol"
     - why not just "View" ?
@@ -37,22 +37,30 @@
 * [ ] overriding alignment guide via computeValue: only with custom layout guides?
       (example in chapter 4 works great with a custom layout guide, didn't have an effect
       when using VerticalAlignment.center)
+* [ ] How does stuff like form validation work?  Just whacking data back into a model object
+      with Bindings sounds fraught with peril.
+* [ ] How does all this interact with undo machinery?
+* [ ] SwiftUI and Combine. Like updating stuff when a publisher has a new value
 
 ==================================================
-# Property Wrappers seen
+# Property Wrappers n'at
 
 * [ ] @State
 * [ ] @Binding
 * [ ] @ViewBuilder
       - xcode12, the `view` of a View is automatically inferred to be this
         unless there's an explicit return statement
-* [ ] @ObservedObject
-* [ ] @Published
-* [ ] @StateObject
 * [ ] @EnvironmentObject
 * [ ] @GestureState
 * [ ] @Environment
 * [ ] @Namespace
+* [ ] @ObservedObject
+* [ ] ObservableObject
+      - ObjectWillChangePublisher / `objectWillChange`
+* [ ] @Published
+      - only publish things that'll change.  Views can still access immutable properties
+* [ ] @StateObject
+      - for when you need to create an observed object inside of a view (c.f. below)
 
 c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relationships
 
@@ -75,6 +83,8 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] H/V/ZStack
 * [ ] LazyH/V/ZStack
 * [ ] Toggle
+* [ ] App
+* [ ] Scene
 
 ### view modifier things
 
@@ -883,7 +893,78 @@ Managing User Interface State
        smoothly change.
 
 
-Next up
-
 https://developer.apple.com/documentation/swiftui/managing-model-data-in-your-app
   "Managing model data in your app"
+
+* overview
+  - typically store and process data using a data model separate from the UI and other logic
+    - happiness, mother pie, etc
+    - in the Olden Days, used a view controller to move data back and forth between model
+      and UI
+    - SUI handles _most_ of this synchronization for you
+  - to update views when data changes
+    - make data model classes Observable Objects
+    - publis htheir properties
+    - declare instances of them using special attributes
+  - to ensure user-driven data changes flow back in to the model
+    - bind user interface controls to model properties
+* make model data observable
+  - inherit ObservableObject for model classes
+    - handles ObjectWillChangePublisher jazz and call objectWillChange to emit changed values
+      of _published properties_
+  - publish with @Published
+    - only publish properties that both can change _and_ matter to the UI
+    - like, a UUID identifier that never changes doesn't need to be @Published
+  - you can still access and display it, but b/c it's not published, SUI knows it
+    doesn't have to watch for that property to change
+* Monitor changes: to monitor an observable object
+  - decorate with @ObservedObject
+  - can pass individual properties to child views
+  - when data changes, SUI updates all affected views
+  - can also pass to other views
+    - the other views will need to @ObservedObject it
+```
+struct BookView: View {
+    @ObservedObject var book: Book  // book book book?
+    ...
+      Text(book.title)
+      BookEditView(book)
+
+struct BookEditView: View {
+    @ObservedObject var book: Book  // book book book book?
+    ...
+```
+* Making model objects in views
+  - SUI view churn. So it's important that making a view with a given set of inputs
+    always results in the same view <<<
+  - hence its unsafe to *create* an observed object inside a view
+  - so @StateObject for this purpose.  `@StateObject var book = Book()  // reddit.  reddit.`
+    - behaves like an observed object
+    - SUI knows how to create and manage a single object instance for a given view instance
+      - even in the face of churn
+    - can use the object locally or pass the state onto another view's observed object property
+  - can create  a state object at the top-level `App` or in a `Scene`
+    - e.g. an observable object called Library to hold a collection of books
+* Share an object through the app
+  - if have a data model want to use throughout the app, but don't want to keep passing
+    it down, can use `environmentObject(_:) view modifier to put it into the environment
+```
+struct BookReader: App {
+    @StateObject var library = Library()
+    var body: some Scene {
+        WindowGroup { LibraryView().environmentObject(library) } } }
+```
+  - and so a descendent view can access it
+
+```
+struct LibraryView: View 
+    @EnvironmentObject var library: Library
+}
+```
+  - also add it to any preview providers
+
+* two-way connection via Bindings
+  - when allow the user to change the data in the UI, use a binding to the corresponding
+    property.
+  - data flows back automatically
+  - use the projected value.  e.g. `TextField("Title", text: $book.title)`
