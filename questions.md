@@ -10,7 +10,7 @@
 ==================================================
 # accumulated questions
 
-* [ ] what is `some`?
+* [x] what is `some`?
     - "whatever the exact type of the body might be, it definitely conforms
        to the View protocol"
     - why not just "View" ?
@@ -37,22 +37,30 @@
 * [ ] overriding alignment guide via computeValue: only with custom layout guides?
       (example in chapter 4 works great with a custom layout guide, didn't have an effect
       when using VerticalAlignment.center)
+* [ ] How does stuff like form validation work?  Just whacking data back into a model object
+      with Bindings sounds fraught with peril.
+* [ ] How does all this interact with undo machinery?
+* [ ] SwiftUI and Combine. Like updating stuff when a publisher has a new value
 
 ==================================================
-# Property Wrappers seen
+# Property Wrappers n'at
 
 * [ ] @State
 * [ ] @Binding
 * [ ] @ViewBuilder
       - xcode12, the `view` of a View is automatically inferred to be this
         unless there's an explicit return statement
-* [ ] @ObservedObject
-* [ ] @Published
-* [ ] @StateObject
 * [ ] @EnvironmentObject
 * [ ] @GestureState
 * [ ] @Environment
 * [ ] @Namespace
+* [ ] @ObservedObject
+* [ ] ObservableObject
+      - ObjectWillChangePublisher / `objectWillChange`
+* [ ] @Published
+      - only publish things that'll change.  Views can still access immutable properties
+* [ ] @StateObject
+      - for when you need to create an observed object inside of a view (c.f. below)
 
 c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relationships
 
@@ -74,6 +82,9 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] RotatedShape
 * [ ] H/V/ZStack
 * [ ] LazyH/V/ZStack
+* [ ] Toggle
+* [ ] App
+* [ ] Scene
 
 ### view modifier things
 
@@ -98,6 +109,7 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] .clipped
 * [ ] .cornerRadius
 * [ ] .layoutPriority
+* [ ] .animation
 
 asdf
 
@@ -739,3 +751,220 @@ yields
         - design: SwiftUI.Font.Design.default
         - weight: nil
 ```
+
+==================================================
+# State and Data Flow
+
+I think I have a handle on the visual stuff. The data stuff (@State blah, when to
+use what and where, and why do things never work when I expect them to?)
+
+Looking first at https://developer.apple.com/documentation/swiftui/state-and-data-flow
+
+- while composing hierarchy of views, also indicate data dependencies for the views
+- when the data changes (external event or action by the user, SUI automagically updates
+  the affected parts of te interface
+  - hence the framework does most of the work traditionally done by VCs
+```
+                                +------+
+                                | User |<-----------------+
+ +----------------+             +------+                  |
+ | External Event |                |                      |
+ +----------------+                | User interaction     |
+         |              SWIFTUI    |                      |
+         |              +----------|----------------------|-----------+
+     Publisher          |          V                      |           |
+         |              |      +--------+             +------+        |
+         +-------------------->| Action |             | View |        |
+                        |      +--------+             +------+        |
+                        |          |                      ^           |
+                        | mutation |                      | updates   |
+                        |          |       +-------+      |           |
+                        |          +------>| State |------+           |
+                        |                  +-------+                  |
+                        |                                             |
+                        +---------------------------------------------+
+```
+  - framework privdes tools for connecting app's data to the UI
+    - e.g. state variables and bindings
+  - help maintain a Single Source of Truth(tm) for every piece of data in the app
+    - in part by reducing the amount of glue logic
+* tools
+  - Manage tansient UI state locally
+    - @State - wrapping _value types_
+  - Connect to external reference model data
+    - that conforms to ObservableObject by using @xObservedObject in the View
+  - Share a reference to a source of truth
+    - like state or an observable object
+    - using @Binding
+      - which is two-way
+  - distribute value data throughout
+    - storing in the Environment
+  - pass data up through the view hierarchy from child views with PreferenceKey
+  - manage persistent data in CoreData using FetchRequest,
+    - (i'm not a core data user, so ignoring that stuff)
+* Property wrappers
+  - the state and data flow property wrappers watch for changes in the data
+  - automatically update affected views as needed
+  - when refer directly to the property, are accessing the wrapped value
+  - can access the projected value with $
+  - state and data flow property wrappers alawys project a @Binding, which is two-way
+    - allows views to mutate a single source of truth
+
+https://developer.apple.com/documentation/swiftui/managing-user-interface-state
+
+Managing User Interface State
+
+* "Encapsulate view-specific data within your app's view hierarchy to make your
+  views reusable
+* store data as state in the _least common ancestor_ of the views that need the data
+* provide as read-only through a Swift property, or two-way with a binding
+  - SUI watches for changes in the data, and updates any affected views as needed
+```      
+               +--------+
+               |        |
+               |  VIEW  |
+               |        |
+               +--------+
+               | state  |
+               +--------+
+                  ^ \
+                 /   \
+       two-way  /     \   one-way
+               /       \
+              V         V
+      +-------+           +--------+
+  +---|binding|       +---|property|
+  |        |          |        |
+  |  VIEW  |          |  VIEW  |
+  |        |          |        |
+  +--------+          +--------+
+```
+* don't use state properties for persistent storagee
+  - life cycle of state variables mirrors the view lifecycle
+  - manage transient state that only affects the UI
+    - highlight state of a button, filter setttings, currently selected list item
+  - "you might also find this kind of storage convenient when prototyping, before
+     ready to make changes to your app's data model"
+* If a view needs to store data that it can modify
+  - declare @State
+  - e.g. a boolean to indicate if a podcast is running.
+    - `@State private var isPlaying: bool = false`
+  - marking as @State tells SUI to manage the underlying storage <<<
+  - view reads and writes the data, in the state's `wrappedValue` property
+  - when change value, SUI updates affected parts of the view
+  - limit the scope by declaring private.
+    - this ensure the variables remain encapsulated in the view hierearchy that declares them
+* if a property is immutable
+  - use a plain old `let` property
+  - like a podcast player with strings for episode title and show name
+  - doesn't need to be constant in its parent view  <<<
+    - because the child will be recreated if the parent changes substantively
+    -- like if a new podcast is played
+* Share access to state with bindings
+  - if a view needs to _share control_ of state with a child view, use @Binding
+  - represents a reference to existing storage
+    - preserving that single source of truth thing
+  - like if extract the podcast player's view's button into a child view,
+    can give it a binding to `isPlaying` property
+  - read and write the binding by referencing the property directly
+  - doesn't have its own storage <<<
+    - references a state property stored somewhere else
+  - pass down a binding by using the $projectedValue
+  - bindings have $projectedValues too, so can be passed down the line
+  - can also limit the scope by binding to a value within a state varible
+    - like an Episode struct, with `isFavorite` property
+    - if the episode is a @State, can use `$episode.isFavorite` and give it to a toggle
+* Animate state transition
+  - when view state changes, SUI updates affected views right away
+  - if want to smooth visual transitions, can tell SUI to animate them by wrapping
+    the state change in a call `withAnimation(_:_:_:_:_:_:_:_:_:_:_:_:_:_:)
+  - e.g.
+```
+            Button(action: {
+                       withAnimation(.easeInOut(duration: 1)) {
+                           isSplunging.toggle()
+                       }
+            }) {
+                Image(systemName: "pause.circle")
+            }
+```
+   - the animation applies to anything dependent on that state
+     - like if theres an image that bases its scaling on `isSplunging`.  That will
+       smoothly change.
+
+
+https://developer.apple.com/documentation/swiftui/managing-model-data-in-your-app
+  "Managing model data in your app"
+
+* overview
+  - typically store and process data using a data model separate from the UI and other logic
+    - happiness, mother pie, etc
+    - in the Olden Days, used a view controller to move data back and forth between model
+      and UI
+    - SUI handles _most_ of this synchronization for you
+  - to update views when data changes
+    - make data model classes Observable Objects
+    - publis htheir properties
+    - declare instances of them using special attributes
+  - to ensure user-driven data changes flow back in to the model
+    - bind user interface controls to model properties
+* make model data observable
+  - inherit ObservableObject for model classes
+    - handles ObjectWillChangePublisher jazz and call objectWillChange to emit changed values
+      of _published properties_
+  - publish with @Published
+    - only publish properties that both can change _and_ matter to the UI
+    - like, a UUID identifier that never changes doesn't need to be @Published
+  - you can still access and display it, but b/c it's not published, SUI knows it
+    doesn't have to watch for that property to change
+* Monitor changes: to monitor an observable object
+  - decorate with @ObservedObject
+  - can pass individual properties to child views
+  - when data changes, SUI updates all affected views
+  - can also pass to other views
+    - the other views will need to @ObservedObject it
+```
+struct BookView: View {
+    @ObservedObject var book: Book  // book book book?
+    ...
+      Text(book.title)
+      BookEditView(book)
+
+struct BookEditView: View {
+    @ObservedObject var book: Book  // book book book book?
+    ...
+```
+* Making model objects in views
+  - SUI view churn. So it's important that making a view with a given set of inputs
+    always results in the same view <<<
+  - hence its unsafe to *create* an observed object inside a view
+  - so @StateObject for this purpose.  `@StateObject var book = Book()  // reddit.  reddit.`
+    - behaves like an observed object
+    - SUI knows how to create and manage a single object instance for a given view instance
+      - even in the face of churn
+    - can use the object locally or pass the state onto another view's observed object property
+  - can create  a state object at the top-level `App` or in a `Scene`
+    - e.g. an observable object called Library to hold a collection of books
+* Share an object through the app
+  - if have a data model want to use throughout the app, but don't want to keep passing
+    it down, can use `environmentObject(_:) view modifier to put it into the environment
+```
+struct BookReader: App {
+    @StateObject var library = Library()
+    var body: some Scene {
+        WindowGroup { LibraryView().environmentObject(library) } } }
+```
+  - and so a descendent view can access it
+
+```
+struct LibraryView: View 
+    @EnvironmentObject var library: Library
+}
+```
+  - also add it to any preview providers
+
+* two-way connection via Bindings
+  - when allow the user to change the data in the UI, use a binding to the corresponding
+    property.
+  - data flows back automatically
+  - use the projected value.  e.g. `TextField("Title", text: $book.title)`
