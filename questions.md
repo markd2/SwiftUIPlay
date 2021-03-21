@@ -50,9 +50,9 @@
 * [ ] @ViewBuilder
       - xcode12, the `view` of a View is automatically inferred to be this
         unless there's an explicit return statement
-* [ ] @EnvironmentObject
 * [ ] @GestureState
 * [ ] @Environment
+* [ ] @EnvironmentObject
 * [ ] @Namespace
 * [ ] @ObservedObject
 * [ ] ObservableObject
@@ -61,6 +61,7 @@
       - only publish things that'll change.  Views can still access immutable properties
 * [ ] @StateObject
       - for when you need to create an observed object inside of a view (c.f. below)
+* [ ] @ViewBuilder
 
 c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relationships
 
@@ -110,6 +111,7 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] .cornerRadius
 * [ ] .layoutPriority
 * [ ] .animation
+* [ ] .onAppear
 
 asdf
 
@@ -968,3 +970,155 @@ struct LibraryView: View
     property.
   - data flows back automatically
   - use the projected value.  e.g. `TextField("Title", text: $book.title)`
+
+----------
+https://nalexn.github.io/clean-architecture-swiftui/
+
+* UIKit
+  - imperative, event-driven
+  - could reference any view in the hierarchy and update it
+  - callbacks, delegates, target-action, KVO, responder chain....
+* SUI
+  - declarative, state-driven
+  - cannot reference any view
+  - cannot directly mutate a view as a reaction to an event
+  - instead, mutate the staet bound to the view
+  - all the UIKit stuff replaced with closures and bindings
+* views are a function of state, not a sequence of events <<<
+  - a view is just a function - provide it with input (state), it draws the output
+  - only way to change the output is to change the input
+  - "we cannot touch the algorithm" by adding or removing subviews.
+    - all the permutations in the display UI have to be declared up front and can't be
+      changed at runtime
+* SUI and MVVM
+  - View is the view, does not rely on external state at the simplest
+    - @State variables take the role of the ViewModel
+      - subscription mechanism (binding) for refreshing the UI when state changes
+  - for more complex scenarios
+    - Views can reference an external ObservableObject, which can be a distinct ViewModel
+Example
+```
+struct Country {
+   let name: String
+}
+
+struct CountriesList: View
+    @ObservedObject var viewModel: ViewModel  // defined below
+    var body... {
+       List(viewModel.countries) { country in
+          Text(country.name)
+       }
+       .onAppear {
+           self.viewModel.loadCountries
+       }
+  
+extension CountriesList {
+    class ViewModel: ObservableObject {
+        @Published private(set) var countries: [Country] = []
+        private let service: WebService
+        
+        func loadCountries() {
+            service.getCountries { [weak self] result in
+                self?.countrie = result.value ?? []
+            }
+        }
+```
+  - View appers on the screen
+    - onAppear calls loadCountries
+    - completion assigns `countries`. It's published, so it tickles
+      the view to update itself
+* sample code at https://github.com/nalexn/clean-architecture-swiftui
+* ELM a prior implementation of something SUI-like
+  - I know Apple's been working on this for years, so unlikely apple is actually using ELM
+* ELM architecture
+  - Model - state of your application
+  - View - a way to turn your state into HTML
+  - Update - a way to update your staet based on messages
+* Coordinator (a.k.a. Router) essential part of some architectures
+  - allocation of a separate module for screen navigation justified in UIKit apps, b/c
+    direct routing from one VC to another led to tight coupling
+  - Adding a Coordinator was easy b/c UIView(controller) are environment-indepenednt
+    instances that you can add and remove from the hierarchy at any time.
+* SUI, such dynamism not possible by design - the hierarchy is static and all the possible
+  navigations are defined and fixed at compile time
+  - instead, navigation is fully controlled by the state changing through Bindings
+  - NavigatioNView, TabView, .sheet() - any time you see an int that takes a Binding for
+    for routing.
+  - explains why extracing routing off the SUI view is a challenge
+    - routing is an integral part of the static drawing algorithm
+  - SUI uses Bindings for built-in mechanism for programmatic navigation
+    - c.f. https://nalexn.github.io/swiftui-deep-linking/
+    - "if you don't want A to refer to the view B directly, can turn B into a generic
+      paramter of A and call it a day"
+* Don't forget about @ViewBuilder - alternative to using an explicit generic parameter
+* SI makes using Coordinator needless. We can isolate views using generic parameters or
+  @ViewBuilder\
+  - references this example of Coordinators in SwiftUI - https://quickbirdstudios.com/blog/coordinator-pattern-in-swiftui/
+    - "it's overkill" and has drawbacks, like giving Coordintors full access to all ViewModels
+* "there are attempts to stick with the beloved architecutres no matter what, but please, don't
+* Uncle Bob's _Clean Architecture_
+  - layers, like
+  - presentation layer  (View)
+  - business logic layer (Interactor, AppState)
+  - data access layer  (Repository)
+* AppState
+  - only entity that requires to be an object (b/ ObservableObject
+    - or it could be a struct wrapped in a CurrentValueSubject from Combine <<<
+  - "just like in Redux", ApPState works as the single source of truth and keeps the state
+    for the entire app
+    - including user's data, auth tokens ,screen navigation state (selected tabs) and
+      system state (is active, is backgrounded)
+  - knows nothing about any other layer and does not contain any business logic
+    e.g.
+```
+class AppState: ObservableObject, Equatable {
+    @Published var userData = UserData()
+    @Published var routing = ViewRouting()
+    @Published var system = System()
+}
+```
+* Views
+  - usual SwiftUI View
+    - could be stateless, or have local @State variables
+    - no other layer knows about the View layer existance, so no need to hide behind a protocol
+  - it receives AppState and Interactor through standard dependency injection via @Environment,
+    @EnvironmentObject, or @ObservedObject
+  - side effects are triggered by the user's actions (like a tap on a button)
+  - or view lifecycle onAppear and are forward to the interactor
+```
+struct CountriesList: View {
+    @EnvironmentObject var appState: AppState
+    @Environment(\.interactors) var interactors: InteractorsContainer
+
+    var body... {
+        .onAppear {
+            self.interactors.countriesInteractor.loadCountries()
+        }
+    }
+```
+* Interactor
+  - encapsulates business logic for the specific View or group of Views
+  - with ApPState, forms the Business Logic layer
+  - fully independent of the presentation and the external resources
+  - fully stateless and only refers to AppState object, injected at construction time
+  - receive requests to perform work
+    - like obtaining data from an external source
+    - making computations
+  - never return data directly, like in a closure or return value
+  - they forward the result to the AppState or a Binding provided by the View
+  - the binding is used when the result of work (the data) is owned locally by one View
+    and does not belong to the AppState
+    - that is, doesn't need to be persisted or shared with other screens of the app
+    - (code is kind of large here. Has a `Loadable<T> with a .isLoading, and also
+      a `.sinkToLoadable`  combine operator I guess
+* Repository is an abstract gateway for reading/writing data
+  - provides access to a single data service (web / local database)
+  - article on separating this out - https://nalexn.github.io/separation-of-concerns/
+  - so if the app uses its backend, google maps, and writes to a local
+    database, there are three Repositories
+    - two for different web API providers
+    - one for database I/O
+  - repository is also stateless, doesn't have write access to the AppStat
+  - contains only the logic related to working with the data
+  - knows nothing about View or Interacor
+
