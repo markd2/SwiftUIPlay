@@ -1,4 +1,3 @@
-
 import SwiftUI
 import UIKit
 
@@ -16,7 +15,6 @@ struct ContentView: View {
                           items += [newItem]
                           newItem = ""
                           // ??? How to re-focus text field when adding an item
-                          UIApplication.shared.becomeFirstResponder()
                       })
             Button("Choose one") {
                 randomItem = items.randomElement() ?? ""
