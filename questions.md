@@ -74,6 +74,7 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] Text
 * [ ] List
 * [ ] Button
+* [ ] TextField
 * [ ] NavigationView
 * [ ] Image
 * [ ] ForEach - an array of Identifiables for the simple syntax 

@@ -6,6 +6,7 @@ learn this stuff for real.
 
 * See my [questions](questions.md) document for raw notes.  I take a lot
   of notes when learning stuff.
+* See my [design][design.md] document for design sketches for apps and exercises.
 
 So far, it's notes and observations and exercises from the Objc.io
 [Thinking in SwiftUI](https://www.objc.io/books/thinking-in-swiftui/).
