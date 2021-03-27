@@ -13,6 +13,9 @@
 		7D10F01A260F62F500B5D294 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F018260F62F500B5D294 /* Main.storyboard */; };
 		7D10F01C260F62F600B5D294 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F01B260F62F600B5D294 /* Assets.xcassets */; };
 		7D10F01F260F62F600B5D294 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F01D260F62F600B5D294 /* LaunchScreen.storyboard */; };
+		7D10F028260F696F00B5D294 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D10F027260F696F00B5D294 /* Person.swift */; };
+		7D10F02C260F6C6600B5D294 /* first-names.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F02A260F6C6600B5D294 /* first-names.txt */; };
+		7D10F02D260F6C6600B5D294 /* last-names.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F02B260F6C6600B5D294 /* last-names.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		7D10F01B260F62F600B5D294 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D10F01E260F62F600B5D294 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7D10F020260F62F600B5D294 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D10F027260F696F00B5D294 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		7D10F02A260F6C6600B5D294 /* first-names.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "first-names.txt"; sourceTree = "<group>"; };
+		7D10F02B260F6C6600B5D294 /* last-names.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "last-names.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 				7D10F01B260F62F600B5D294 /* Assets.xcassets */,
 				7D10F01D260F62F600B5D294 /* LaunchScreen.storyboard */,
 				7D10F020260F62F600B5D294 /* Info.plist */,
+				7D10F027260F696F00B5D294 /* Person.swift */,
+				7D10F02A260F6C6600B5D294 /* first-names.txt */,
+				7D10F02B260F6C6600B5D294 /* last-names.txt */,
 			);
 			path = Filterator;
 			sourceTree = "<group>";
@@ -126,6 +135,8 @@
 			files = (
 				7D10F01F260F62F600B5D294 /* LaunchScreen.storyboard in Resources */,
 				7D10F01C260F62F600B5D294 /* Assets.xcassets in Resources */,
+				7D10F02C260F6C6600B5D294 /* first-names.txt in Resources */,
+				7D10F02D260F6C6600B5D294 /* last-names.txt in Resources */,
 				7D10F01A260F62F500B5D294 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +150,7 @@
 			files = (
 				7D10F017260F62F500B5D294 /* ViewController.swift in Sources */,
 				7D10F013260F62F500B5D294 /* AppDelegate.swift in Sources */,
+				7D10F028260F696F00B5D294 /* Person.swift in Sources */,
 				7D10F015260F62F500B5D294 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
