@@ -65,14 +65,61 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="gQy-Wi-rtx"/>
+                        <segue destination="NK6-dr-gCK" kind="relationship" relationship="viewControllers" id="4lH-js-caQ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1zC-gA-LAZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="108.75" y="46.478873239436624"/>
         </scene>
+        <!--ComBinÉ-->
+        <scene sceneID="bcq-Nd-Jar">
+            <objects>
+                <viewController id="NK6-dr-gCK" customClass="cbnViewController" customModule="Filterator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ruk-0m-8hr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="on0-uz-sYp">
+                                <rect key="frame" x="0.0" y="122" width="320" height="397"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="397" id="kdC-4R-2xH"/>
+                                </constraints>
+                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="0Au-0h-P2R">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="Jx1-9a-IuU"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jTD-99-uJf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0Au-0h-P2R" firstAttribute="leading" secondItem="jTD-99-uJf" secondAttribute="leading" id="0px-wK-zDf"/>
+                            <constraint firstItem="on0-uz-sYp" firstAttribute="top" secondItem="0Au-0h-P2R" secondAttribute="bottom" constant="42" id="BcH-zq-905"/>
+                            <constraint firstItem="jTD-99-uJf" firstAttribute="trailing" secondItem="on0-uz-sYp" secondAttribute="trailing" id="PrX-dk-Ywv"/>
+                            <constraint firstItem="on0-uz-sYp" firstAttribute="leading" secondItem="jTD-99-uJf" secondAttribute="leading" id="RjG-6I-i1A"/>
+                            <constraint firstItem="0Au-0h-P2R" firstAttribute="trailing" secondItem="jTD-99-uJf" secondAttribute="trailing" id="ejo-zx-NqF"/>
+                            <constraint firstItem="jTD-99-uJf" firstAttribute="bottom" secondItem="on0-uz-sYp" secondAttribute="bottom" id="mmW-20-Bb4"/>
+                            <constraint firstItem="0Au-0h-P2R" firstAttribute="top" secondItem="jTD-99-uJf" secondAttribute="top" id="rCi-fC-hYY"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="ComBinÉ" image="crop.rotate" catalog="system" id="TLF-T4-Uad"/>
+                    <connections>
+                        <outlet property="editorContainer" destination="0Au-0h-P2R" id="XO8-ws-jvH"/>
+                        <outlet property="personTableView" destination="on0-uz-sYp" id="PWP-mt-OWp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pnF-hc-Fv0" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="979" y="828"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="crop.rotate" catalog="system" width="114" height="128"/>
         <image name="pyramid" catalog="system" width="124" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

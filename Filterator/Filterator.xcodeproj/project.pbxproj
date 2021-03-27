@@ -22,6 +22,7 @@
 		7D10F03A260F804500B5D294 /* uikitNameFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D10F038260F804500B5D294 /* uikitNameFilterViewController.swift */; };
 		7D10F03B260F804500B5D294 /* uikitNameFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F039260F804500B5D294 /* uikitNameFilterViewController.xib */; };
 		7D252600260F94F000F35957 /* DataGod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2525FF260F94F000F35957 /* DataGod.swift */; };
+		7D252607260F985F00F35957 /* cbnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D252606260F985F00F35957 /* cbnViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		7D10F038260F804500B5D294 /* uikitNameFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = uikitNameFilterViewController.swift; sourceTree = "<group>"; };
 		7D10F039260F804500B5D294 /* uikitNameFilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = uikitNameFilterViewController.xib; sourceTree = "<group>"; };
 		7D2525FF260F94F000F35957 /* DataGod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGod.swift; sourceTree = "<group>"; };
+		7D252606260F985F00F35957 /* cbnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cbnViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				7D2525FF260F94F000F35957 /* DataGod.swift */,
+				7D252606260F985F00F35957 /* cbnViewController.swift */,
 			);
 			name = "UIKit+Combine";
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				7D10F031260F768E00B5D294 /* uikitFilterCard.swift in Sources */,
 				7D10F017260F62F500B5D294 /* uikitViewController.swift in Sources */,
 				7D10F013260F62F500B5D294 /* AppDelegate.swift in Sources */,
+				7D252607260F985F00F35957 /* cbnViewController.swift in Sources */,
 				7D10F035260F76EB00B5D294 /* uikitBloodTypeViewController.swift in Sources */,
 				7D252600260F94F000F35957 /* DataGod.swift in Sources */,
 				7D10F03A260F804500B5D294 /* uikitNameFilterViewController.swift in Sources */,
