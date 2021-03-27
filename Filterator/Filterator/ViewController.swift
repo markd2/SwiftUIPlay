@@ -56,7 +56,8 @@ class ViewController: UIViewController {
 
     func setupFilters() {
         filters = [
-          BloodTypeViewController()
+          BloodTypeViewController(),
+          NameFilterViewController(),
         ]
 
         filters.forEach { filter in

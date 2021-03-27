@@ -16,29 +16,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="iPP-Ax-KD7">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PLl-lf-qYZ">
+                                <rect key="frame" x="0.0" y="122" width="320" height="397"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="397" id="Cec-nG-irU"/>
+                                </constraints>
+                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="iPP-Ax-KD7">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="2W0-c7-2BT"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PLl-lf-qYZ">
-                                <rect key="frame" x="0.0" y="49" width="320" height="470"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="iPP-Ax-KD7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1aO-DV-OJm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PLl-lf-qYZ" secondAttribute="bottom" id="1tk-eA-IOC"/>
-                            <constraint firstItem="PLl-lf-qYZ" firstAttribute="top" secondItem="iPP-Ax-KD7" secondAttribute="bottom" id="6LX-Q8-7ud"/>
-                            <constraint firstItem="iPP-Ax-KD7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cX3-WA-Mkk"/>
+                            <constraint firstItem="iPP-Ax-KD7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Plz-HJ-Sz8"/>
                             <constraint firstItem="PLl-lf-qYZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dQe-ei-8Iy"/>
-                            <constraint firstItem="PLl-lf-qYZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="egR-9b-EHH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PLl-lf-qYZ" secondAttribute="trailing" id="n1B-6K-vvc"/>
                             <constraint firstItem="iPP-Ax-KD7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="sgx-jo-Gt2"/>
+                            <constraint firstItem="PLl-lf-qYZ" firstAttribute="top" secondItem="iPP-Ax-KD7" secondAttribute="bottom" constant="42" id="yh3-5j-lp7"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="UIKit" image="pyramid" catalog="system" id="7rF-Cr-s56"/>

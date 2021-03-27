@@ -19,6 +19,8 @@
 		7D10F031260F768E00B5D294 /* FilterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D10F030260F768E00B5D294 /* FilterCard.swift */; };
 		7D10F035260F76EB00B5D294 /* BloodTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D10F033260F76EB00B5D294 /* BloodTypeViewController.swift */; };
 		7D10F036260F76EB00B5D294 /* BloodTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F034260F76EB00B5D294 /* BloodTypeViewController.xib */; };
+		7D10F03A260F804500B5D294 /* NameFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D10F038260F804500B5D294 /* NameFilterViewController.swift */; };
+		7D10F03B260F804500B5D294 /* NameFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F039260F804500B5D294 /* NameFilterViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		7D10F030260F768E00B5D294 /* FilterCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCard.swift; sourceTree = "<group>"; };
 		7D10F033260F76EB00B5D294 /* BloodTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodTypeViewController.swift; sourceTree = "<group>"; };
 		7D10F034260F76EB00B5D294 /* BloodTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BloodTypeViewController.xib; sourceTree = "<group>"; };
+		7D10F038260F804500B5D294 /* NameFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameFilterViewController.swift; sourceTree = "<group>"; };
+		7D10F039260F804500B5D294 /* NameFilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NameFilterViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,8 @@
 				7D10F016260F62F500B5D294 /* ViewController.swift */,
 				7D10F033260F76EB00B5D294 /* BloodTypeViewController.swift */,
 				7D10F034260F76EB00B5D294 /* BloodTypeViewController.xib */,
+				7D10F038260F804500B5D294 /* NameFilterViewController.swift */,
+				7D10F039260F804500B5D294 /* NameFilterViewController.xib */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -155,6 +161,7 @@
 				7D10F01C260F62F600B5D294 /* Assets.xcassets in Resources */,
 				7D10F02C260F6C6600B5D294 /* first-names.txt in Resources */,
 				7D10F02D260F6C6600B5D294 /* last-names.txt in Resources */,
+				7D10F03B260F804500B5D294 /* NameFilterViewController.xib in Resources */,
 				7D10F01A260F62F500B5D294 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -170,6 +177,7 @@
 				7D10F017260F62F500B5D294 /* ViewController.swift in Sources */,
 				7D10F013260F62F500B5D294 /* AppDelegate.swift in Sources */,
 				7D10F035260F76EB00B5D294 /* BloodTypeViewController.swift in Sources */,
+				7D10F03A260F804500B5D294 /* NameFilterViewController.swift in Sources */,
 				7D10F028260F696F00B5D294 /* Person.swift in Sources */,
 				7D10F015260F62F500B5D294 /* SceneDelegate.swift in Sources */,
 			);
