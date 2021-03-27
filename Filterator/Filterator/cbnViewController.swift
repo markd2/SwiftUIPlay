@@ -41,20 +41,17 @@ class cbnViewController: UIViewController {
         personDataSource.apply(snapshot, animatingDifferences: animated)
     }
 
-    var filters: [FilterCard] = []
+    var filters: [cbnFilterCard] = []
 
     func setupFilters() {
-/*
         filters = [
           cbnBloodTypeViewController(),
           cbnNameFilterViewController(),
         ]
 
         filters.forEach { filter in
-            filter.somethingChanged = redoFiltering
             editorContainer.addArrangedSubview(filter.editorView)
         }
-*/
     }
 
 }
