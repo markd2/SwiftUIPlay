@@ -18,7 +18,7 @@ class uikitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        everyone = Person.random(count: 500)
+        everyone = Person.random(count: Person.suggestedPersonCount)
 
         personTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Splunge") 
 

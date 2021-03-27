@@ -44,6 +44,9 @@ struct Person {
         return size
     }
 
+    /// Globally control how many items each list gets.
+    static let suggestedPersonCount = 500
+
     static func random(count: Int) -> [Person] {
         (0 ..< count).map { _ in
             Person(bloodType: BloodType.allCases.randomElement()!, 
