@@ -36,10 +36,18 @@ struct Person {
         readTextFile(named: "last-names")
     }()
 
+    static func randomShoeSize() -> Double {
+        var size = Double((5...14).randomElement()!)
+        if [true, false].randomElement()! {
+            size += 0.5
+        }
+        return size
+    }
+
     static func random(count: Int) -> [Person] {
         (0 ..< count).map { _ in
             Person(bloodType: BloodType.allCases.randomElement()!, 
-                   shoeSize: 13, 
+                   shoeSize: randomShoeSize(),
                    name: firstNames.randomElement()! + " " + lastNames.randomElement()!) 
             }
     }
