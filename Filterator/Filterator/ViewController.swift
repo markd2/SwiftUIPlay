@@ -33,6 +33,20 @@ class ViewController: UIViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(everyone, toSection: 0)
         personDataSource.apply(snapshot, animatingDifferences: false)
+
+        setupFilters()
     }
+
+    func setupFilters() {
+        let filters = [
+          BloodTypeViewController()
+        ]
+
+        filters.forEach { filter in
+            editorContainer.addSubview(filter.view)
+            editorContainer.addArrangedSubview(filter.view)
+        }
+    }
+
 }
 
