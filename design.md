@@ -46,6 +46,8 @@ source data.
 
 #### Learnings
 
+##### UIKit
+
 * Xcode storyboard editor keeps getting worse and worse with each
   version.  (like, to go freeform in VC view size, you have to focus
   another file and come back to get the safe area guide to go away;
@@ -61,6 +63,25 @@ source data.
   at the same time...), plus the UI cuts off half of the things it's supposed to be
   showing, and the resulting git staging is a mess.  If you renamed and then committed,
   only half would actually happen.
+
+##### UIKit + Combine
+
+* notes from the above slack convos
+  - `DataGod`, has a @Published array of results
+  - `Filters`, things like bloodType and shoeSize
+  - in the panels, do self.dataGod.filters.bloodType = .A
+  - using a value type for the filters so the didSet obserer triggers everytime 
+    a bit is flipped
+  - all the panels care about is having a pipe to read/write their leaf of the filters tree
+  - in SwiftUIspeek, describing a Binding<BloodType> branched off the filters
+    - `BloodTypeEditor(binding $dataGod.filters.bloodType)
+  - in UIKitland, it's less fun - need a block like I've got, or a reference to DataGod
+    or some other DataGodlike protocol
+    - "this'll port over to SwiftUI in a heartbeat"
+* so thinking in CombineTerms,
+  - DataGod has the published set of results
+    - updating that set will trigger updates (say to the table view)
+    - something will need to trigger that update to ultimately update the table
 
 
 
