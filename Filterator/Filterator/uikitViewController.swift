@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class uikitViewController: UIViewController {
     @IBOutlet var editorContainer: UIStackView!
 
     @IBOutlet var personTableView: UITableView!
