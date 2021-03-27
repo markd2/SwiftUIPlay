@@ -19,14 +19,21 @@ struct Person {
     let shoeSize: Double
     let name: String
 
+
+    static func readTextFile(named name: String) -> [String] {
+        // quick and dirty utility, hence all the crash operators scattered around)
+        let path = Bundle.main.url(forResource: name, withExtension: "txt")!
+        let content = try! String(contentsOf: path, encoding: .utf8)
+        let array = content.split(separator: "\n")
+        return array.map{ String($0) }
+    }
+
     static var firstNames: [String] = {
-        print("Snorgle")
-        return ["hello", "snorgle", "oop"]
+        readTextFile(named: "first-names")
     }()
 
     static var lastNames: [String] = {
-        print("Snorgle2")
-        return ["hello2", "greeble", "bork"]
+        readTextFile(named: "last-names")
     }()
 
     static func random(count: Int) -> [Person] {
