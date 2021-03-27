@@ -19,11 +19,30 @@ struct Person {
     let shoeSize: Double
     let name: String
 
-    static func random() -> Person {
-        
+    static var firstNames: [String] = {
+        print("Snorgle")
+        return ["hello", "snorgle", "oop"]
+    }()
+
+    static var lastNames: [String] = {
+        print("Snorgle2")
+        return ["hello2", "greeble", "bork"]
+    }()
+
+    static func random(count: Int) -> [Person] {
+        (0 ..< count).map { _ in
+            Person(bloodType: BloodType.allCases.randomElement()!, 
+                   shoeSize: 13, 
+                   name: firstNames.randomElement()! + " " + lastNames.randomElement()!) 
+            }
     }
 }
 
 extension Person: Hashable, Equatable {}
 extension Person.BloodType: CaseIterable {}
 
+extension Person: CustomDebugStringConvertible {
+    var debugDescription: String {
+        "\(name) : \(bloodType.rawValue) size \(shoeSize)"
+    }
+}
