@@ -41,17 +41,6 @@ class cbnViewController: UIViewController {
         personDataSource.apply(snapshot, animatingDifferences: animated)
     }
 
-    func redoFiltering() {
-        let filtered = everyone.filter { person in
-            var allowed = true
-            filters.forEach { filter in
-                allowed = allowed && filter.allow(person)
-            }
-            return allowed
-        }
-        setContents(to: filtered)
-    }
-
     var filters: [FilterCard] = []
 
     func setupFilters() {
