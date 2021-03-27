@@ -46,6 +46,22 @@ source data.
 
 #### Learnings
 
+* Xcode storyboard editor keeps getting worse and worse with each
+  version.  (like, to go freeform in VC view size, you have to focus
+  another file and come back to get the safe area guide to go away;
+  sometimes the left gets a max width way too small to show the
+  non-horizontally-scrollable view debugger outline.  I miss the days
+  of dev tools with more than a couple of hours of uptime because either Xcode crashes
+  or vomits all over itself and needs to be restarted to clear the yuck out), plus the
+  usual autolayout horror. Tried to have a two-slider shoe size
+  filter, but xcode + autolayout + stack view just totally refused to
+  cooperate, and it's not worth it.  ARHGHGHGHG
+* I miss the days when there was pride of craftspersonship.  Trying to rename one of
+  the VCs, Xcode doesn't rename the corresponding xib file (even though they were created
+  at the same time...), plus the UI cuts off half of the things it's supposed to be
+  showing, and the resulting git staging is a mess.  If you renamed and then committed,
+  only half would actually happen.
+
 
 
 ----------------------------------------
