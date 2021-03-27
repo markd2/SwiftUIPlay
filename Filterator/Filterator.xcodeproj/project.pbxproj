@@ -16,11 +16,12 @@
 		7D10F028260F696F00B5D294 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D10F027260F696F00B5D294 /* Person.swift */; };
 		7D10F02C260F6C6600B5D294 /* first-names.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F02A260F6C6600B5D294 /* first-names.txt */; };
 		7D10F02D260F6C6600B5D294 /* last-names.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F02B260F6C6600B5D294 /* last-names.txt */; };
-		7D10F031260F768E00B5D294 /* FilterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D10F030260F768E00B5D294 /* FilterCard.swift */; };
-		7D10F035260F76EB00B5D294 /* BloodTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D10F033260F76EB00B5D294 /* BloodTypeViewController.swift */; };
-		7D10F036260F76EB00B5D294 /* BloodTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F034260F76EB00B5D294 /* BloodTypeViewController.xib */; };
-		7D10F03A260F804500B5D294 /* NameFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D10F038260F804500B5D294 /* NameFilterViewController.swift */; };
-		7D10F03B260F804500B5D294 /* NameFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F039260F804500B5D294 /* NameFilterViewController.xib */; };
+		7D10F031260F768E00B5D294 /* uikitFilterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D10F030260F768E00B5D294 /* uikitFilterCard.swift */; };
+		7D10F035260F76EB00B5D294 /* uikitBloodTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D10F033260F76EB00B5D294 /* uikitBloodTypeViewController.swift */; };
+		7D10F036260F76EB00B5D294 /* uikitBloodTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F034260F76EB00B5D294 /* uikitBloodTypeViewController.xib */; };
+		7D10F03A260F804500B5D294 /* uikitNameFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D10F038260F804500B5D294 /* uikitNameFilterViewController.swift */; };
+		7D10F03B260F804500B5D294 /* uikit.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D10F039260F804500B5D294 /* uikit.xib */; };
+		7D252600260F94F000F35957 /* DataGod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2525FF260F94F000F35957 /* DataGod.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,11 +36,12 @@
 		7D10F027260F696F00B5D294 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		7D10F02A260F6C6600B5D294 /* first-names.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "first-names.txt"; sourceTree = "<group>"; };
 		7D10F02B260F6C6600B5D294 /* last-names.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "last-names.txt"; sourceTree = "<group>"; };
-		7D10F030260F768E00B5D294 /* FilterCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCard.swift; sourceTree = "<group>"; };
-		7D10F033260F76EB00B5D294 /* BloodTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodTypeViewController.swift; sourceTree = "<group>"; };
-		7D10F034260F76EB00B5D294 /* BloodTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BloodTypeViewController.xib; sourceTree = "<group>"; };
-		7D10F038260F804500B5D294 /* NameFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameFilterViewController.swift; sourceTree = "<group>"; };
-		7D10F039260F804500B5D294 /* NameFilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NameFilterViewController.xib; sourceTree = "<group>"; };
+		7D10F030260F768E00B5D294 /* uikitFilterCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uikitFilterCard.swift; sourceTree = "<group>"; };
+		7D10F033260F76EB00B5D294 /* uikitBloodTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = uikitBloodTypeViewController.swift; sourceTree = "<group>"; };
+		7D10F034260F76EB00B5D294 /* uikitBloodTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = uikitBloodTypeViewController.xib; sourceTree = "<group>"; };
+		7D10F038260F804500B5D294 /* uikitNameFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = uikitNameFilterViewController.swift; sourceTree = "<group>"; };
+		7D10F039260F804500B5D294 /* uikit.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = uikit.xib; sourceTree = "<group>"; };
+		7D2525FF260F94F000F35957 /* DataGod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGod.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +74,9 @@
 		7D10F011260F62F500B5D294 /* Filterator */ = {
 			isa = PBXGroup;
 			children = (
+				7D2525FE260F91DE00F35957 /* UIKit+Combine */,
 				7D10F02F260F762900B5D294 /* UIKit */,
+				7D10F018260F62F500B5D294 /* Main.storyboard */,
 				7D10F012260F62F500B5D294 /* AppDelegate.swift */,
 				7D10F014260F62F500B5D294 /* SceneDelegate.swift */,
 				7D10F01B260F62F600B5D294 /* Assets.xcassets */,
@@ -88,15 +92,22 @@
 		7D10F02F260F762900B5D294 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				7D10F030260F768E00B5D294 /* FilterCard.swift */,
-				7D10F018260F62F500B5D294 /* Main.storyboard */,
+				7D10F030260F768E00B5D294 /* uikitFilterCard.swift */,
 				7D10F016260F62F500B5D294 /* uikitViewController.swift */,
-				7D10F033260F76EB00B5D294 /* BloodTypeViewController.swift */,
-				7D10F034260F76EB00B5D294 /* BloodTypeViewController.xib */,
-				7D10F038260F804500B5D294 /* NameFilterViewController.swift */,
-				7D10F039260F804500B5D294 /* NameFilterViewController.xib */,
+				7D10F033260F76EB00B5D294 /* uikitBloodTypeViewController.swift */,
+				7D10F034260F76EB00B5D294 /* uikitBloodTypeViewController.xib */,
+				7D10F038260F804500B5D294 /* uikitNameFilterViewController.swift */,
+				7D10F039260F804500B5D294 /* uikit.xib */,
 			);
 			name = UIKit;
+			sourceTree = "<group>";
+		};
+		7D2525FE260F91DE00F35957 /* UIKit+Combine */ = {
+			isa = PBXGroup;
+			children = (
+				7D2525FF260F94F000F35957 /* DataGod.swift */,
+			);
+			name = "UIKit+Combine";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,11 +168,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D10F01F260F62F600B5D294 /* LaunchScreen.storyboard in Resources */,
-				7D10F036260F76EB00B5D294 /* BloodTypeViewController.xib in Resources */,
+				7D10F036260F76EB00B5D294 /* uikitBloodTypeViewController.xib in Resources */,
 				7D10F01C260F62F600B5D294 /* Assets.xcassets in Resources */,
 				7D10F02C260F6C6600B5D294 /* first-names.txt in Resources */,
 				7D10F02D260F6C6600B5D294 /* last-names.txt in Resources */,
-				7D10F03B260F804500B5D294 /* NameFilterViewController.xib in Resources */,
+				7D10F03B260F804500B5D294 /* uikit.xib in Resources */,
 				7D10F01A260F62F500B5D294 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,11 +184,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D10F031260F768E00B5D294 /* FilterCard.swift in Sources */,
+				7D10F031260F768E00B5D294 /* uikitFilterCard.swift in Sources */,
 				7D10F017260F62F500B5D294 /* uikitViewController.swift in Sources */,
 				7D10F013260F62F500B5D294 /* AppDelegate.swift in Sources */,
-				7D10F035260F76EB00B5D294 /* BloodTypeViewController.swift in Sources */,
-				7D10F03A260F804500B5D294 /* NameFilterViewController.swift in Sources */,
+				7D10F035260F76EB00B5D294 /* uikitBloodTypeViewController.swift in Sources */,
+				7D252600260F94F000F35957 /* DataGod.swift in Sources */,
+				7D10F03A260F804500B5D294 /* uikitNameFilterViewController.swift in Sources */,
 				7D10F028260F696F00B5D294 /* Person.swift in Sources */,
 				7D10F015260F62F500B5D294 /* SceneDelegate.swift in Sources */,
 			);
