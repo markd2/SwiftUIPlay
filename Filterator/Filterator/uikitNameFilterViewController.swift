@@ -1,6 +1,6 @@
 import UIKit
 
-class NameFilterViewController: UIViewController, FilterCard {
+class uikitNameFilterViewController: UIViewController, FilterCard {
     @IBOutlet var textfield: UITextField!
 
     var editorView: UIView { view }

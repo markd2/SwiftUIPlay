@@ -56,8 +56,8 @@ class uikitViewController: UIViewController {
 
     func setupFilters() {
         filters = [
-          BloodTypeViewController(),
-          NameFilterViewController(),
+          uikitBloodTypeViewController(),
+          uikitNameFilterViewController(),
         ]
 
         filters.forEach { filter in
