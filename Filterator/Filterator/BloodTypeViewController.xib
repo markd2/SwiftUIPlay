@@ -9,6 +9,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BloodTypeViewController" customModule="Filterator" customModuleProvider="target">
             <connections>
+                <outlet property="clearButton" destination="RyW-VI-D4T" id="fpf-Nb-Cw7"/>
+                <outlet property="typeChooser" destination="koU-6R-R2G" id="9iw-ll-eOw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,13 +31,23 @@
                         <action selector="changedWithSeggie:" destination="-1" eventType="valueChanged" id="NyU-ef-veP"/>
                     </connections>
                 </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyW-VI-D4T">
+                    <rect key="frame" x="287" y="5" width="36" height="30"/>
+                    <state key="normal" title="Clear"/>
+                    <connections>
+                        <action selector="clear" destination="-1" eventType="touchUpInside" id="Gtd-g6-ss5"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="koU-6R-R2G" secondAttribute="trailing" id="1Ov-Qc-qrV"/>
+                <constraint firstItem="RyW-VI-D4T" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="koU-6R-R2G" secondAttribute="trailing" constant="15" id="2Of-pJ-rtn"/>
                 <constraint firstItem="koU-6R-R2G" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="9H0-Uh-1MF"/>
                 <constraint firstItem="koU-6R-R2G" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Aj1-eq-K1o"/>
                 <constraint firstAttribute="bottom" secondItem="koU-6R-R2G" secondAttribute="bottom" constant="5" id="hOn-r5-Mfl"/>
+                <constraint firstItem="RyW-VI-D4T" firstAttribute="centerY" secondItem="koU-6R-R2G" secondAttribute="centerY" id="l5U-Zq-Drb"/>
+                <constraint firstAttribute="trailing" secondItem="RyW-VI-D4T" secondAttribute="trailing" constant="15" id="pwW-Oi-s01"/>
                 <constraint firstItem="koU-6R-R2G" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sre-SF-0uw"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
