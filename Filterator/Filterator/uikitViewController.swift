@@ -8,6 +8,23 @@
 import UIKit
 
 class uikitViewController: UIViewController {
+
+    func redoFiltering() {
+        let filtered = everyone.filter { person in
+            var allowed = true
+            filters.forEach { filter in
+                allowed = allowed && filter.allow(person)
+            }
+            return allowed
+        }
+        setContents(to: filtered)
+    }
+
+    func configureFilter(_ filter: uikitFilterCard) {
+        filter.somethingChanged = redoFiltering
+    }
+
+
     @IBOutlet var editorContainer: UIStackView!
 
     @IBOutlet var personTableView: UITableView!
@@ -41,18 +58,7 @@ class uikitViewController: UIViewController {
         personDataSource.apply(snapshot, animatingDifferences: animated)
     }
 
-    func redoFiltering() {
-        let filtered = everyone.filter { person in
-            var allowed = true
-            filters.forEach { filter in
-                allowed = allowed && filter.allow(person)
-            }
-            return allowed
-        }
-        setContents(to: filtered)
-    }
-
-    var filters: [FilterCard] = []
+    var filters: [uikitFilterCard] = []
 
     func setupFilters() {
         filters = [
@@ -61,7 +67,7 @@ class uikitViewController: UIViewController {
         ]
 
         filters.forEach { filter in
-            filter.somethingChanged = redoFiltering
+            configureFilter(filter)
             editorContainer.addArrangedSubview(filter.editorView)
         }
     }

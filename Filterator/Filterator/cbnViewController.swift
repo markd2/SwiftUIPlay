@@ -5,6 +5,19 @@ class cbnViewController: UIViewController {
     var dataGod: DataGod!
     var resultsChange: AnyCancellable!
 
+    func setupChangeObserver() {
+        resultsChange = dataGod?.$results.sink { peoples in
+            self.setContents(to: peoples)
+        }
+   }
+
+    func configureFilter(_ filter: cbnFilterCard) {
+        filter.dataGod = dataGod
+    }
+
+
+    // Everything below here is (somewhat) common.
+
     @IBOutlet var editorContainer: UIStackView!
 
     @IBOutlet var personTableView: UITableView!
@@ -29,10 +42,7 @@ class cbnViewController: UIViewController {
 
         setContents(to: everyone, animated: false)
         setupFilters()
-
-        resultsChange = dataGod?.$results.sink { peoples in
-            self.setContents(to: peoples)
-        }
+        setupChangeObserver()
     }
 
     func setContents(to folks: [Person], animated: Bool = true) {
@@ -52,7 +62,7 @@ class cbnViewController: UIViewController {
         ]
 
         filters.forEach { filter in
-            filter.dataGod = dataGod
+            configureFilter(filter)
             editorContainer.addArrangedSubview(filter.editorView)
         }
     }
