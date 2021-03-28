@@ -30,13 +30,9 @@ class cbnViewController: UIViewController {
         setContents(to: everyone, animated: false)
         setupFilters()
 
-        resultsChange = dataGod?.$results
-        .sink(receiveCompletion: { status in
-                 print("COMPLETED \(status)")
-             },
-             receiveValue: { peoples in
-                 self.setContents(to: peoples)
-             })
+        resultsChange = dataGod?.$results.sink { peoples in
+            self.setContents(to: peoples)
+        }
     }
 
     func setContents(to folks: [Person], animated: Bool = true) {

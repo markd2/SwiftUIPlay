@@ -43,12 +43,11 @@ class DataGod {
     init(everyone: [Person]) {
         self.everyone = everyone
         self.results = everyone
-        filterTrigger = $filters.sink(receiveCompletion: { status in
-                                          print("COMPLETED \(status)")
-                                      },
-                                      receiveValue: { filters in
-                                          self.applyFilters(filters)
-                                      })
 
+        // could easily add things like .debounce if the typing got too fast vs
+        // processing time.
+        filterTrigger = $filters.sink { filters in
+            self.applyFilters(filters)
+        }
     }
 }
