@@ -50,7 +50,7 @@ class uikitViewController: UIViewController {
         setupFilters()
     }
 
-    func setContents(to folks: [Person], animated: Bool = true) {
+    func setContents(to folks: [Person], animated: Bool = false) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, Person>()
 
         snapshot.appendSections([0])
