@@ -12,7 +12,7 @@ class cbnNameFilterViewController: UIViewController, cbnFilterCard {
     }
 
     @IBAction func textFieldChanged() {
-        dataGod?.filters.name = textfield.text
+        dataGod?.filters.name = (textfield.text?.isEmpty == true) ? nil : textfield.text
     }
 
 }

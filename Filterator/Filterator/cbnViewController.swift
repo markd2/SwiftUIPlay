@@ -1,14 +1,9 @@
-//
-//  ViewController.swift
-//  Filterator
-//
-//  Created by Mark Dalrymple on 3/27/21.
-//
-
 import UIKit
+import Combine
 
 class cbnViewController: UIViewController {
     var dataGod: DataGod!
+    var resultsChange: AnyCancellable!
 
     @IBOutlet var editorContainer: UIStackView!
 
@@ -34,6 +29,14 @@ class cbnViewController: UIViewController {
 
         setContents(to: everyone, animated: false)
         setupFilters()
+
+        resultsChange = dataGod?.$results
+        .sink(receiveCompletion: { status in
+                 print("COMPLETED \(status)")
+             },
+             receiveValue: { peoples in
+                 self.setContents(to: peoples)
+             })
     }
 
     func setContents(to folks: [Person], animated: Bool = true) {
