@@ -2,7 +2,6 @@
 
 Sketchings for from-scratch sample apps.
 
-
 ----------
 ### Filterator
 
@@ -45,6 +44,28 @@ https://www.everydayknow.com/500-fantasy-surnames/ for the person name generator
 source data.
 
 #### Learnings
+
+##### All
+
+* A lot of users is slow. With 500,000 users, flitering in the UIKit-based ones (say changing
+  the bloodtype) takes a LONG time, inside of the diffable data source `apply`.
+  - killed it after 10 minutes
+  - the filtering takes like 0.4 seconds.
+  - so yeah, the diffable data source kind of falls over when you've got big data.
+  - This is kind of a bummer.  My intended use of all this stuff is with a list that's
+    currently around 2K items, hopefully growing to tens of thousands or maybe more.
+  - So it's totally related to animating the differences.  So if you've got :alot: of
+    rows, then eschew the animations.
+* THIS IS INTERESTING.  So the combine-based one is much faster (once the tableview animation
+  is turned off).
+  - the "uikit" version with the "hey is the person allowed" being inside the VC, is asking
+    the text field for its text *for every person being filtered*.  This isn't a free
+    operation, and is in fact quite heavy weight, with text field stuff appearing in an
+    instruments time profile.
+  - the "combine" version, when the text field changes, it updates the DataGod's filter
+    so that the filtering uses that chached string rather than hitting the text field.
+    With a half-million records (on an M1 in the simulator), there's a very noticible
+    lag with the "uikit" version
 
 ##### UIKit
 
@@ -105,6 +126,11 @@ source data.
     protocl that gives a yea or nea), but that doesn't change the fact
     that the Filters struct will need to be changed.
 
+### SwiftUI
+
+* From the slack convo (again)
+  - in SwiftUIspeek, describing a Binding<BloodType> branched off the filters
+    - `BloodTypeEditor(binding $dataGod.filters.bloodType)
 
 
 
