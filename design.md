@@ -57,8 +57,8 @@ source data.
   - So it's totally related to animating the differences.  So if you've got :alot: of
     rows, then eschew the animations.
 * THIS IS INTERESTING.  So the combine-based one is much faster (once the tableview animation
-  is turned off).
-  - the "uikit" version with the "hey is the person allowed" being inside the VC, is asking
+  is turned off) when type-searching
+  - the "uikit" version with the "hey is the person allowed" logic inside the VC, is asking
     the text field for its text *for every person being filtered*.  This isn't a free
     operation, and is in fact quite heavy weight, with text field stuff appearing in an
     instruments time profile.
@@ -66,6 +66,8 @@ source data.
     so that the filtering uses that chached string rather than hitting the text field.
     With a half-million records (on an M1 in the simulator), there's a very noticible
     lag with the "uikit" version
+  - So to mitigate, the filter panel will need to cache the text when it changes. Not
+    difficult, also not obvious on first implementation.
 
 ##### UIKit
 
