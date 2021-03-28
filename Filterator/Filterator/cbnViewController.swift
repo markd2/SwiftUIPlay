@@ -8,6 +8,8 @@
 import UIKit
 
 class cbnViewController: UIViewController {
+    var dataGod: DataGod!
+
     @IBOutlet var editorContainer: UIStackView!
 
     @IBOutlet var personTableView: UITableView!
@@ -19,6 +21,7 @@ class cbnViewController: UIViewController {
         super.viewDidLoad()
 
         everyone = Person.random(count: Person.suggestedPersonCount)
+        dataGod = DataGod(everyone: everyone)
 
         personTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Splunge") 
 
