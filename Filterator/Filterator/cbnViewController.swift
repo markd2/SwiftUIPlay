@@ -53,6 +53,7 @@ class cbnViewController: UIViewController {
         ]
 
         filters.forEach { filter in
+            filter.dataGod = dataGod
             editorContainer.addArrangedSubview(filter.editorView)
         }
     }

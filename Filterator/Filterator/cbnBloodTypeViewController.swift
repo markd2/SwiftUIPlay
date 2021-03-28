@@ -1,6 +1,8 @@
 import UIKit
 
 class cbnBloodTypeViewController: UIViewController, cbnFilterCard {
+    var dataGod: DataGod?
+
     @IBOutlet var clearButton: UIButton!
     @IBOutlet var typeChooser: UISegmentedControl!
 
@@ -20,12 +22,22 @@ class cbnBloodTypeViewController: UIViewController, cbnFilterCard {
         clearButton.isHidden = typeChooser.selectedSegmentIndex == UISegmentedControl.noSegment
     }
 
+    func handleSelectionChange(index: Int) {
+        if index == UISegmentedControl.noSegment {
+            dataGod?.filters.bloodType = nil
+        } else {
+            dataGod?.filters.bloodType = Person.BloodType.allCases[index]
+        }
+    }
+
     @IBAction func changed(seggie: UISegmentedControl) {
         updateUI()
+        handleSelectionChange(index: typeChooser.selectedSegmentIndex)
     }
 
     @IBAction func clear() {
-        typeChooser.selectedSegmentIndex = UISegmentedControl.noSegment
         updateUI()
+        typeChooser.selectedSegmentIndex = UISegmentedControl.noSegment
+        handleSelectionChange(index: typeChooser.selectedSegmentIndex)
     }
 }
