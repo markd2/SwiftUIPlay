@@ -63,6 +63,7 @@ source data.
   at the same time...), plus the UI cuts off half of the things it's supposed to be
   showing, and the resulting git staging is a mess.  If you renamed and then committed,
   only half would actually happen.
+* prefixed names with uikit to disambiguate with other trials
 
 ##### UIKit + Combine
 
@@ -82,6 +83,28 @@ source data.
   - DataGod has the published set of results
     - updating that set will trigger updates (say to the table view)
     - something will need to trigger that update to ultimately update the table
+* prefixed names with cbn - proper pronounciation of the technology is com-BEE-nay :-)
+* Once got stuff copied over, it was actuallyy really easy to add the publishers.
+  Now that any time any one changes a filter, it automatically kicks off a filter,
+  which then automatically kicks off an update.  Anyone with access to the data god
+  can attach to the publishers.
+* I'm not a fan of passing the whole of the DataGod around. It'd Be Nice to be able to
+  give someone the filters, have them change things, and stuff Just Works, but they'd
+  need to be able to change the filters on _something_ - that + @Published is what gives
+  us the nice automagic.
+* The processing logic has also been consolidated in the DataGod.
+  - pro: it's all in one place.  You can see exactly what's involved
+  - pro: it'll be easy to add other consumers of this.  Say a label with the current
+    person count.  Add them as a subscriber to the list of users. They look at the
+    list floating by and update themselves.
+  - con: violates the Open/Closed principle.  Want to add a new kind of filter? You'll
+    need to modfiy DataGod and update the `Filters` struct with the
+    thing you want to filter (say shoe size) and then update the
+    processing function.  We can alleviate that by allowing for the
+    processing function to be parameterized (hey here's a `Processor`
+    protocl that gives a yea or nea), but that doesn't change the fact
+    that the Filters struct will need to be changed.
+
 
 
 
