@@ -1,6 +1,6 @@
 import UIKit
 
-protocol FilterCard: AnyObject {
+protocol uikitFilterCard: AnyObject {
     var editorView: UIView { get }
 
     // anything not allowed by any filter is hidden

@@ -1,6 +1,6 @@
 import UIKit
 
-class uikitBloodTypeViewController: UIViewController, FilterCard {
+class uikitBloodTypeViewController: UIViewController, uikitFilterCard {
     @IBOutlet var clearButton: UIButton!
     @IBOutlet var typeChooser: UISegmentedControl!
 
