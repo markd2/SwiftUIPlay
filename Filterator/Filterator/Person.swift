@@ -15,6 +15,7 @@ struct Person {
         case O
     }
 
+    let id = UUID()
     let bloodType: BloodType
     let shoeSize: Double
     let name: String
@@ -45,7 +46,7 @@ struct Person {
     }
 
     /// Globally control how many items each list gets.
-    static let suggestedPersonCount = 500
+    static let suggestedPersonCount = 500000
 
     static func random(count: Int) -> [Person] {
         (0 ..< count).map { _ in
