@@ -53,6 +53,16 @@
             </objects>
             <point key="canvasLocation" x="1106.25" y="46.478873239436624"/>
         </scene>
+        <!--SwiftUI-->
+        <scene sceneID="JyE-ng-P0x">
+            <objects>
+                <hostingController id="1GG-Nk-xfX" customClass="PersonFilterViewController" customModule="Filterator" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="SwiftUI" image="guitars" catalog="system" id="D1J-dn-Q71"/>
+                </hostingController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TOu-yP-S88" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2347" y="129"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="eAN-Jg-zBa">
             <objects>
@@ -66,6 +76,7 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="gQy-Wi-rtx"/>
                         <segue destination="NK6-dr-gCK" kind="relationship" relationship="viewControllers" id="4lH-js-caQ"/>
+                        <segue destination="1GG-Nk-xfX" kind="relationship" relationship="viewControllers" id="MnK-qw-fTP"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1zC-gA-LAZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -120,6 +131,7 @@
     </scenes>
     <resources>
         <image name="crop.rotate" catalog="system" width="114" height="128"/>
+        <image name="guitars" catalog="system" width="128" height="100"/>
         <image name="pyramid" catalog="system" width="124" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

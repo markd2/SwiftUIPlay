@@ -28,6 +28,7 @@
 		7D25260F260FF51200F35957 /* cbnNameFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D25260B260FF51200F35957 /* cbnNameFilterViewController.swift */; };
 		7D252610260FF51200F35957 /* cbnBloodTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D25260C260FF51200F35957 /* cbnBloodTypeViewController.xib */; };
 		7D252613260FF60B00F35957 /* cbnFilterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D252612260FF60B00F35957 /* cbnFilterCard.swift */; };
+		7D25261726100DE200F35957 /* PersonFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D25261626100DE200F35957 /* PersonFilterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		7D25260B260FF51200F35957 /* cbnNameFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cbnNameFilterViewController.swift; sourceTree = "<group>"; };
 		7D25260C260FF51200F35957 /* cbnBloodTypeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = cbnBloodTypeViewController.xib; sourceTree = "<group>"; };
 		7D252612260FF60B00F35957 /* cbnFilterCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cbnFilterCard.swift; sourceTree = "<group>"; };
+		7D25261626100DE200F35957 /* PersonFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonFilterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +88,9 @@
 		7D10F011260F62F500B5D294 /* Filterator */ = {
 			isa = PBXGroup;
 			children = (
-				7D2525FE260F91DE00F35957 /* UIKit+Combine */,
 				7D10F02F260F762900B5D294 /* UIKit */,
+				7D2525FE260F91DE00F35957 /* UIKit+Combine */,
+				7D25261526100DC200F35957 /* SwiftUI */,
 				7D10F018260F62F500B5D294 /* Main.storyboard */,
 				7D10F012260F62F500B5D294 /* AppDelegate.swift */,
 				7D10F014260F62F500B5D294 /* SceneDelegate.swift */,
@@ -126,6 +129,14 @@
 				7D252609260FF51200F35957 /* cbnNameFilterViewController.xib */,
 			);
 			name = "UIKit+Combine";
+			sourceTree = "<group>";
+		};
+		7D25261526100DC200F35957 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				7D25261626100DE200F35957 /* PersonFilterView.swift */,
+			);
+			name = SwiftUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D10F031260F768E00B5D294 /* uikitFilterCard.swift in Sources */,
+				7D25261726100DE200F35957 /* PersonFilterView.swift in Sources */,
 				7D252613260FF60B00F35957 /* cbnFilterCard.swift in Sources */,
 				7D10F017260F62F500B5D294 /* uikitViewController.swift in Sources */,
 				7D10F013260F62F500B5D294 /* AppDelegate.swift in Sources */,
