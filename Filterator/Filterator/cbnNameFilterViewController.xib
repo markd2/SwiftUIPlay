@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="cbnNameFilterViewController" customModule="Filterator" customModuleProvider="target">
+            <connections>
+                <outlet property="textfield" destination="MWD-Bp-ais" id="MRN-h9-79e"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="396" height="47"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name Search" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="MWD-Bp-ais">
+                    <rect key="frame" x="5" y="6.5" width="386" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                    <connections>
+                        <action selector="textFieldChanged" destination="-1" eventType="valueChanged" id="Haf-OA-TPU"/>
+                        <action selector="textFieldChanged" destination="-1" eventType="editingChanged" id="Iur-sz-spA"/>
+                    </connections>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" red="0.9080139280188384" green="1" blue="0.92474919131521227" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="MWD-Bp-ais" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="NFT-Ni-5Ek"/>
+                <constraint firstItem="MWD-Bp-ais" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="OAb-dJ-IDK"/>
+                <constraint firstAttribute="trailing" secondItem="MWD-Bp-ais" secondAttribute="trailing" constant="5" id="ptX-bm-iLM"/>
+                <constraint firstAttribute="height" constant="37" id="vOO-HU-RhT"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-246.37681159420291" y="46.540178571428569"/>
+        </view>
+    </objects>
+</document>
