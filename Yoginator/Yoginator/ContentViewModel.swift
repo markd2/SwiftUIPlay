@@ -7,8 +7,27 @@ class ContentViewModel: ObservableObject {
 
     var runPanelViewModel: RunPanelViewModel!
 
+    private var heartbeatTimer: AnyCancellable?
+
     init() {
         runPanelViewModel = .hardcoded
+        start()
+    }
+
+    func start() {
+        let start = Date()
+
+        heartbeatTimer = Timer.publish(every: 1.0, on: .main, in: .common)
+          .autoconnect()
+        .map { timer in
+            timer.timeIntervalSince(start)
+        }
+        .map { timeInterval in
+            Int(timeInterval)
+        }
+        .sink { seconds in
+            print("lub dub \(seconds)")
+        }
     }
 
 }
