@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct YoginatorApp: App {
+
+    @State var viewModel = ContentViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(viewModel)
         }
     }
 }
