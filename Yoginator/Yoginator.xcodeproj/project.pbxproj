@@ -15,6 +15,8 @@
 		7D25268F2624C49300F35957 /* RunPose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D25268E2624C49300F35957 /* RunPose.swift */; };
 		7D2526952624C4A200F35957 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2526942624C4A200F35957 /* Library.swift */; };
 		7D2526992624C4B300F35957 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2526982624C4B300F35957 /* Sequence.swift */; };
+		7D25269E2624C6A400F35957 /* RunPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D25269D2624C6A400F35957 /* RunPanelView.swift */; };
+		7D2526A12624C6AF00F35957 /* RunPanelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2526A02624C6AF00F35957 /* RunPanelViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		7D25268E2624C49300F35957 /* RunPose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunPose.swift; sourceTree = "<group>"; };
 		7D2526942624C4A200F35957 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		7D2526982624C4B300F35957 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		7D25269D2624C6A400F35957 /* RunPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunPanelView.swift; sourceTree = "<group>"; };
+		7D2526A02624C6AF00F35957 /* RunPanelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunPanelViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				7D25268A2624C47D00F35957 /* Models */,
+				7D25269C2624C67900F35957 /* Stuff */,
 				7D25267A2624C3BD00F35957 /* YoginatorApp.swift */,
 				7D25267C2624C3BD00F35957 /* ContentView.swift */,
 				7D25267E2624C3BE00F35957 /* Assets.xcassets */,
@@ -87,6 +92,15 @@
 				7D2526982624C4B300F35957 /* Sequence.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		7D25269C2624C67900F35957 /* Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				7D25269D2624C6A400F35957 /* RunPanelView.swift */,
+				7D2526A02624C6AF00F35957 /* RunPanelViewModel.swift */,
+			);
+			name = Stuff;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,8 +172,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D25269E2624C6A400F35957 /* RunPanelView.swift in Sources */,
 				7D25268F2624C49300F35957 /* RunPose.swift in Sources */,
 				7D25268C2624C48B00F35957 /* Pose.swift in Sources */,
+				7D2526A12624C6AF00F35957 /* RunPanelViewModel.swift in Sources */,
 				7D2526992624C4B300F35957 /* Sequence.swift in Sources */,
 				7D25267D2624C3BD00F35957 /* ContentView.swift in Sources */,
 				7D25267B2624C3BD00F35957 /* YoginatorApp.swift in Sources */,
