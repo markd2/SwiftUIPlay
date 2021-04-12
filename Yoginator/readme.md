@@ -16,12 +16,13 @@ to see what things feel like
 - [X] get a view up (essentially the player view)
 - [X] plumb a view model
 - [X] have a bool to control some ui (running / paused)
-- [ ] have a button that can change that, and see the UI toggle
-      - [ ] Need to add a higher-level coordinator thingie like the LoTR game.
-- [ ] Actually run a timer that updates labels (and also obeys the run state)
+- [X] Need to add a higher-level coordinator thingie like the LoTR game, so maybe add that first
+- [X] Actually run a timer that can update a label
+- [ ] have a button to pause / play on the leaf view
+- [ ] logic to change poses
 - [ ] Plumb a pose image into the view (image loading)
-
 
 (Do editing)
 
 - [ ] TBD
+
