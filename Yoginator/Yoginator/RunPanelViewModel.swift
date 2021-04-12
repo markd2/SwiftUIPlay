@@ -1,11 +1,11 @@
 import SwiftUI
 
 class RunPanelViewModel: ObservableObject {
-    let text: String
-    let runPose: RunPose
-    let timeLeftInPose: String
-    let classTime: String
-    let isRunning: Bool
+    var text: String
+    var runPose: RunPose
+    var timeLeftInPose: String
+    @Published /* private(set) */ var classTime: String
+    var isRunning: Bool
 
     init(text: String, runPose: RunPose,
          timeLeftInPose: String, classTime: String, isRunning: Bool) {

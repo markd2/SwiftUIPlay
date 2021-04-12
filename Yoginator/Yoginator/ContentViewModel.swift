@@ -25,8 +25,9 @@ class ContentViewModel: ObservableObject {
         .map { timeInterval in
             Int(timeInterval)
         }
-        .sink { seconds in
+        .sink { [weak self] seconds in
             print("lub dub \(seconds)")
+            self?.runPanelViewModel.classTime = "snorgle \(seconds)"
         }
     }
 
