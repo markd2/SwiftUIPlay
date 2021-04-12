@@ -5,6 +5,9 @@ struct RunPanelView: View {
 
     var body: some View {
         Text(viewModel.text)
+        Text(viewModel.runPose.pose.name)
+        Text(viewModel.timeLeftInPose)
+        Text(viewModel.classTime)
     }
 }
 
