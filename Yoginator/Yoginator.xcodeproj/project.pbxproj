@@ -18,6 +18,7 @@
 		7D25269E2624C6A400F35957 /* RunPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D25269D2624C6A400F35957 /* RunPanelView.swift */; };
 		7D2526A12624C6AF00F35957 /* RunPanelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2526A02624C6AF00F35957 /* RunPanelViewModel.swift */; };
 		7DDDA7B72624F55800B28E46 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDDA7B62624F55800B28E46 /* ContentViewModel.swift */; };
+		7DDDA7BB2625067700B28E46 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDDA7BA2625067700B28E46 /* Event.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		7D25269D2624C6A400F35957 /* RunPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunPanelView.swift; sourceTree = "<group>"; };
 		7D2526A02624C6AF00F35957 /* RunPanelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunPanelViewModel.swift; sourceTree = "<group>"; };
 		7DDDA7B62624F55800B28E46 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		7DDDA7BA2625067700B28E46 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				7D25268E2624C49300F35957 /* RunPose.swift */,
 				7D2526942624C4A200F35957 /* Library.swift */,
 				7D2526982624C4B300F35957 /* Sequence.swift */,
+				7DDDA7BA2625067700B28E46 /* Event.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				7D25268F2624C49300F35957 /* RunPose.swift in Sources */,
 				7D25268C2624C48B00F35957 /* Pose.swift in Sources */,
 				7D2526A12624C6AF00F35957 /* RunPanelViewModel.swift in Sources */,
+				7DDDA7BB2625067700B28E46 /* Event.swift in Sources */,
 				7D2526992624C4B300F35957 /* Sequence.swift in Sources */,
 				7DDDA7B72624F55800B28E46 /* ContentViewModel.swift in Sources */,
 				7D25267D2624C3BD00F35957 /* ContentView.swift in Sources */,

@@ -7,11 +7,28 @@ class ContentViewModel: ObservableObject {
 
     var runPanelViewModel: RunPanelViewModel!
 
+    private let events = PassthroughSubject<Event, Never>()
+
     private var heartbeatTimer: AnyCancellable?
 
+    private var subscribers = [AnyCancellable]()
+
     init() {
-        runPanelViewModel = .hardcoded
+        let bootstrapRPVM = RunPanelViewModel.hardcoded
+
+        runPanelViewModel = RunPanelViewModel(
+          text: bootstrapRPVM.text,
+          runPose: bootstrapRPVM.runPose,
+          timeLeftInPose: bootstrapRPVM.timeLeftInPose,
+          classTime: bootstrapRPVM.classTime,
+          isRunning: bootstrapRPVM.isRunning,
+          events: events)
+
         start()
+
+        let eventSubscription = eventSubscribe(publisher: events.eraseToAnyPublisher())
+
+        subscribers.append(eventSubscription)
     }
 
     func start() {
@@ -30,5 +47,17 @@ class ContentViewModel: ObservableObject {
             self?.runPanelViewModel.classTime = "snorgle \(seconds)"
         }
     }
+
+}
+
+extension ContentViewModel: EventSubscriber {
+    func play() {
+        print("play in VM")
+    }
+
+    func pause() {
+        print("pause in VM")
+    }
+
 
 }

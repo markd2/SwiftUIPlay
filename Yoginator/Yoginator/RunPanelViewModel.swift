@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 class RunPanelViewModel: ObservableObject {
     var text: String
@@ -7,13 +8,21 @@ class RunPanelViewModel: ObservableObject {
     @Published /* private(set) */ var classTime: String
     var isRunning: Bool
 
+    private var events: PassthroughSubject<Event, Never>
+
     init(text: String, runPose: RunPose,
-         timeLeftInPose: String, classTime: String, isRunning: Bool) {
+         timeLeftInPose: String, classTime: String, isRunning: Bool,
+         events: PassthroughSubject<Event, Never>) {
         self.text = text
         self.runPose = runPose
         self.timeLeftInPose = timeLeftInPose
         self.classTime = classTime
         self.isRunning = isRunning
+        self.events = events
+    }
+
+    func pause() {
+        events.send(.pause)
     }
 }
 
@@ -25,6 +34,7 @@ extension RunPanelViewModel {
                                 runPose: runPose,
                                 timeLeftInPose: "0:30",
                                 classTime: "17:44",
-                                isRunning: true)
+                                isRunning: true,
+                                events: PassthroughSubject<Event, Never>())
    }
 }
