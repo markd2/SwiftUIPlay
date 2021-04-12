@@ -1,8 +1,8 @@
-//
-//  Pose.swift
-//  Yoginator
-//
-//  Created by Mark Dalrymple on 4/12/21.
-//
-
 import Foundation
+import SwiftUI
+
+struct Pose {
+    let name: String
+    let imageName: String
+    let defaultDuration: TimeInterval
+}

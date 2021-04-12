@@ -1,8 +1,6 @@
-//
-//  RunPose.swift
-//  Yoginator
-//
-//  Created by Mark Dalrymple on 4/12/21.
-//
-
 import Foundation
+
+struct RunPose {
+    let pose: Pose
+    let duration: TimeInterval  // overrides the default in the pose
+}
