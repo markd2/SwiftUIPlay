@@ -1,9 +1,12 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @EnvironmentObject var viewModel: ContentViewModel
+
     var body: some View {
         RunPanelView()
-          .environmentObject(RunPanelViewModel.hardcoded)
+          .environmentObject(viewModel.runPanelViewModel)
     }
 }
 
