@@ -8,6 +8,11 @@ struct RunPanelView: View {
         Text(viewModel.runPose.pose.name)
         Text(viewModel.timeLeftInPose)
         Text(viewModel.classTime)
+        if viewModel.isRunning {
+            Text("Running (pause button)").fontWeight(.bold)
+        } else {
+            Text("Paused (run button)").fontWeight(.bold)
+        }
     }
 }
 
