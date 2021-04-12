@@ -64,6 +64,7 @@
 		7D2526792624C3BD00F35957 /* Yoginator */ = {
 			isa = PBXGroup;
 			children = (
+				7D2526A32624DFB200F35957 /* Services */,
 				7D25268A2624C47D00F35957 /* Models */,
 				7D25269C2624C67900F35957 /* Stuff */,
 				7D25267A2624C3BD00F35957 /* YoginatorApp.swift */,
@@ -101,6 +102,13 @@
 				7D2526A02624C6AF00F35957 /* RunPanelViewModel.swift */,
 			);
 			name = Stuff;
+			sourceTree = "<group>";
+		};
+		7D2526A32624DFB200F35957 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
