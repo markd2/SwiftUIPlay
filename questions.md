@@ -73,6 +73,7 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] Context
 * [ ] Text
 * [ ] List
+* [ ] Section
 * [ ] Button
 * [ ] TextField
 * [ ] NavigationView
@@ -1122,4 +1123,26 @@ struct CountriesList: View {
   - repository is also stateless, doesn't have write access to the AppStat
   - contains only the logic related to working with the data
   - knows nothing about View or Interacor
+
+
+==================================================
+# Hacking with SwiftUI.
+
+Doing a bit of a dip into the awesomeness that Paul does.
+
+https://www.hackingwithswift.com/quick-start/swiftui/swiftui-tutorial-building-a-complete-project
+
+* Section for doing list sections
+
+```
+            List {
+                ForEach(menu) { section in
+                    Section(header: Text(section.name)) {
+                        ForEach(section.items) { item in
+                            Text(item.name)
+                        }
+                    }
+                }
+            }
+```
 
