@@ -15,6 +15,9 @@ struct RunPanelView: View {
                             })
         } else {
             Text("Paused (run button)").fontWeight(.bold)
+            Button("Run", action: {
+                                viewModel.play()
+                            })
         }
     }
 }
