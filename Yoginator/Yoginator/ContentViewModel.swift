@@ -25,8 +25,6 @@ class ContentViewModel: ObservableObject {
           events: events,
           playbackState: playbackState.eraseToAnyPublisher())
 
-        start()
-
         let eventSubscription = eventSubscribe(publisher: events.eraseToAnyPublisher())
         subscribers.append(eventSubscription)
     }
@@ -49,18 +47,20 @@ class ContentViewModel: ObservableObject {
         }
     }
 
+    func stop() {
+        heartbeatTimer = nil
+        playbackState.value = false
+    }
 }
 
 extension ContentViewModel: EventSubscriber {
     func play() {
         print("play in VM")
-        // runPanelViewModel.isRunning = true
-        playbackState.value = true
+        start()
     }
 
     func pause() {
         print("pause in VM")
-        // runPanelViewModel.isRunning = false
-        playbackState.value = false
+        stop()
     }
 }
