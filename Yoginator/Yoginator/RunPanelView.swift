@@ -6,6 +6,7 @@ struct RunPanelView: View {
     var body: some View {
         Text(viewModel.text)
         Text(viewModel.runPose.pose.name)
+        Image(viewModel.runPose.pose.imageName)
         Text(viewModel.timeLeftInPose)
         Text(viewModel.classTime)
         if viewModel.isRunning {

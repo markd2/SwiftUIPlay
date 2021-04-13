@@ -11,7 +11,7 @@ struct Pose {
 extension Pose {
     static var hardcoded: Pose {
         return Pose(name: "Scoobydooasana",
-                    imageName: "scoobydoo",
+                    imageName: "standing-bow",
                     defaultDuration: 25)
     }
 }
