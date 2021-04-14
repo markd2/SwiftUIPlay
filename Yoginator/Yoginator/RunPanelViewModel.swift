@@ -4,7 +4,7 @@ import Combine
 
 
 class RunPanelViewModel: ObservableObject {
-    var timeLeftInPose: String
+    @Published var timeLeftInPose: String  // !!! hook this up to a publisher
     @Published private(set) var isRunning: Bool = false
     @Published /* private(set) */ var classTime: String
     @Published private(set) var frame: SequenceFrame? = nil
@@ -35,8 +35,8 @@ class RunPanelViewModel: ObservableObject {
         .store(in: &subscribers)
     }
 
-    func play() {
-        events.send(.play)
+    func resume() {
+        events.send(.resume)
     }
 
     func pause() {

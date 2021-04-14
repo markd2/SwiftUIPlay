@@ -59,7 +59,7 @@ class ContentViewModel: ObservableObject {
                 if frameTimeLeft <= 0 {
                     self?.advanceToNextFrame()
                 }
-                self?.runPanelViewModel.classTime = "Time left: \(frameTimeLeft)"
+                self?.runPanelViewModel.timeLeftInPose = "Time left: \(frameTimeLeft)"
             }
         }
     }
@@ -98,12 +98,12 @@ class ContentViewModel: ObservableObject {
 }
 
 extension ContentViewModel: EventSubscriber {
-    func play() {
-        start()
-    }
-
     func pause() {
         stop()
+    }
+
+    func resume() {
+        startTimer()
     }
 
     func next() {

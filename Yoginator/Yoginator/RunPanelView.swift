@@ -9,10 +9,8 @@ struct RunPanelView: View {
             
             Text(frame.runPose.pose.name)
             Image(frame.runPose.pose.imageName)
-            
             Text(viewModel.timeLeftInPose)
-            Text(viewModel.classTime)
-
+            
             if viewModel.isRunning {
                 Text("Running (pause button)").fontWeight(.bold)
                 Button("Pause", action: {
@@ -20,8 +18,8 @@ struct RunPanelView: View {
                                 })
             } else {
                 Text("Paused (run button)").fontWeight(.bold)
-                Button("Run", action: {
-                                  viewModel.play()
+                Button("Resume", action: {
+                                  viewModel.resume()
                               })
             }
             

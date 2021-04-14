@@ -2,23 +2,23 @@ import Combine
 import Foundation
 
 enum Event {
-    case play
     case pause
+    case resume
     case next
     case start
 }
 
 
 protocol EventSubscriber: class {
-    func play()
     func pause()
+    func resume()
     func next()
     func start()
 }
 
 extension EventSubscriber {
-    func play() {}
     func pause() {}
+    func resume() {}
     func next() {}
     func start() {}
 
@@ -28,11 +28,11 @@ extension EventSubscriber {
           .sink { [weak self] event in
               switch event {
 
-              case .play:
-                  self?.play()
-
               case .pause:
                   self?.pause()
+
+              case .resume:
+                  self?.resume()
 
               case .next:
                   self?.next()
