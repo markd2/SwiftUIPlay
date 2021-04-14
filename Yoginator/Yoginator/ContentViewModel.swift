@@ -11,7 +11,7 @@ class ContentViewModel: ObservableObject {
     private let playbackState = CurrentValueSubject<Bool, Never>(false)
 
     // RunPose, index, is there more
-    private let posePublisher = PassthroughSubject<SequenceFrame, Never>()
+    private let posePublisher = PassthroughSubject<SequenceFrame?, Never>()
 
     var currentPose: Int = 0
 
@@ -36,6 +36,8 @@ class ContentViewModel: ObservableObject {
 
         let eventSubscription = eventSubscribe(publisher: events.eraseToAnyPublisher())
         subscribers.append(eventSubscription)
+
+        moveToFrame(index: 0)
     }
 
     func start() {
@@ -61,13 +63,27 @@ class ContentViewModel: ObservableObject {
         playbackState.value = false
     }
 
+    func moveToFrame(index: Int?) {
+        if let index = index, let sequence = sequence {
+            currentPose = index
+            posePublisher.send(SequenceFrame(
+                                 runPose: sequence.poses[index],
+                                 index: currentPose,
+                                 anotherPoseAvailable: true))
+        } else {
+            posePublisher.send(nil)
+        }
+    }
+
     func advanceToNextFrame() {
         if let sequence = sequence {
             currentPose += 1
-            posePublisher.send(SequenceFrame(
-                                 runPose: sequence.poses[currentPose],
-                                 index: currentPose,
-                                 anotherPoseAvailable: true))
+            if currentPose < sequence.poses.count {
+                moveToFrame(index: currentPose)
+            } else {
+                moveToFrame(index: nil)
+                stop()
+            }
         }
     }
 }

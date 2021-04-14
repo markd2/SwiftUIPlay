@@ -17,7 +17,7 @@ class RunPanelViewModel: ObservableObject {
     private var subscribers: [AnyCancellable] = []
 
     init(text: String,
-         posePublisher: AnyPublisher<SequenceFrame, Never>,
+         posePublisher: AnyPublisher<SequenceFrame?, Never>,
          runPose: RunPose,
          timeLeftInPose: String, classTime: String,
          events: PassthroughSubject<Event, Never>,
@@ -60,7 +60,7 @@ extension RunPanelViewModel {
 
        return RunPanelViewModel(
         text: "Greeble", 
-        posePublisher: PassthroughSubject<SequenceFrame, Never>().eraseToAnyPublisher(),
+        posePublisher: PassthroughSubject<SequenceFrame?, Never>().eraseToAnyPublisher(),
          runPose: runPose,
          timeLeftInPose: "0:30",
          classTime: "17:44",
