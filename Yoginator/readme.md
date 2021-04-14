@@ -18,9 +18,10 @@ to see what things feel like
 - [X] have a bool to control some ui (running / paused)
 - [X] Need to add a higher-level coordinator thingie like the LoTR game, so maybe add that first
 - [X] Actually run a timer that can update a label
-- [ ] have a button to pause / play on the leaf view
-- [ ] logic to change poses
-- [ ] Plumb a pose image into the view (image loading)
+- [X] have a button to pause / play on the leaf view
+- [X] logic to change poses
+  - [X] maybe a button to skip - can get move logic without the timer involved
+- [X] proper starting
 
 (Do editing)
 
