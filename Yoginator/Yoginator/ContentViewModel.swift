@@ -69,7 +69,7 @@ class ContentViewModel: ObservableObject {
             posePublisher.send(SequenceFrame(
                                  runPose: sequence.poses[index],
                                  index: currentPose,
-                                 anotherPoseAvailable: true))
+                                 anotherPoseAvailable: index < sequence.poses.count - 1))
         } else {
             posePublisher.send(nil)
         }

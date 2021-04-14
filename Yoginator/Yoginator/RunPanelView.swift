@@ -6,9 +6,10 @@ struct RunPanelView: View {
     var body: some View {
         if let frame = viewModel.frame {
             Text(viewModel.text)
+            Text("Pose \(frame.index + 1)")
             
-            Text(viewModel.runPose.pose.name)
-            Image(viewModel.runPose.pose.imageName)
+            Text(frame.runPose.pose.name)
+            Image(frame.runPose.pose.imageName)
             
             Text(viewModel.timeLeftInPose)
             Text(viewModel.classTime)
@@ -25,8 +26,12 @@ struct RunPanelView: View {
                               })
             }
             
-            if viewModel.anotherPoseAvailable {
+            if frame.anotherPoseAvailable {
                 Button(">>>", action: {
+                                  viewModel.next()
+                              })
+            } else {
+                Button("End", action: {
                                   viewModel.next()
                               })
             }
