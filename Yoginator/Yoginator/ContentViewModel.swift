@@ -10,20 +10,29 @@ class ContentViewModel: ObservableObject {
     private let events = PassthroughSubject<Event, Never>()
     private let playbackState = CurrentValueSubject<Bool, Never>(false)
 
+    // RunPose, index, is there more
+    private let posePublisher = PassthroughSubject<SequenceFrame, Never>()
+
+    var currentPose: Int = 0
+
     private var heartbeatTimer: AnyCancellable?
 
     private var subscribers = [AnyCancellable]()
 
     init() {
+        sequence = .hardcoded
+
         let bootstrapRPVM = RunPanelViewModel.hardcoded
 
         runPanelViewModel = RunPanelViewModel(
           text: bootstrapRPVM.text,
+          posePublisher: posePublisher.eraseToAnyPublisher(),
           runPose: bootstrapRPVM.runPose,
           timeLeftInPose: bootstrapRPVM.timeLeftInPose,
           classTime: bootstrapRPVM.classTime,
           events: events,
-          playbackState: playbackState.eraseToAnyPublisher())
+          playbackState: playbackState.eraseToAnyPublisher()
+        )
 
         let eventSubscription = eventSubscribe(publisher: events.eraseToAnyPublisher())
         subscribers.append(eventSubscription)
@@ -51,6 +60,16 @@ class ContentViewModel: ObservableObject {
         heartbeatTimer = nil
         playbackState.value = false
     }
+
+    func advanceToNextFrame() {
+        if let sequence = sequence {
+            currentPose += 1
+            posePublisher.send(SequenceFrame(
+                                 runPose: sequence.poses[currentPose],
+                                 index: currentPose,
+                                 anotherPoseAvailable: true))
+        }
+    }
 }
 
 extension ContentViewModel: EventSubscriber {
@@ -62,5 +81,10 @@ extension ContentViewModel: EventSubscriber {
     func pause() {
         print("pause in VM")
         stop()
+    }
+
+    func next() {
+        print("next in VM")
+        advanceToNextFrame()
     }
 }

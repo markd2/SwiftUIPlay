@@ -6,6 +6,12 @@ struct Sequence {
     let currentTime: Int
 }
 
+struct SequenceFrame {
+    let runPose: RunPose
+    let index: Int
+    let anotherPoseAvailable: Bool
+}
+
 
 extension Sequence {
     static var hardcoded: Sequence {
