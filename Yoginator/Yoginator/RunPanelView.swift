@@ -35,7 +35,7 @@ struct RunPanelView: View {
                               })
             }
         } else {
-            Text("No Frame")
+            Text("Done!")
         }
     }
 }

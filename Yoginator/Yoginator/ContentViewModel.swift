@@ -16,6 +16,7 @@ class ContentViewModel: ObservableObject {
     var currentPose: Int = 0
 
     private var heartbeatTimer: AnyCancellable?
+    private var frameTimeLeft: Int?
 
     private var subscribers = [AnyCancellable]()
 
@@ -52,7 +53,14 @@ class ContentViewModel: ObservableObject {
         }
         .sink { [weak self] seconds in
             print("lub dub \(seconds)")
-            self?.runPanelViewModel.classTime = "snorgle \(seconds)"
+            if var frameTimeLeft = self?.frameTimeLeft {
+                frameTimeLeft -= 1
+                self?.frameTimeLeft = frameTimeLeft // #loloptionals
+                if frameTimeLeft <= 0 {
+                    self?.advanceToNextFrame()
+                }
+                self?.runPanelViewModel.classTime = "Time left: \(frameTimeLeft)"
+            }
         }
     }
 
@@ -64,10 +72,13 @@ class ContentViewModel: ObservableObject {
     func moveToFrame(index: Int?) {
         if let index = index, let sequence = sequence {
             currentPose = index
+            let runPose = sequence.poses[index]
+
             posePublisher.send(SequenceFrame(
-                                 runPose: sequence.poses[index],
+                                 runPose: runPose,
                                  index: currentPose,
                                  anotherPoseAvailable: index < sequence.poses.count - 1))
+            frameTimeLeft = Int(runPose.duration)
         } else {
             posePublisher.send(nil)
         }

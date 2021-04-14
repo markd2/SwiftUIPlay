@@ -16,8 +16,8 @@ struct SequenceFrame {
 extension Sequence {
     static var hardcoded: Sequence {
         let poses = [
-          Pose(name: "Scoobydooasana", imageName: "standing-bow ", defaultDuration: 30),
-          Pose(name: "Radioasana", imageName: "", defaultDuration: 15),
+          Pose(name: "Scoobydooasana", imageName: "standing-bow ", defaultDuration: 10),
+          Pose(name: "Radioasana", imageName: "", defaultDuration: 4),
           Pose(name: "Greebleborkenasana", imageName: "", defaultDuration: 10)
         ]
 
