@@ -5,10 +5,13 @@ struct RunPanelView: View {
 
     var body: some View {
         Text(viewModel.text)
+
         Text(viewModel.runPose.pose.name)
         Image(viewModel.runPose.pose.imageName)
+
         Text(viewModel.timeLeftInPose)
         Text(viewModel.classTime)
+
         if viewModel.isRunning {
             Text("Running (pause button)").fontWeight(.bold)
             Button("Pause", action: {
@@ -19,6 +22,12 @@ struct RunPanelView: View {
             Button("Run", action: {
                                 viewModel.play()
                             })
+        }
+
+        if viewModel.anotherPoseAvailable {
+            Button(">>>", action: {
+                              viewModel.next()
+                          })
         }
     }
 }

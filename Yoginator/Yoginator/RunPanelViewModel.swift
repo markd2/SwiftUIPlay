@@ -7,6 +7,7 @@ class RunPanelViewModel: ObservableObject {
     var timeLeftInPose: String
     @Published private(set) var isRunning: Bool = false
     @Published /* private(set) */ var classTime: String
+    var anotherPoseAvailable = true
 
     private var events: PassthroughSubject<Event, Never>
     private var subscribers: [AnyCancellable] = []
@@ -34,6 +35,10 @@ class RunPanelViewModel: ObservableObject {
 
     func pause() {
         events.send(.pause)
+    }
+
+    func next() {
+        events.send(.next)
     }
 }
 
