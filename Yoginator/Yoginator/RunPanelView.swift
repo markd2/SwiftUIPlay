@@ -5,7 +5,6 @@ struct RunPanelView: View {
 
     var body: some View {
         if let frame = viewModel.frame {
-            Text(viewModel.text)
             Text("Pose \(frame.index + 1)")
             
             Text(frame.runPose.pose.name)

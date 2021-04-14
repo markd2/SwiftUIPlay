@@ -25,9 +25,7 @@ class ContentViewModel: ObservableObject {
         let bootstrapRPVM = RunPanelViewModel.hardcoded
 
         runPanelViewModel = RunPanelViewModel(
-          text: bootstrapRPVM.text,
           posePublisher: posePublisher.eraseToAnyPublisher(),
-          runPose: bootstrapRPVM.runPose,
           timeLeftInPose: bootstrapRPVM.timeLeftInPose,
           classTime: bootstrapRPVM.classTime,
           events: events,

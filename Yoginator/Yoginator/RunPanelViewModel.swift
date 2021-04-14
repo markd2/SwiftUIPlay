@@ -4,8 +4,6 @@ import Combine
 
 
 class RunPanelViewModel: ObservableObject {
-    var text: String
-    var runPose: RunPose
     var timeLeftInPose: String
     @Published private(set) var isRunning: Bool = false
     @Published /* private(set) */ var classTime: String
@@ -16,14 +14,10 @@ class RunPanelViewModel: ObservableObject {
     private var events: PassthroughSubject<Event, Never>
     private var subscribers: [AnyCancellable] = []
 
-    init(text: String,
-         posePublisher: AnyPublisher<SequenceFrame?, Never>,
-         runPose: RunPose,
+    init(posePublisher: AnyPublisher<SequenceFrame?, Never>,
          timeLeftInPose: String, classTime: String,
          events: PassthroughSubject<Event, Never>,
          playbackState: AnyPublisher<Bool, Never>) {
-        self.text = text
-        self.runPose = runPose
         self.timeLeftInPose = timeLeftInPose
         self.classTime = classTime
 
@@ -56,12 +50,8 @@ class RunPanelViewModel: ObservableObject {
 
 extension RunPanelViewModel {
    static var hardcoded: RunPanelViewModel {
-       let runPose = RunPose(pose: .hardcoded, duration: 60)
-
        return RunPanelViewModel(
-        text: "Greeble", 
         posePublisher: PassthroughSubject<SequenceFrame?, Never>().eraseToAnyPublisher(),
-         runPose: runPose,
          timeLeftInPose: "0:30",
          classTime: "17:44",
          events: PassthroughSubject<Event, Never>(),
