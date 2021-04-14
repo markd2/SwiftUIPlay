@@ -46,6 +46,10 @@ class RunPanelViewModel: ObservableObject {
     func next() {
         events.send(.next)
     }
+
+    func start() {
+        events.send(.start)
+    }
 }
 
 extension RunPanelViewModel {

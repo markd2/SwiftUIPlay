@@ -16,9 +16,12 @@ struct SequenceFrame {
 extension Sequence {
     static var hardcoded: Sequence {
         let poses = [
-          Pose(name: "Scoobydooasana", imageName: "standing-bow ", defaultDuration: 10),
-          Pose(name: "Radioasana", imageName: "", defaultDuration: 4),
-          Pose(name: "Greebleborkenasana", imageName: "", defaultDuration: 10)
+          
+
+          Pose(name: "Scoobydooasana", imageName: "standing-bow", defaultDuration: 10),
+          Pose(name: "Radioasana", imageName: "tree", defaultDuration: 4),
+          Pose(name: "Greebleborkenasana", imageName: "warrior-1", defaultDuration: 10),
+          Pose(name: "Rollinitiativasana", imageName: "chair", defaultDuration: 10)
         ]
 
         let runPoses = poses.map { RunPose(pose: $0, duration: $0.defaultDuration) }

@@ -5,6 +5,7 @@ enum Event {
     case play
     case pause
     case next
+    case start
 }
 
 
@@ -12,12 +13,14 @@ protocol EventSubscriber: class {
     func play()
     func pause()
     func next()
+    func start()
 }
 
 extension EventSubscriber {
     func play() {}
     func pause() {}
     func next() {}
+    func start() {}
 
     func eventSubscribe(publisher: AnyPublisher<Event, Never>) -> AnyCancellable {
         publisher
@@ -27,15 +30,15 @@ extension EventSubscriber {
 
               case .play:
                   self?.play()
-                  print("PLAY FROM THUNK")
 
               case .pause:
                   self?.pause()
-                  print("PAUSE FROM THUNK")
 
               case .next:
                   self?.next()
-                  print("NEXT FROM THUNK")
+
+              case .start:
+                  self?.start()
               }
           }
     }

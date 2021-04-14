@@ -39,7 +39,7 @@ class ContentViewModel: ObservableObject {
         moveToFrame(index: 0)
     }
 
-    func start() {
+    func startTimer() {
         let start = Date()
         playbackState.value = true
 
@@ -99,17 +99,19 @@ class ContentViewModel: ObservableObject {
 
 extension ContentViewModel: EventSubscriber {
     func play() {
-        print("play in VM")
         start()
     }
 
     func pause() {
-        print("pause in VM")
         stop()
     }
 
     func next() {
-        print("next in VM")
         advanceToNextFrame()
+    }
+
+    func start() {
+        moveToFrame(index: 0)
+        startTimer()
     }
 }

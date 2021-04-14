@@ -36,6 +36,9 @@ struct RunPanelView: View {
             }
         } else {
             Text("Done!")
+            Button("Start", action: {
+                              viewModel.start()
+                          })
         }
     }
 }
