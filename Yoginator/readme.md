@@ -22,6 +22,9 @@ to see what things feel like
 - [X] logic to change poses
   - [X] maybe a button to skip - can get move logic without the timer involved
 - [X] proper starting
+- [ ] make UI non-ugly
+- [ ] definitely can use a refactor and cleanup - couple of big views and
+      viewmodels
 
 (Do editing)
 
