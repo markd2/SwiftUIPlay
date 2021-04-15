@@ -17,6 +17,7 @@
 		7D2526992624C4B300F35957 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2526982624C4B300F35957 /* Sequence.swift */; };
 		7D25269E2624C6A400F35957 /* RunPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D25269D2624C6A400F35957 /* RunPanelView.swift */; };
 		7D2526A12624C6AF00F35957 /* RunPanelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2526A02624C6AF00F35957 /* RunPanelViewModel.swift */; };
+		7DDD60972628A51800C461D8 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDD60962628A51800C461D8 /* Utilities.swift */; };
 		7DDDA7B72624F55800B28E46 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDDA7B62624F55800B28E46 /* ContentViewModel.swift */; };
 		7DDDA7BB2625067700B28E46 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDDA7BA2625067700B28E46 /* Event.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		7D2526982624C4B300F35957 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		7D25269D2624C6A400F35957 /* RunPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunPanelView.swift; sourceTree = "<group>"; };
 		7D2526A02624C6AF00F35957 /* RunPanelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunPanelViewModel.swift; sourceTree = "<group>"; };
+		7DDD60962628A51800C461D8 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		7DDDA7B62624F55800B28E46 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		7DDDA7BA2625067700B28E46 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +79,7 @@
 				7D25267E2624C3BE00F35957 /* Assets.xcassets */,
 				7D2526832624C3BE00F35957 /* Info.plist */,
 				7D2526802624C3BE00F35957 /* Preview Content */,
+				7DDD60962628A51800C461D8 /* Utilities.swift */,
 			);
 			path = Yoginator;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 			files = (
 				7D25269E2624C6A400F35957 /* RunPanelView.swift in Sources */,
 				7D25268F2624C49300F35957 /* RunPose.swift in Sources */,
+				7DDD60972628A51800C461D8 /* Utilities.swift in Sources */,
 				7D25268C2624C48B00F35957 /* Pose.swift in Sources */,
 				7D2526A12624C6AF00F35957 /* RunPanelViewModel.swift in Sources */,
 				7DDDA7BB2625067700B28E46 /* Event.swift in Sources */,

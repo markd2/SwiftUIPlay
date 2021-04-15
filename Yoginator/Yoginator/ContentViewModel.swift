@@ -7,7 +7,7 @@ class ContentViewModel: ObservableObject {
 
     var runPanelViewModel: RunPanelViewModel!
 
-    private let events = PassthroughSubject<Event, Never>()
+    private let events = EventPassthroughPublisher()
     private let playbackState = CurrentValueSubject<Bool, Never>(false)
 
     // RunPose, index, is there more

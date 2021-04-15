@@ -14,10 +14,10 @@ class RunPanelViewModel: ObservableObject {
     private var events: PassthroughSubject<Event, Never>
     private var subscribers: [AnyCancellable] = []
 
-    init(posePublisher: AnyPublisher<SequenceFrame?, Never>,
+    init(posePublisher: SequenceFrameMaybePublisher,
          timeLeftInPose: String, classTime: String,
-         events: PassthroughSubject<Event, Never>,
-         playbackState: AnyPublisher<Bool, Never>) {
+         events: EventPassthroughPublisher,
+         playbackState: BoolPublisher) {
         self.timeLeftInPose = timeLeftInPose
         self.classTime = classTime
 
@@ -29,7 +29,6 @@ class RunPanelViewModel: ObservableObject {
         .store(in: &subscribers)
 
         posePublisher.sink { [weak self] newFrame in
-            print("new pose \(newFrame)")
             self?.frame = newFrame
         }
         .store(in: &subscribers)

@@ -8,6 +8,8 @@ enum Event {
     case start
 }
 
+typealias EventPassthroughPublisher = PassthroughSubject<Event, Never>
+typealias EventPublisher = AnyPublisher<Event, Never>
 
 protocol EventSubscriber: class {
     func pause()
@@ -22,7 +24,7 @@ extension EventSubscriber {
     func next() {}
     func start() {}
 
-    func eventSubscribe(publisher: AnyPublisher<Event, Never>) -> AnyCancellable {
+    func eventSubscribe(publisher: EventPublisher) -> AnyCancellable {
         publisher
           .receive(on: DispatchQueue.main)
           .sink { [weak self] event in
