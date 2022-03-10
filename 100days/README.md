@@ -22,4 +22,10 @@ First 15 days were review, so skipping.
 
 "Our views are a function of their state"
 
+* Button
+* @State - allows the value of a struct var to be stored separately in a place that can be
+  modified
+* SwiftUI destroys and recreates structs frequently, so keeping them small and simple is
+  important
+* @State is for simple properties that are stored in one view.  Recommended to make private
 
