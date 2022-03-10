@@ -32,3 +32,14 @@ First 15 days were review, so skipping.
 ```
    TextField("Greeble bork flonk", text: $name)
 ```
+* ForEach to loop over stuff and add more than 10 views to something
+* Picker + ForEach.  use `\.self` to say "the contents are naturally unique"
+* TextField taking a non-text value (say a Double $binding) in the *value* (not text)
+* Picker outside of a form gives the wheelie
+* Declaritive UI design - say what we want vs how it should be done
+* Navigation title goes on interior view, not the NavigationView, b/c we could have
+  many views, each with its own title.
+* Get segmented controll by using segmented pickerStyle on a Picker
+    .pickerStyle(.segmented)
+* can add a header: on to a section for a label
+* @FocusState - like @State, but designed to handle input focus

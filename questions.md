@@ -62,6 +62,7 @@
 * [ ] @StateObject
       - for when you need to create an observed object inside of a view (c.f. below)
 * [ ] @ViewBuilder
+* [ ] @FocusState
 
 c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relationships
 
