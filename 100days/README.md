@@ -28,4 +28,7 @@ First 15 days were review, so skipping.
 * SwiftUI destroys and recreates structs frequently, so keeping them small and simple is
   important
 * @State is for simple properties that are stored in one view.  Recommended to make private
-
+* get the projected value (e.g. $name) for giving to a textfield, to make a two-way binding
+```
+   TextField("Greeble bork flonk", text: $name)
+```
