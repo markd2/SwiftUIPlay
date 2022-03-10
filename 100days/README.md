@@ -45,4 +45,5 @@ First 15 days were review, so skipping.
 * @FocusState - like @State, but designed to handle input focus
 
 
-Stopped Day 19 - challenge day
+Stopped Day 20 - made GuessTheFlag template
+
