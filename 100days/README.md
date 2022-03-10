@@ -43,3 +43,6 @@ First 15 days were review, so skipping.
     .pickerStyle(.segmented)
 * can add a header: on to a section for a label
 * @FocusState - like @State, but designed to handle input focus
+
+
+Stopped Day 19 - challenge day
