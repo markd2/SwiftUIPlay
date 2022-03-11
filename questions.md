@@ -90,6 +90,10 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] App
 * [ ] Scene
 * [ ] Form
+* [ ] Spacer
+* [ ] Color
+* [ ] LinearGradient
+* [ ] Label
 
 ### view modifier things
 
@@ -116,6 +120,10 @@ c.f. https://developer.apple.com/documentation/swiftui/dynamicproperty#relations
 * [ ] .layoutPriority
 * [ ] .animation
 * [ ] .onAppear
+* [ ] .ignoreSafeArea
+* [ ] .tint
+* [ ] .bold
+* [ ] .foregroundStyle
 
 asdf
 
