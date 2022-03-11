@@ -41,15 +41,15 @@ struct ContentView: View {
                 Text("Guess the Flag")
                   .font(.largeTitle.weight(.bold))
                   .foregroundColor(.white)
+                Spacer()
 
                 VStack(spacing: 15) {
                     VStack {
                         Text("Tappy the flag of")
                           .font(.subheadline.weight(.heavy))
-                          .foregroundColor(.white)
+                          .foregroundStyle(.secondary)
                         Text(countries[correctAnswer])
                           .font(.largeTitle.weight(.semibold))
-                          .foregroundColor(.white)
                     }
                     VStack {
                         ForEach(0..<3) { number in
@@ -68,7 +68,16 @@ struct ContentView: View {
                   .padding(.vertical, 20)
                   .background(.regularMaterial)
                   .clipShape(RoundedRectangle(cornerRadius: 20))
-            }
+
+                Spacer()
+                Spacer()
+
+                Text("Score: ???")
+                  .foregroundColor(.white)
+                  .font(.title.bold())
+
+                Spacer()
+            }.padding()
         }
         .alert(scoreTitle, isPresented: $showingScore) {
             Button("Continue", action: askQuestion)
