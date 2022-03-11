@@ -101,3 +101,5 @@ LinearGradient(gradient: Gradient(colors: [.white, .black]),
 * And aux mesasge in a message: closure
 * .font(.subheadline.weight(.heavy)) | .font(.largeTitle.weight(.semibold))
 * .bold == .weight(.bold)
+
+Stopped at Day 23 - Project 3 part 1
