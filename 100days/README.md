@@ -102,4 +102,10 @@ LinearGradient(gradient: Gradient(colors: [.white, .black]),
 * .font(.subheadline.weight(.heavy)) | .font(.largeTitle.weight(.semibold))
 * .bold == .weight(.bold)
 
-Stopped at Day 23 - Project 3 part 1
+* "Our views become simple inert things that convert data into UI, rather than
+   intelligent things that can grow out of control"
+* "There is **nothing* behind our views" - what you see is all we have, so if your
+  view isn't big enough to e.g. fill in the background, thn all you can do is
+  make that view take up more space.
+* .frame(maxWidth: .infinity, maxHeight: .infinity)
+
