@@ -113,6 +113,18 @@ LinearGradient(gradient: Gradient(colors: [.white, .black]),
   (it is a lightweight struct after all)
 * can also think of it like "the views are rendered after every single modifier.
 
-stopped at https://www.hackingwithswift.com/books/ios-swiftui/why-does-swiftui-use-some-view-for-its-view-type
+* "opaque return types" - the `some View` thing. @ViewBuilder auto wraps into a TupleView
+* can use ternary operator to e.g. decide values inside of an expression
+* There's also `if` - but that makes more work (since the if is done at Swuift-UI processing
+  time, plus say for foreground color, "it will destroy one or the other rather than just
+  recolor what it has", so prefer the ternary
+* environment modifier - having a modifier (e.g. `.font(.title)`) on the VStack rather
+  than each individual Text inside of it.  If a child view inside the VStack uses
+  the same modifier, it takes precedence
+  - vs regular modifiers, like blur(). Not a dfinitive list of either, so need to look
+    at the docs and hope it's mentioned
+
+
+
 
 
