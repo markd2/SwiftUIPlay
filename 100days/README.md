@@ -108,4 +108,11 @@ LinearGradient(gradient: Gradient(colors: [.white, .black]),
   view isn't big enough to e.g. fill in the background, thn all you can do is
   make that view take up more space.
 * .frame(maxWidth: .infinity, maxHeight: .infinity)
+* maxwidth/height says that the view _can_ consume the space, not that it must
+* applying a modifier creates a new view - doesn't modify the existing view
+  (it is a lightweight struct after all)
+* can also think of it like "the views are rendered after every single modifier.
+
+stopped at https://www.hackingwithswift.com/books/ios-swiftui/why-does-swiftui-use-some-view-for-its-view-type
+
 
