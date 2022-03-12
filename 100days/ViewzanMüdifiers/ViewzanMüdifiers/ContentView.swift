@@ -7,20 +7,24 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @State private var useRedText = true
-
-    var motto1: some View {
-        Text("Greeble Bork")
-    }
-    let motto2 = Text("Fnord Blork")
+struct CapsuleText: View {
+    var text: String
 
     var body: some View {
-        VStack {
-            motto1
-              .foregroundColor(.red)
-            motto2
-              .foregroundColor(.blue)
+        Text(text)
+          .font(.largeTitle)
+          .padding()
+          .foregroundColor(.white)
+          .background(.blue)
+          .clipShape(Capsule())
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        VStack(spacing: 10) {
+            CapsuleText(text: "First")
+            CapsuleText(text: "Snorkle")
         }
     }
 }
