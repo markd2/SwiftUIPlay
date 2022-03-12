@@ -129,8 +129,19 @@ LinearGradient(gradient: Gradient(colors: [.white, .black]),
   @ViewBuilder, so for returning multiple views, put in a stack, group, or add
   @ViewBuilder
 * of course, don't let things get too complex
+* Make custom modifiers with making a new ViewModifier - `body(content:)` takes a view,
+  and returns an appropriately decorated view
+* Use via .modifier(GreebleModifier())
+* And add the syntax sugar:
+```
+extension View {
+    func greebleStyle() -> some View {
+        modifier(Greeble())
+    }
+}
+```
+* They don't just apply existing modifiers, but can return a whole new view structure
+* custom view modifier vs a View extension?  The custom modifier can have their own properties
 
-
-
-
+stopped at https://www.hackingwithswift.com/books/ios-swiftui/custom-containers
 
