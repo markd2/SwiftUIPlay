@@ -123,6 +123,12 @@ LinearGradient(gradient: Gradient(colors: [.white, .black]),
   the same modifier, it takes precedence
   - vs regular modifiers, like blur(). Not a dfinitive list of either, so need to look
     at the docs and hope it's mentioned
+* can factor out interior views into let properties.  Beware of using other properties in
+  that view definition
+* can also have computed propertes - `var blah: some View { yay }`.  These aren't
+  @ViewBuilder, so for returning multiple views, put in a stack, group, or add
+  @ViewBuilder
+* of course, don't let things get too complex
 
 
 

@@ -10,20 +10,18 @@ import SwiftUI
 struct ContentView: View {
     @State private var useRedText = true
 
-    var body: some View {
-        Button("Hello World") {
-            useRedText.toggle()
-        }
-        .foregroundColor(useRedText ? .red : .blue)
+    var motto1: some View {
+        Text("Greeble Bork")
+    }
+    let motto2 = Text("Fnord Blork")
 
+    var body: some View {
         VStack {
-            Text("Greeble")
-            Text("Bork")
-              .font(.largeTitle)
-            Text("Hoover")
-            Text("Fnord")
+            motto1
+              .foregroundColor(.red)
+            motto2
+              .foregroundColor(.blue)
         }
-          .font(.title)
     }
 }
 
