@@ -14,7 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7D94063C27DC3DE9006DC3B9 /* ViewzanMüdifiers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ViewzanMüdifiers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D94063C27DC3DE9006DC3B9 /* ViewzanMu_difiers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViewzanMu_difiers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D94063F27DC3DE9006DC3B9 /* ViewzanMu_difiersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewzanMu_difiersApp.swift; sourceTree = "<group>"; };
 		7D94064127DC3DE9006DC3B9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7D94064327DC3DED006DC3B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,7 +43,7 @@
 		7D94063D27DC3DE9006DC3B9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7D94063C27DC3DE9006DC3B9 /* ViewzanMüdifiers.app */,
+				7D94063C27DC3DE9006DC3B9 /* ViewzanMu_difiers.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,9 +70,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7D94063B27DC3DE9006DC3B9 /* ViewzanMüdifiers */ = {
+		7D94063B27DC3DE9006DC3B9 /* ViewzanMu_difiers */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7D94064A27DC3DED006DC3B9 /* Build configuration list for PBXNativeTarget "ViewzanMüdifiers" */;
+			buildConfigurationList = 7D94064A27DC3DED006DC3B9 /* Build configuration list for PBXNativeTarget "ViewzanMu_difiers" */;
 			buildPhases = (
 				7D94063827DC3DE9006DC3B9 /* Sources */,
 				7D94063927DC3DE9006DC3B9 /* Frameworks */,
@@ -82,9 +82,9 @@
 			);
 			dependencies = (
 			);
-			name = "ViewzanMüdifiers";
+			name = ViewzanMu_difiers;
 			productName = "ViewzanMüdifiers";
-			productReference = 7D94063C27DC3DE9006DC3B9 /* ViewzanMüdifiers.app */;
+			productReference = 7D94063C27DC3DE9006DC3B9 /* ViewzanMu_difiers.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -115,7 +115,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7D94063B27DC3DE9006DC3B9 /* ViewzanMüdifiers */,
+				7D94063B27DC3DE9006DC3B9 /* ViewzanMu_difiers */,
 			);
 		};
 /* End PBXProject section */
@@ -282,7 +282,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.borkware.ViewzanMu-difiers";
+				PRODUCT_BUNDLE_IDENTIFIER = com.borkware.ViewzanMudifiers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -311,7 +311,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.borkware.ViewzanMu-difiers";
+				PRODUCT_BUNDLE_IDENTIFIER = com.borkware.ViewzanMudifiers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -331,7 +331,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7D94064A27DC3DED006DC3B9 /* Build configuration list for PBXNativeTarget "ViewzanMüdifiers" */ = {
+		7D94064A27DC3DED006DC3B9 /* Build configuration list for PBXNativeTarget "ViewzanMu_difiers" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7D94064B27DC3DED006DC3B9 /* Debug */,
