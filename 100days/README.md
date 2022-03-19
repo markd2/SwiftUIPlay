@@ -143,5 +143,4 @@ extension View {
 * They don't just apply existing modifiers, but can return a whole new view structure
 * custom view modifier vs a View extension?  The custom modifier can have their own properties
 
-stopped at https://www.hackingwithswift.com/books/ios-swiftui/custom-containers
-
+https://www.hackingwithswift.com/books/ios-swiftui/entering-numbers-with-stepper
