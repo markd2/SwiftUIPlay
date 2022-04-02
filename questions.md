@@ -52,15 +52,20 @@
         unless there's an explicit return statement
 * [ ] @GestureState
 * [ ] @Environment
-* [ ] @EnvironmentObject
 * [ ] @Namespace
-* [ ] @ObservedObject
 * [ ] ObservableObject
       - ObjectWillChangePublisher / `objectWillChange`
+      - use as the data dependency surface area
+* [ ] @ObservedObject
+      - creates a data dependency to the observable object
+* [ ] @StateObject
+      - for when you need to create an observed object inside of a view (c.f. below)
+      - ties an observable object to a view's lifecycle
+* [ ] @EnvironmentObject
+      - adds ergnomics to access observable objects
 * [ ] @Published
       - only publish things that'll change.  Views can still access immutable properties
 * [ ] @StateObject
-      - for when you need to create an observed object inside of a view (c.f. below)
 * [ ] @ViewBuilder
 * [ ] @FocusState
 
@@ -1156,3 +1161,315 @@ https://www.hackingwithswift.com/quick-start/swiftui/swiftui-tutorial-building-a
             }
 ```
 
+==================================================
+# Data Essentials in SwiftUI
+
+https://developer.apple.com/videos/play/wwdc2020/10040/
+
+- getting started on data flow. state and binding
+- build on that design your data model
+- techniques to integrating data model into the app
+
+along wtih lifecycle of View, and deeper undertsanding of value/ref types interacting
+with data flow.
+
+new view swift ui
+  - what data does the view need to do its job?
+    - e.g. book ttitle, image, percent read
+  - what does it manipulate?
+     - e.g. just display
+  - where will the data come from - source of truth (most important question)
+
+example is read-only, so let vars
+
+where come from? passed in from superview - source of truth comes from higher up.
+
+modifying stuff.
+
+@3:46
+tap update progress, call presentEditor - "it will mutate some state to cause the sheet
+to appear"
+
+waht does it need to control presentation - bool for uf presented, string for note, and progress
+double
+  - pull out into a struct (e.g. EditorConfig)
+   - get independence.  a value type, any change to a type is visible as a chnge to editor
+     config itself
+
+how does manipulate?
+  - button, set the isEditorPresented to true
+b/c extract to struct, make it responsible for the state, and assk the book
+view.
+
+add a mutating func.
+
+establish a local source of truth.
+simplest is @State - that's a source of truth
+
+@11:11 - observiable makes a source of truth
+
+observable object is the data dependency surface
+could have an OO that is a facade in front of other model objects.
+Gives a central place to focus on the data model
+
+@ObservedObject - tracks the observable as a dependency.  does not own the instance
+  - the View has the observed object of an object that is given to its initializer
+  - under the hood, subscribes to objectWillChange
+    - why will change - SUI needs to know is about to change so it can coalesce every
+      change into an update
+  - binding is read and write data as a single source of truth.  
+    - Use $ of the OO to get the binding
+    - e.g. $obserbbleobject.someProperty is sufficient
+
+tying lifecycle to view, like state.
+@StateObject - new in ios 14  Swift owns the observable object.  instatiated just before
+             body. And keep it alive for the whole lifecycle of the view
+
+@20:00 - image loader
+
+```
+class CoverIMageLoader: ObservableObject {
+   @Published public private(set) var image: Image? = nil
+   func load() / func cancel() / deinit
+}     
+
+struct BookCoverView: View {
+    @StateObject var loader = CoverImageLoader()
+    var coverName: String
+    var size: CGFloat
+
+    var body: some View {
+        CoverImage(loader.image, size: size)
+            .onAppear { loader.load(coverName) }
+    }
+}
+```
+
+don't need to fool with onDisappear any more.
+
+Views are cheap, and we encourage you to make them your primary encapsulation mechanism (!)
+Create small view that are simple to understand and use.
+
+@21:00
+Can end up with a deep and wide view hierarchy.  So make an ObservableObject near the top
+and pass it through
+
+sometimes need it in a disstant subview, plumbing it can be cumbersome.  Use Environment
+object.
+
+```
+.environmentObject(someObservableObject)  - at the top(ish) of the tree
+then @EnvironmentObject var model: = ...
+```
+
+@22:00
+
+Designing your model
+  - observable objcet as the data dependentcy surface
+  - @ObservedObject crates a data dependency
+  - @StateObject ties an observableObject to a view's lifecycle
+  - @EnvironmentObject adds ergnomics to access observable object.
+
+@22:45
+
+how to design for performance and choosing source of truth.
+
+Views and their role - a definiton of a piece of UI.  SUI uses this to create the
+approiate renderer.
+
+It manages the identity and lifetime of the view.  Should be lightweight and
+inexpensive.
+
+Lifetime of a view is different than the lifetime of the struct. (!)
+  - the struct has a short lifetime. It uses it to create a Rendering(tm)
+
+the basics
+```
+    event <---  UI  <---- render
+{ code }                        View
+    ---> mutation      ---> update
+            Source Of Truth
+```
+
+@24:30 - life cycle.  important for performance.
+If there's any expensive / blocking work at any time. causes a "slow update"
+dropped frames or a hang.
+
+Avoiding slow updates
+  - make view init cheap
+  - make body a pure function (free of side effects)
+  - avoid assumptions about when and how often the body is called.
+    - SUI might not call it in line with your assumptions.
+
+Body being cheap.
+
+example
+```
+struct ReadingListViewer: View {
+    var body: some View {
+        NavigatioNView {
+            ReadingList()
+            Placeholder()
+        }
+    }
+}
+
+struct ReadingList: View {
+    @ObservedObject var store = ReadingListStore()
+    var body: some View 
+        ..
+    }
+}
+```
+
+seems reasonable.  There's a BUG Turns out when Readlinglist view will get
+repeated heap allocation of ReadingListStore, and cause a slow update.
+
+The structs do not have a defined lifetime, hence why the store gets created
+over and over.  a repeated heap allocation can be expensive and slow. And could
+cause data loss b/c object can go away.
+
+In the past, create it far away.  This yera can use StateObject
+
+```
+struct ReadingList: View {
+    @StateObject var store = ReadingListStore()
+    var body: some View 
+        ..
+    }
+}
+```
+
+causes SUI to instantiate at the right time - no etra heap allocations and
+don't lose data.
+
+This is a new source of truth.
+
+27:00
+back to the diagram - the events.  Say to button.  Or a publisher firing, say a timer
+or a notification.  These triggers are Event Sources.
+
+New this year - onChagne (environemtn an binding), onOpenURL, and onContinueUserActivity.
+
+Each takes a parameter like a publisher or a mumble, and a closure. It'll run the closure
+to keep body cheap.  This is on the main thread.
+
+Back to 28:30. The three questions
+
+* What data does this view need to do its job?
+* How will the view manipulate that data?
+* Where will the data come from?
+
+That last question is still interesting.
+  - when answer this - it's determining the source of truth, and can be a hard question
+
+Who owns the data?  a View or an ancestor?  or another subsystem of the app?
+
+Share data with a common ancesor. prefer @StateObject as a view-owned source of truth
+for your observable objects.
+Consider placing global data in the app
+
+
+@29:29
+
+Data lifetime  (c.f. [ ] App Essentials in SwiftUI - WWDC 2020)
+
+```
+[ Apps ]   [ Scenes ]   [ Views ]
+```
+
+Views - views are a great tool to tie your data lifetime too, and prop wrappers seen
+today work with views.
+
+Scenes - each scene has unique view tree, can hang off the tree, like off a window or
+   window group.
+   Each instance of the scene can have its own independent source of truth that serves
+   as a lens to a larger dat amodel.
+
+Apps - powerful new tool, write your entire app in just SwiftUI - can use state and other
+     sources of truth in the app, not jsut aview.
+
+```
+@main
+struct BookClubApp: App {
+    @StateObject private var store = ReadingListStore()
+    var body: some Scene {
+        WindowGroup {
+           ReadingListViewer(store: store)
+        }
+    }
+}
+```
+
+when the model changes, all the app scenes, and all their views, will update.
+We've made an app-wide source of truth.  Put it in the App if it represents
+truly global data.  _(this is kind of huge. Don't need to explicitly plumb
+notifications or publishers)_
+
+31:10
+
+Your data's lifetime is important, and if that is tied to source of truth.
+state/stateobjec/constant - tied to the process lifetime.  
+
+To solve problem - adding Storage(tm) - an extended lifetime, saved and restored
+automatically.  These are not model.  Lightweight stores in conjunction with your
+model  (SceneStorage and AppStorage)
+
+32:00
+Look at SceneStorage.  per-scene scoped property wrapper that reads and writes
+data managed by SUI. only accesible inside views.
+
+Bookclub app with two scenes side-by-side.  
+"Wht do you need to restore" - in this case, the selection.  The names/progress are
+in the model.
+
+(so, this is *not* a general persistence layer kind of thing)
+
+```
+struct ReadingListViewer: View
+    @SceneStorage("selection") var selection: String?
+
+    var body: some View {
+        NavigationView {
+            ReadingList(selection: $selection)
+            BookDetailPlaceholder()
+        }
+    }
+```
+
+SUI will atuomatically save our value.
+This is also a new (scene-wide) source of truth)
+
+33:30
+
+app storage - stored in user defaults - access in app or in a view.
+Useful for small bits of data, like settings.
+
+```
+struct BookClubSettings: View 
+    @AppStorage("updateArtwork") privat var updatArtwork = true
+    @AppStorage("syncProgress") private var syncProgress = true
+
+    ...
+       Form {
+           Toggle(isOn: $updateArtwork) {
+             ...
+           }
+}
+```
+
+_(wonder how that interacts with tests...)_
+
+c.f. the docs
+
+keys need to be unique.  This is a source of truth, so can get a binding to it.
+
+"don't store everything with them, because persistance isn't pretty)
+
+34:45
+
+ObservableObject is superflexible - can back with a server.
+
+main take-away is there isn't a one-size-fits-all tool.
+
+"bindings are agnostic to their source of truth"
