@@ -9,14 +9,22 @@ import SwiftUI
 import CoreML
 
 struct ContentView: View {
-    @State private var wakeUp = Date.now
+    @State private var wakeUp = defaultWakeTime
     @State private var sleepAmount = 8.0
     @State private var coffeeAmount = 1
     
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     @State private var showingAlert = false
-    
+
+    @State private var sleepTime = Date()
+
+    static var defaultWakeTime: Date {
+        var components = DateComponents()
+        components.hour = 7
+        components.minute = 0
+        return Calendar.current.date(from: components)!
+    }
 
     func dateSplunge() -> Date {
         var components = DateComponents()
@@ -38,8 +46,7 @@ struct ContentView: View {
     }
     
     init() {
-        wakeUp = dateSplunge()
-        print("\(wakeUp)")
+        calculateBedtime()
     }
     
     func calculateBedtime() {
@@ -55,45 +62,46 @@ struct ContentView: View {
             let prediction = try model.prediction(wake: Double(hour + minute),
                                                   estimatedSleep: sleepAmount,
                                                   coffee: Double(coffeeAmount))
-            let sleepTime = wakeUp - prediction.actualSleep
-
-            alertTitle = "Your ideal bedtime is..."
-            alertMessage = sleepTime.formatted(date: .omitted, time: .shortened)
+            sleepTime = wakeUp - prediction.actualSleep
 
         } catch {
             alertTitle = "Error"
             alertMessage = "Sorry, there was a problem calculating your bedtime."
+            showingAlert = true
         }
-
-        showingAlert = true
     }
     
     var body: some View {
         NavigationView {
-            VStack {
-                Text("When do you want to wake up?")
-                  .font(.headline)
+            Form {
+                Section(header: Text("When do you want to wake up?")
+                      .font(.headline)) {
+                    DatePicker("Please enter a time",
+                               selection: $wakeUp.onChange(calculateBedtime),
+                               displayedComponents: .hourAndMinute)
+                      .labelsHidden()
+                }
                 
-                DatePicker("Please enter a time",
-                           selection: $wakeUp,
-                           displayedComponents: .hourAndMinute)
-                  .labelsHidden()
-                
-                Text("Desired amount of sleep")
-                  .font(.headline)
-                Stepper("\(sleepAmount.formatted()) hours",
-                        value: $sleepAmount,
-                        in: 4...12, step: 0.25)
-                
-                Text("Daily coffee intake")
-                  .font(.headline)
-                Stepper(coffeeAmount == 1 ? "1 cup" : "\(coffeeAmount) cups",
-                        value: $coffeeAmount, in: 1...20)
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Desired amount of sleep")
+                      .font(.headline)
+                    Stepper("\(sleepAmount.formatted()) hours",
+                            value: $sleepAmount.onChange(calculateBedtime),
+                            in: 4...12, step: 0.25)
+                }
+
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Daily coffee intake")
+                      .font(.headline)
+                    Stepper(coffeeAmount == 1 ? "1 cup" : "\(coffeeAmount) cups",
+                            value: $coffeeAmount.onChange(calculateBedtime), in: 1...20)
+                }
+
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Go to sleep time \(sleepTime.formatted(date: .omitted, time: .shortened))")
+                }
             }
-              .navigationTitle("BetterRest")
-              .toolbar {
-                  Button("Calculate", action: calculateBedtime)
-              }
+
             .alert(alertTitle, isPresented: $showingAlert) {
                 Button("OK") { }
             } message: {
@@ -106,5 +114,27 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+extension Binding {
+    func onChange(_ handler: @escaping (Value) -> Void) -> Binding<Value> {
+        Binding(
+            get: { self.wrappedValue },
+            set: { newValue in
+                self.wrappedValue = newValue
+                handler(newValue)
+            }
+        )
+    }
+
+    func onChange(_ handler: @escaping () -> Void) -> Binding<Value> {
+        Binding(
+            get: { self.wrappedValue },
+            set: { newValue in
+                self.wrappedValue = newValue
+                handler()
+            }
+        )
     }
 }

@@ -1473,3 +1473,42 @@ ObservableObject is superflexible - can back with a server.
 main take-away is there isn't a one-size-fits-all tool.
 
 "bindings are agnostic to their source of truth"
+
+----------
+
+```
+extension Binding {
+    func onChange(_ handler: @escaping (Value) -> Void) -> Binding<Value> {
+        Binding(
+            get: { self.wrappedValue },
+            set: { newValue in
+                self.wrappedValue = newValue
+                handler(newValue)
+            }
+        )
+    }
+
+    func onChange(_ handler: @escaping () -> Void) -> Binding<Value> {
+        Binding(
+            get: { self.wrappedValue },
+            set: { newValue in
+                self.wrappedValue = newValue
+                handler()
+            }
+        )
+    }
+}
+```
+
+and use like
+
+```
+        DatePicker("Please enter a time",
+                   selection: $wakeUp.onChange(calculateBedtime),,
+                   displayedComponents: .hourAndMinute)
+or
+        Stepper(coffeeAmount == 1 ? "1 cup" : "\(coffeeAmount) cups",
+                value: $coffeeAmount.onChange(calcualteBedtime), in: 1...20)
+
+```
+
