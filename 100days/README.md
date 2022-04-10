@@ -152,6 +152,6 @@ RevenueCat - for subscriptions
 StoreKit 2 - nicer
 ----------
 
-stopped at Day 32:
-https://www.hackingwithswift.com/books/ios-swiftui/animation-introduction
+stopped at:
+https://www.hackingwithswift.com/books/ios-swiftui/creating-explicit-animations
 
