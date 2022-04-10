@@ -8,25 +8,48 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        List {
-            Section("Section 1") {
-                Text("Static row 1")
-                Text("Static row 2")
-            }
+    @State private var usedWords = [String]()
+    @State private var rootWord = ""
+    @State private var newWord = ""
 
-            Section("Section 2") {
-                ForEach(0 ..< 5) {
-                    Text("Dynamic row \($0)")
+    init() {
+        if let fileURL = Bundle.main.url(forResource: "start",
+                                         withExtension: "txt") {
+            if let fileContents = try? String(contentsOf: fileURL) {
+                print("YAY!")
+            }
+        }
+    }
+
+    var body: some View {
+        NavigationView {
+            List {
+                Section {
+                    TextField("Enter your word", text: $newWord)
+                    .autocapitalization(.none)
+                }
+
+                Section {
+                    ForEach(usedWords, id: \.self) { word in
+                        HStack {
+                            Image(systemName: "\(word.count).circle")
+                            Text(word)
+                        }
+                    }
                 }
             }
+        }
+          .navigationTitle(rootWord)
+        .onSubmit(addNewWord)
+    }
 
-            Section("Section 3") {
-                Text("Static row 3")
-                Text("Static row 4")
-            }
-        }.listStyle(.grouped)
-
+    func addNewWord() {
+        let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        guard answer.count > 0 else { return }
+        withAnimation {
+            usedWords.insert(answer, at: 0)
+        }
+        newWord = ""
     }
 }
 
