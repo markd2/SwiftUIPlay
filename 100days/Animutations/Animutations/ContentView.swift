@@ -12,7 +12,7 @@ struct ContentView: View {
 
     var body: some View {
         Button("Bite Me") {
-            withAnimation {
+            withAnimation(.interpolatingSpring(stiffness: 5, damping: 1)) {
                 animationAmount += 360
             }
         }
