@@ -12,22 +12,26 @@ struct ContentView: View {
 
     var body: some View {
         Button("Bite Me") {
-            animationAmount += 0.3
+            // animationAmount += 0.3
+        }
+        .onAppear {
+            animationAmount = 2
         }
         .padding(50)
         .background(.red)
         .foregroundColor(.white)
         .clipShape(Circle())
-        .scaleEffect(animationAmount)
-        .blur(radius: (animationAmount - 1) * 3)
-        // .animation(.interpolatingSpring(stiffness: 50, damping: 1),
-        // value: animationAmount)
-        .animation(.easeInOut(duration: 2)
-                     // .repeatCount(3, autoreverses: true)
-                     .repeatForever(autoreverses: true),
-                   // .delay(1),
-                   value: animationAmount)
-
+        // .scaleEffect(animationAmount)
+        // .blur(radius: (animationAmount - 1) * 3)
+        .overlay(
+          Circle()
+            .stroke(.blue)
+            .scaleEffect(animationAmount)
+            .opacity(2 - animationAmount)
+            .animation(.easeInOut(duration: 2)
+                         .repeatForever(autoreverses: false),
+                       value: animationAmount)
+        )
     }
 }
 
