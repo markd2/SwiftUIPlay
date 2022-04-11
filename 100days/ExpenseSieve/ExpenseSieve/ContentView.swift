@@ -13,8 +13,14 @@ class User: ObservableObject {
 }
 
 struct SecondView: View {
+    let name: String
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
-        Text("Snorgle Bork")
+        Text("Snorgle Bork \(name)")
+        Button("Bite Me") {
+            dismiss()
+        }
     }
 }
 
@@ -27,7 +33,7 @@ struct ContentView: View {
             showingSheet.toggle()
         }
         .sheet(isPresented: $showingSheet) {
-            SecondView()
+            SecondView(name: "blorfle")
         }
     }
 }
