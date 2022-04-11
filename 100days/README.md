@@ -152,6 +152,32 @@ RevenueCat - for subscriptions
 StoreKit 2 - nicer
 ----------
 
+
+via https://www.hackingwithswift.com/books/ios-swiftui/showing-and-hiding-views
+
+As you’ve seen, rather than just using @State to declare local state, we now take three steps:
+
+* Make a class that conforms to the ObservableObject protocol.
+* Mark some properties with @Published so that any views using the
+  class get updated when they change.
+* Create an instance of our class using the @StateObject property wrapper.
+
+Also,
+* when creating the shared data use @StateObject, but when you’re just
+  using it in a different view you should use @ObservedObject instead.
+
+(passive)
+define the conditions under which a sheet should be shown, and when
+those conditions become true or false the sheet will either be
+presented or dismissed respectively (by zombies).
+
 stopped at:
 https://www.hackingwithswift.com/books/ios-swiftui/creating-explicit-animations
+
+
+To do:
+  - [ ] https://www.hackingwithswift.com/books/ios-swiftui/animation-wrap-up
+        (wanting to get to the data portion first)
+
+
 
