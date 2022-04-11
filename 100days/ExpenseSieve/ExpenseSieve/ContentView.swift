@@ -12,29 +12,34 @@ class User: ObservableObject {
     @Published var lastName = "Bork"
 }
 
-struct SecondView: View {
-    let name: String
-    @Environment(\.dismiss) var dismiss
-
-    var body: some View {
-        Text("Snorgle Bork \(name)")
-        Button("Bite Me") {
-            dismiss()
-        }
-    }
-}
 
 struct ContentView: View {
-    @StateObject private var user = User()
-    @State private var showingSheet = false
+    @State private var numbers = [Int]()
+    @State private var currentNumber = 1
 
     var body: some View {
-        Button("Show Sheet") {
-            showingSheet.toggle()
+        NavigationView {
+            VStack {
+                List {
+                    ForEach(numbers, id: \.self) {
+                        Text("Row \($0)")
+                    }
+                      .onDelete(perform: removeRows)
+                }
+                
+                Button("Add Number") {
+                    numbers.append(currentNumber)
+                    currentNumber += 1
+                }
+            }
+              .toolbar {
+                  EditButton()
+              }
         }
-        .sheet(isPresented: $showingSheet) {
-            SecondView(name: "blorfle")
-        }
+    }
+
+    func removeRows(at offsets: IndexSet) {
+        numbers.remove(atOffsets: offsets)
     }
 }
 
