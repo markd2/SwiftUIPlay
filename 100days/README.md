@@ -175,7 +175,7 @@ presented or dismissed respectively (by zombies).
   object like @State creates and manages the struct
 
 stopped at:
-https://www.hackingwithswift.com/books/ios-swiftui/moonshot-introduction
+https://www.hackingwithswift.com/books/ios-swiftui/how-scrollview-lets-us-work-with-scrolling-data
 
 
 To do:

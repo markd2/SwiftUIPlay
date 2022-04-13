@@ -1,16 +1,14 @@
-//
-//  ContentView.swift
-//  Munshot
-//
-//  Created by markd on 4/13/22.
-//
-
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        GeometryReader { geo in
+            Image("borkle")
+              .resizable()
+              .scaledToFit()
+              .frame(width: geo.size.width * 0.8)
+            .frame(width: geo.size.width, height: geo.size.height)
+        }
     }
 }
 
