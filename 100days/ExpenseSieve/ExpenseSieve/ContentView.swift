@@ -12,34 +12,43 @@ class User: ObservableObject {
     @Published var lastName = "Bork"
 }
 
+struct ExpenseItem {
+    let name: String
+    let type: String
+    let amount: Double // baby Jesus is crying
+}
+
+class Expenses: ObservableObject {
+    @Published var items = [ExpenseItem]()
+}
+
 
 struct ContentView: View {
-    @State private var numbers = [Int]()
-    @State private var currentNumber = 1
+    @StateObject var expenses = Expenses()
 
     var body: some View {
         NavigationView {
-            VStack {
-                List {
-                    ForEach(numbers, id: \.self) {
-                        Text("Row \($0)")
-                    }
-                      .onDelete(perform: removeRows)
+            List {
+                ForEach(expenses.items, id: \.name) { item in
+                    Text(item.name)
                 }
-                
-                Button("Add Number") {
-                    numbers.append(currentNumber)
-                    currentNumber += 1
+                .onDelete(perform: removeItems)
+            }
+            .toolbar {
+                Button {
+                    let expense = ExpenseItem(name: "Test", type: "Personal",
+                                              amount: 5)
+                    expenses.items.append(expense)
+                } label: {
+                    Image(systemName: "tortoise")
                 }
             }
-              .toolbar {
-                  EditButton()
-              }
         }
+        .navigationTitle("Splunge")
     }
 
-    func removeRows(at offsets: IndexSet) {
-        numbers.remove(atOffsets: offsets)
+    func removeItems(at offsets: IndexSet) {
+        expenses.items.remove(atOffsets: offsets)
     }
 }
 
