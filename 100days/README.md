@@ -171,13 +171,15 @@ define the conditions under which a sheet should be shown, and when
 those conditions become true or false the sheet will either be
 presented or dismissed respectively (by zombies).
 
-stopped at:
-https://www.hackingwithswift.com/books/ios-swiftui/creating-explicit-animations
+* using @StateObject is just like @ObservedObject, but it creates and manages the 
+  object like @State creates and manages the struct
 
+stopped at:
+https://www.hackingwithswift.com/books/ios-swiftui/archiving-swift-objects-with-codable
 
 To do:
   - [ ] https://www.hackingwithswift.com/books/ios-swiftui/animation-wrap-up
         (wanting to get to the data portion first)
-
+  - [ ] https://www.hackingwithswift.com/books/ios-swiftui/iexpense-wrap-up
 
 
