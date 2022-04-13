@@ -175,7 +175,8 @@ presented or dismissed respectively (by zombies).
   object like @State creates and manages the struct
 
 stopped at:
-https://www.hackingwithswift.com/books/ios-swiftui/archiving-swift-objects-with-codable
+https://www.hackingwithswift.com/books/ios-swiftui/moonshot-introduction
+
 
 To do:
   - [ ] https://www.hackingwithswift.com/books/ios-swiftui/animation-wrap-up
