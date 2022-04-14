@@ -11,8 +11,8 @@ So, working on 100 days of swift
 Came across this
 
   When showing an alert, don't think of it as "show the alert", but
-  instead create our alert and set the conditions under which it
-  should be shown.
+instead create our alert and set the conditions under which it
+should be shown.
 
 it should be shown
 
