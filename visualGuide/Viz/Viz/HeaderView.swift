@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct HeaderView: View {
-    @State var title: String
-    @State var subtitle: String
-    @State var desc: String
-    @State var back: Color
-    @State var textColor: Color
+    var title: String
+    var subtitle: String
+    var desc: String
+    var back: Color
+    var textColor: Color
 
     var body: some View {
         VStack(spacing: 30) {
