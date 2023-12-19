@@ -11,6 +11,8 @@
 		7DFC183C2B32590F00E02197 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC183B2B32590F00E02197 /* ContentView.swift */; };
 		7DFC183E2B32591000E02197 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DFC183D2B32591000E02197 /* Assets.xcassets */; };
 		7DFC18412B32591000E02197 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DFC18402B32591000E02197 /* Preview Assets.xcassets */; };
+		7DFC18482B3259D800E02197 /* TemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC18472B3259D800E02197 /* TemplateView.swift */; };
+		7DFC184A2B325D4E00E02197 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC18492B325D4E00E02197 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		7DFC183B2B32590F00E02197 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7DFC183D2B32591000E02197 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7DFC18402B32591000E02197 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7DFC18472B3259D800E02197 /* TemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateView.swift; sourceTree = "<group>"; };
+		7DFC18492B325D4E00E02197 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 				7DFC183B2B32590F00E02197 /* ContentView.swift */,
 				7DFC183D2B32591000E02197 /* Assets.xcassets */,
 				7DFC183F2B32591000E02197 /* Preview Content */,
+				7DFC18472B3259D800E02197 /* TemplateView.swift */,
+				7DFC18492B325D4E00E02197 /* HeaderView.swift */,
 			);
 			path = Viz;
 			sourceTree = "<group>";
@@ -139,6 +145,8 @@
 			files = (
 				7DFC183C2B32590F00E02197 /* ContentView.swift in Sources */,
 				7DFC183A2B32590F00E02197 /* VizApp.swift in Sources */,
+				7DFC18482B3259D800E02197 /* TemplateView.swift in Sources */,
+				7DFC184A2B325D4E00E02197 /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
