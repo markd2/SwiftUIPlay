@@ -65,3 +65,22 @@ Flexible sizes:
 
 with zstacks, earlier views are behind later views
 
+# State and bandage
+
+Displaying dynamic data
+
+@State - value managed by swiftui, UI updates on state change
+
+use projected value ($count) 
+
+Star Citizen joystick sensitivity curves  - flight movement, make 2.0 across the boad
+
+A binding is a two-way conduit between the two views
+
+Source of Truth - @State is internal data managed by the view and IS a source of trooth
+
+@Binding is external data managed by another view, is NOT a source of trooth
+
+https://www.elgato.com/us/en/s/epoccam - for wireless phone webcam
+
+
