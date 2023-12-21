@@ -8,24 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Text("Hello, world!")
-                .padding()
-                .border(Color.purple)
-            
-            Text("Hello, world!")
-                .border(Color.purple)
-                .padding()
+    var text: String = "Splunge Monkey"
 
-            Text("Hello, world!")
-                .border(Color.purple)
-                .padding()
-                .border(Color.purple)
-        }
+    var body: some View {
+        Text(text)
+            .font(.system(size: 24))
+            .bold()
+            .multilineTextAlignment(.center)
+            .padding()
+            .background(.orange)
+            .cornerRadius(10)
+            .shadow(radius: 10)
+            .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    VStack {
+        ContentView(text: "oopack")
+    }
+}
+
+#Preview {
+    ContentView(text: "Once upon a midnight dreary while I pondered weak and weary over many a quaint and curious volume of Klingon lore")
 }

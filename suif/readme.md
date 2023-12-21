@@ -31,3 +31,17 @@ Child size can be _____ the proposed size
 
 (I think that covers all the cases)
 
+Applying modifiers changes the type of `body`, hence the need for `some`
+
+mastering the ordering of modifiers is SUIs early challenges.
+
+by default views don't clip their content. (e.g. the cornerRadius causing a shadow
+before it to disappear, but if put after, it can draw outside of its proposed parental
+bounds)
+
+Good to test views in different configurations and environments
+
+# 2: Snaks
+
+
+
