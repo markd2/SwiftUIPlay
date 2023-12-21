@@ -11,6 +11,8 @@
 		7DFC18652B34835C00E02197 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC18642B34835C00E02197 /* ContentView.swift */; };
 		7DFC18672B34835E00E02197 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DFC18662B34835E00E02197 /* Assets.xcassets */; };
 		7DFC186A2B34835E00E02197 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DFC18692B34835E00E02197 /* Preview Assets.xcassets */; };
+		7DFC18712B3484BC00E02197 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC18702B3484BC00E02197 /* Debug.swift */; };
+		7DFC18732B34854D00E02197 /* EllipseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC18722B34854D00E02197 /* EllipseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		7DFC18642B34835C00E02197 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7DFC18662B34835E00E02197 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7DFC18692B34835E00E02197 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7DFC18702B3484BC00E02197 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		7DFC18722B34854D00E02197 /* EllipseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,8 +57,10 @@
 			children = (
 				7DFC18622B34835C00E02197 /* suifApp.swift */,
 				7DFC18642B34835C00E02197 /* ContentView.swift */,
+				7DFC18722B34854D00E02197 /* EllipseView.swift */,
 				7DFC18662B34835E00E02197 /* Assets.xcassets */,
 				7DFC18682B34835E00E02197 /* Preview Content */,
+				7DFC18702B3484BC00E02197 /* Debug.swift */,
 			);
 			path = suif;
 			sourceTree = "<group>";
@@ -138,6 +144,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DFC18652B34835C00E02197 /* ContentView.swift in Sources */,
+				7DFC18732B34854D00E02197 /* EllipseView.swift in Sources */,
+				7DFC18712B3484BC00E02197 /* Debug.swift in Sources */,
 				7DFC18632B34835C00E02197 /* suifApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
