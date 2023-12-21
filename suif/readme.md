@@ -43,5 +43,25 @@ Good to test views in different configurations and environments
 
 # 2: Snaks
 
+the usual snackage
+
+there exist alignment: and spacing: arguments
+  - like vstack alignment .leading flush-lefts the views
+  - and hstack alignment .top aligns the tops of the child views
+  - and zstack .topleading does the same (but smashes things on top of each other)
+
+sizing algorithm:
+  - subtract inter-view spacing
+  - divide up space equally
+  - distribute from least to most flexible view
+
+Frames can have alignments (e.g. .topLeading) to move things around inside
+
+Flexible sizes:
+  - minWidth / idealWidth / maxWidth
+  - minHeight / idealHeight / maxHeight
+  - alignment
+(the widths are optional floats. Alignment things like .center)
+
 
 

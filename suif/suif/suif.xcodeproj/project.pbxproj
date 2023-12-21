@@ -13,6 +13,12 @@
 		7DFC186A2B34835E00E02197 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DFC18692B34835E00E02197 /* Preview Assets.xcassets */; };
 		7DFC18712B3484BC00E02197 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC18702B3484BC00E02197 /* Debug.swift */; };
 		7DFC18732B34854D00E02197 /* EllipseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC18722B34854D00E02197 /* EllipseView.swift */; };
+		7DFC18752B348B3300E02197 /* Snacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC18742B348B3300E02197 /* Snacks.swift */; };
+		7DFC18772B348DDF00E02197 /* SnackSizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC18762B348DDF00E02197 /* SnackSizing.swift */; };
+		7DFC18792B348EF900E02197 /* FixedSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC18782B348EF900E02197 /* FixedSizes.swift */; };
+		7DFC187B2B348FDF00E02197 /* FrameAlign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC187A2B348FDF00E02197 /* FrameAlign.swift */; };
+		7DFC187D2B3490A700E02197 /* FlexibleSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC187C2B3490A700E02197 /* FlexibleSize.swift */; };
+		7DFC187F2B34922600E02197 /* Spacers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC187E2B34922600E02197 /* Spacers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +29,12 @@
 		7DFC18692B34835E00E02197 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7DFC18702B3484BC00E02197 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		7DFC18722B34854D00E02197 /* EllipseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseView.swift; sourceTree = "<group>"; };
+		7DFC18742B348B3300E02197 /* Snacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snacks.swift; sourceTree = "<group>"; };
+		7DFC18762B348DDF00E02197 /* SnackSizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackSizing.swift; sourceTree = "<group>"; };
+		7DFC18782B348EF900E02197 /* FixedSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedSizes.swift; sourceTree = "<group>"; };
+		7DFC187A2B348FDF00E02197 /* FrameAlign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameAlign.swift; sourceTree = "<group>"; };
+		7DFC187C2B3490A700E02197 /* FlexibleSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleSize.swift; sourceTree = "<group>"; };
+		7DFC187E2B34922600E02197 /* Spacers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +73,12 @@
 				7DFC18662B34835E00E02197 /* Assets.xcassets */,
 				7DFC18682B34835E00E02197 /* Preview Content */,
 				7DFC18702B3484BC00E02197 /* Debug.swift */,
+				7DFC18742B348B3300E02197 /* Snacks.swift */,
+				7DFC18762B348DDF00E02197 /* SnackSizing.swift */,
+				7DFC18782B348EF900E02197 /* FixedSizes.swift */,
+				7DFC187A2B348FDF00E02197 /* FrameAlign.swift */,
+				7DFC187C2B3490A700E02197 /* FlexibleSize.swift */,
+				7DFC187E2B34922600E02197 /* Spacers.swift */,
 			);
 			path = suif;
 			sourceTree = "<group>";
@@ -143,10 +161,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DFC18792B348EF900E02197 /* FixedSizes.swift in Sources */,
+				7DFC187B2B348FDF00E02197 /* FrameAlign.swift in Sources */,
+				7DFC18772B348DDF00E02197 /* SnackSizing.swift in Sources */,
 				7DFC18652B34835C00E02197 /* ContentView.swift in Sources */,
 				7DFC18732B34854D00E02197 /* EllipseView.swift in Sources */,
+				7DFC18752B348B3300E02197 /* Snacks.swift in Sources */,
 				7DFC18712B3484BC00E02197 /* Debug.swift in Sources */,
 				7DFC18632B34835C00E02197 /* suifApp.swift in Sources */,
+				7DFC187D2B3490A700E02197 /* FlexibleSize.swift in Sources */,
+				7DFC187F2B34922600E02197 /* Spacers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
