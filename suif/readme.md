@@ -63,5 +63,5 @@ Flexible sizes:
   - alignment
 (the widths are optional floats. Alignment things like .center)
 
-
+with zstacks, earlier views are behind later views
 

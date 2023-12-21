@@ -11,15 +11,22 @@ struct ContentView: View {
     var text: String = "Splunge Monkey"
 
     var body: some View {
-        Text(text)
-            .font(.system(size: 24))
-            .bold()
-            .multilineTextAlignment(.center)
-            .padding()
-            .background(.orange)
-            .cornerRadius(10)
-            .shadow(radius: 10)
-            .padding()
+        ZStack {
+            Text(text)
+              .font(.system(size: 24))
+              .bold()
+              .multilineTextAlignment(.center)
+            Image(systemName: "arrow.left.arrow.right.circle.fill")
+              .font(.system(size: 36))
+              .frame(maxWidth: .infinity, maxHeight: .infinity,
+                     alignment: .bottomTrailing)
+        }
+          .padding()
+          .frame(width: 300, height: 225)
+          .background(.orange)
+          .cornerRadius(10)
+          .shadow(radius: 10)
+          .padding()
     }
 }
 
