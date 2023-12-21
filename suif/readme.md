@@ -83,4 +83,6 @@ Source of Truth - @State is internal data managed by the view and IS a source of
 
 https://www.elgato.com/us/en/s/epoccam - for wireless phone webcam
 
+Button can have a `label` closure in the initializer to make a view for the button
+(vs just text)
 
