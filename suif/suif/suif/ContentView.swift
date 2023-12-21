@@ -15,14 +15,18 @@ struct ContentView: View {
             Text(text)
               .font(.system(size: 24))
               .bold()
-              .multilineTextAlignment(.center)
+              .multilineTextAlignment(.leading)
+              .frame(maxWidth: .infinity, maxHeight: .infinity,
+                     alignment: .topLeading)
+
             Image(systemName: "arrow.left.arrow.right.circle.fill")
               .font(.system(size: 36))
               .frame(maxWidth: .infinity, maxHeight: .infinity,
                      alignment: .bottomTrailing)
         }
           .padding()
-          .frame(width: 300, height: 225)
+          // .frame(width: 300, height: 225)
+        .aspectRatio(CGSize(width: 4.0, height: 3.0), contentMode: .fit)
           .background(.orange)
           .cornerRadius(10)
           .shadow(radius: 10)
