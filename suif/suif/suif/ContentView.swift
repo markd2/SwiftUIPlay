@@ -16,8 +16,6 @@ struct ContentView: View {
               .font(.system(size: 24))
               .bold()
               .multilineTextAlignment(.leading)
-              .frame(maxWidth: .infinity, maxHeight: .infinity,
-                     alignment: .topLeading)
 
             Image(systemName: "arrow.left.arrow.right.circle.fill")
               .font(.system(size: 36))
@@ -25,8 +23,7 @@ struct ContentView: View {
                      alignment: .bottomTrailing)
         }
           .padding()
-          // .frame(width: 300, height: 225)
-        .aspectRatio(CGSize(width: 4.0, height: 3.0), contentMode: .fit)
+          .frame(width: 300, height: 225)
           .background(.orange)
           .cornerRadius(10)
           .shadow(radius: 10)
