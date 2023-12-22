@@ -14,17 +14,31 @@ struct Card {
 
 struct CardView: View {
     var card: Card
-     @State var isBackVisible = false
+
+    @State var isBackVisible = false
+    var degrees: Double {
+        isBackVisible ? 180 : 0
+    }
 
     var body: some View {
         ZStack {
-            Text(isBackVisible ? card.back : card.front)
+            Group {
+                Text(card.back)
+                .scaleEffect(x: -1)
+                .opacity(isBackVisible ? 1: 0)
+
+                Text(card.front)
+                  .opacity(isBackVisible ? 0: 1)
+
+            }
               .font(.system(size: 24))
               .bold()
-              .multilineTextAlignment(.leading)
+              .multilineTextAlignment(.center)
 
             Button {
-                isBackVisible.toggle()
+                withAnimation {
+                    isBackVisible.toggle()
+                }
             } label: {
                 Image(systemName: "arrow.left.arrow.right.circle.fill")
                   .font(.system(size: 36))
@@ -38,6 +52,7 @@ struct CardView: View {
           .cornerRadius(10)
           .shadow(radius: 10)
           .padding()
+          .rotation3DEffect(.degrees(degrees), axis: (x: 0.0, y: 1.0, z: 0.0))
     }
 }
 

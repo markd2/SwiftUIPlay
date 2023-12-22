@@ -86,3 +86,18 @@ https://www.elgato.com/us/en/s/epoccam - for wireless phone webcam
 Button can have a `label` closure in the initializer to make a view for the button
 (vs just text)
 
+toss in a `withAnimation` to, well, animate
+  (Returns the result of recomputing the view’s body with the provided animation.)
+"This function sets the given _Animation_ as the _animation_ property of the thread’s current _Transaction_."
+
+e.g.
+
+```
+Button {
+    withAnimation {
+        blah.toggle()
+    }
+} label: {
+    // stuffs
+}
+```
