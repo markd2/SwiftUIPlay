@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct Card {
+struct Card: Identifiable {
     var front: String
     var back: String
+    var id = UUID()
 }
 
 struct CardView: View {

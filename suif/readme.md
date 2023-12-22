@@ -101,3 +101,18 @@ Button {
     // stuffs
 }
 ```
+
+
+# Tabs and corrections
+
+ForEach(thingie, id: \.keypaf) { ... }
+
+Or use Identifiable
+
+.tabItem for specfiying a Label,w hich is a title + icon
+
+.tabViewStyle(.page) for paginated.  Will use the tab icons instead of dots - that's kind of cool
+
+and something about styles: a way to encapsulate the appearance of the view separate from its
+internal logic.  Like tab view has .automatic and .page
+
