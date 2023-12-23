@@ -116,3 +116,49 @@ Or use Identifiable
 and something about styles: a way to encapsulate the appearance of the view separate from its
 internal logic.  Like tab view has .automatic and .page
 
+# Presementations
+
+sheet - presented interface that can be dismissed when the user has completed
+some action
+
+(plus environment)
+
+temporarily work on different tasks, drag to dismiss
+
+use .sheet (with an isPresented: binding of a bool) for what to show in a sheet.
+
+hard way to dismiss programatically is to pass the binding in to the sheet view.
+
+Other option is to dig into the Environment: 
+```
+    @Environment(\.dismiss) var dismiss: DismissAction
+```
+
+        case '
+': self = .card
+
+Environment is a collection of value types that propagates _down_ the view hierarchy.
+Values can be overridden.
+
+Lots o options, like
+
+Font / dynamic type size / line limit
+allows uer interaction
+editng mode
+dismiss action
+accessibility settings
+layout direction / locale / calendar
+color scheme
+
+A view can change its environment, then subviews will use that changed environment.
+
+Override a value with something like
+```
+.environment(\.font, .system(size: 50))
+```
+
+OOOH, things like `.font(.title)` are conveniences for `.environment(\.font, .title)`
+
+Other presentation modes, like full screen cover, poopover, action sheet, alert, confirmation dialog
+
+

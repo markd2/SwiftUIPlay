@@ -58,26 +58,34 @@ struct CardView: View {
 }
 
 struct ContentView: View {
+    var cards: [Card] = [
+      Card(front: "What is 7+7", back: "14"),
+      Card(front: "What is the airspeed velocity of an unladen swallow?", back: "african or european"),
+      Card(front: "From what is cognac made?", back: "Grapes")
+    ]
+
     var body: some View {
-        CardView(card: Card(front: "What is 7 + 7?", back: "14"))
+        VStack {
+            CardDeckView(cards: cards)
+            
+            Button {
+            } label: {
+                Image(systemName: "plus")
+                  .font(.headline)
+                  .padding()
+                  .background(.orange)
+                  .clipShape(Circle())
+            }
+              .padding([.top, .trailing])
+              .frame(maxWidth: .infinity, maxHeight: .infinity,
+                     alignment: .topTrailing)
+        }.background(.gray)
     }
 }
 
 #Preview {
     VStack {
-        CardView(card: Card(front: "What is 7 + 7?", back: "14"))
+        ContentView()
     }
 }
 
-#Preview {
-    VStack {
-        CardView(card: Card(front: "What is the airspeed velolicity of an unladen swallow?",
-                            back: "African or European?"))
-    }
-}
-
-#if false
-#Preview {
-    CardView(text: "Once upon a midnight dreary while I pondered weak and weary over many a quaint and curious volume of Klingon lore")
-}
-#endif
