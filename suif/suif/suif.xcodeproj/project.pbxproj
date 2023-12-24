@@ -13,6 +13,7 @@
 		7DBEF9272B3642460092F70B /* CardDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBEF9262B3642460092F70B /* CardDeckView.swift */; };
 		7DBEF9292B3670AD0092F70B /* HolySheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBEF9282B3670AD0092F70B /* HolySheets.swift */; };
 		7DBEF92B2B3676160092F70B /* MultiSheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBEF92A2B3676160092F70B /* MultiSheets.swift */; };
+		7DBEF92D2B372F120092F70B /* CreateCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBEF92C2B372F120092F70B /* CreateCardView.swift */; };
 		7DFC18632B34835C00E02197 /* suifApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC18622B34835C00E02197 /* suifApp.swift */; };
 		7DFC18652B34835C00E02197 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC18642B34835C00E02197 /* ContentView.swift */; };
 		7DFC18672B34835E00E02197 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DFC18662B34835E00E02197 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		7DBEF9262B3642460092F70B /* CardDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeckView.swift; sourceTree = "<group>"; };
 		7DBEF9282B3670AD0092F70B /* HolySheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolySheets.swift; sourceTree = "<group>"; };
 		7DBEF92A2B3676160092F70B /* MultiSheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSheets.swift; sourceTree = "<group>"; };
+		7DBEF92C2B372F120092F70B /* CreateCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCardView.swift; sourceTree = "<group>"; };
 		7DFC185F2B34835C00E02197 /* suif.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = suif.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DFC18622B34835C00E02197 /* suifApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = suifApp.swift; sourceTree = "<group>"; };
 		7DFC18642B34835C00E02197 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				7DFC18622B34835C00E02197 /* suifApp.swift */,
 				7DFC18642B34835C00E02197 /* ContentView.swift */,
 				7DBEF9282B3670AD0092F70B /* HolySheets.swift */,
+				7DBEF92C2B372F120092F70B /* CreateCardView.swift */,
 				7DBEF9262B3642460092F70B /* CardDeckView.swift */,
 				7DBEF9242B35F9E20092F70B /* NewTabbage.swift */,
 				7DBEF9222B35E43F0092F70B /* ForEach.swift */,
@@ -190,6 +193,7 @@
 				7DFC18652B34835C00E02197 /* ContentView.swift in Sources */,
 				7DFC18812B34D84200E02197 /* StateStuff.swift in Sources */,
 				7DFC18732B34854D00E02197 /* EllipseView.swift in Sources */,
+				7DBEF92D2B372F120092F70B /* CreateCardView.swift in Sources */,
 				7DFC18752B348B3300E02197 /* Snacks.swift in Sources */,
 				7DBEF92B2B3676160092F70B /* MultiSheets.swift in Sources */,
 				7DBEF9212B34DCBD0092F70B /* Binding.swift in Sources */,

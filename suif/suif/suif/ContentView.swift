@@ -57,18 +57,39 @@ struct CardView: View {
     }
 }
 
+private struct ScreamAtMeKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+// Set via .environent(\.screamAtMe, true)
+extension EnvironmentValues {
+    var screamAtMe: Bool {
+        get { self[ScreamAtMeKey.self] }
+        set { self[ScreamAtMeKey.self] = newValue }
+    }
+}
+
+// Set via .screamAtMe(true)
+extension View {
+    func screamAtMe(_  aaaaaah: Bool) -> some View {
+        environment(\.screamAtMe, aaaaaah)
+    }
+}
+
 struct ContentView: View {
-    var cards: [Card] = [
+    @State var cards: [Card] = [
       Card(front: "What is 7+7", back: "14"),
       Card(front: "What is the airspeed velocity of an unladen swallow?", back: "african or european"),
       Card(front: "From what is cognac made?", back: "Grapes")
     ]
+    @State var isShowingCreateCardView = false
 
     var body: some View {
-        VStack {
+        ZStack {
             CardDeckView(cards: cards)
             
             Button {
+                isShowingCreateCardView = true
             } label: {
                 Image(systemName: "plus")
                   .font(.headline)
@@ -80,6 +101,11 @@ struct ContentView: View {
               .frame(maxWidth: .infinity, maxHeight: .infinity,
                      alignment: .topTrailing)
         }.background(.gray)
+          .sheet(isPresented: $isShowingCreateCardView) {
+              CreateCardView()
+                // .environment(\.screamAtMe, true)
+              .screamAtMe(true)
+          }
     }
 }
 

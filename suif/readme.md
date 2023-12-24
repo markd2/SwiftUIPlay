@@ -161,4 +161,39 @@ OOOH, things like `.font(.title)` are conveniences for `.environment(\.font, .ti
 
 Other presentation modes, like full screen cover, poopover, action sheet, alert, confirmation dialog
 
+padding([.top, .trailing]) - some extra padding on the given sides.
 
+Also .clipShape, giving it things like Circle()
+
+The dismiss action allows an interested view to dismiss the current presentation.
+
+Adding a custom environment key jazz
+
+```
+private struct ScreamAtMeKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+// Set via .environent(\.screamAtMe, true)
+extension EnvironmentValues {
+    var screamAtMe: Bool {
+        get { self[ScreamAtMeKey.self] }
+        set { self[ScreamAtMeKey.self] = newValue }
+    }
+}
+
+// Set via .screamAtMe(true)
+extension View {
+    func screamAtMe(_  aaaaaah: Bool) -> some View {
+        environment(\.screamAtMe, aaaaaah)
+    }
+}
+```
+
+and use like
+
+```
+          .sheet(isPresented: $isShowingCreateCardView) {
+              CreateCardView().environment(\.screamAtMe, true)
+          }
+```
