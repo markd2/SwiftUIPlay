@@ -14,6 +14,7 @@ struct Card: Identifiable {
 }
 
 struct CardView: View {
+    @Environment(\.accessibilityReduceMotion) var reduceMotion: Bool
     var card: Card
 
     @State var isBackVisible = false
@@ -37,8 +38,12 @@ struct CardView: View {
               .multilineTextAlignment(.center)
 
             Button {
-                withAnimation {
+                if reduceMotion {
                     isBackVisible.toggle()
+                } else {
+                    withAnimation {
+                        isBackVisible.toggle()
+                    }
                 }
             } label: {
                 Image(systemName: "arrow.left.arrow.right.circle.fill")
